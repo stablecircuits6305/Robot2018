@@ -4,6 +4,7 @@ import org.usfirst.frc.team6305.robot.OI;
 import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -20,7 +21,22 @@ public class DriveTrain extends Subsystem {
 	Spark frontRightDrive = new Spark(RobotMap.frontRightDrive);
 	Spark backRightDrive = new Spark(RobotMap.backRightDrive);
 	
+	Encoder leftEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+	Encoder rightEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
+	
 	public static DriveTrain instance = new DriveTrain();
+	
+	public DriveTrain () {
+		initEncoders();
+	}
+	
+	public void initEncoders () {
+		leftEncoder.setDistancePerPulse(5);
+		leftEncoder.setSamplesToAverage(10);
+		
+		rightEncoder.setDistancePerPulse(5);
+		rightEncoder.setSamplesToAverage(10);
+	}
 	
 	public void drive (double leftSpeed, double rightSpeed) {
 		frontLeftDrive.set(leftSpeed);
@@ -34,6 +50,19 @@ public class DriveTrain extends Subsystem {
 		backLeftDrive.set(0);
 		frontRightDrive.set(0);
 		backRightDrive.set(0);
+	}
+	
+	public void resetEncoders () {
+		leftEncoder.reset();
+		rightEncoder.reset();
+	}
+	
+	public int getLeftEncoderValue () {
+		return leftEncoder.get();
+	}
+	
+	public int getRightEncoderValue () {
+		return rightEncoder.get();
 	}
 	
 	public static DriveTrain getInstance () {

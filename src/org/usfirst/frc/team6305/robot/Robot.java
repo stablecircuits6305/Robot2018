@@ -8,6 +8,7 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
+import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
 
 	Command teleopDrive, m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
+	DriveTrain driveTrain = DriveTrain.getInstance();
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -129,6 +131,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
+//		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
+		System.out.println("Left encoder: " + driveTrain.getLeftEncoderValue() + " -- Right encoder: " + driveTrain.getRightEncoderValue());
 	}
 }
