@@ -7,7 +7,11 @@
 
 package org.usfirst.frc.team6305.robot;
 
+import org.usfirst.frc.team6305.robot.commands.DrivePID;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -44,4 +48,12 @@ public class OI {
 	
 	public static Joystick leftJoystick = new Joystick(0);
 	public static Joystick rightJoystick = new Joystick(1);
+	
+	public static JoystickButton button = new JoystickButton(leftJoystick, 1);
+	
+	static {
+		
+		OI.button.whenPressed(new DrivePID(360));
+	
+	}
 }

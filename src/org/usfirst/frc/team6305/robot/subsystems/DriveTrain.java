@@ -21,8 +21,8 @@ public class DriveTrain extends Subsystem {
 	Spark frontRightDrive = new Spark(RobotMap.frontRightDrive);
 	Spark backRightDrive = new Spark(RobotMap.backRightDrive);
 	
-	Encoder leftEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
-	Encoder rightEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
+	Encoder rightEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+	Encoder leftEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
 	
 	public static DriveTrain instance = new DriveTrain();
 	
@@ -43,6 +43,11 @@ public class DriveTrain extends Subsystem {
 		backLeftDrive.set(leftSpeed);
 		frontRightDrive.set(rightSpeed);
 		backRightDrive.set(rightSpeed);
+	}
+	
+	public void setLeftSpeed(double leftSpeed) {
+		frontLeftDrive.set(leftSpeed);
+		backLeftDrive.set(leftSpeed);
 	}
 
 	public void stop () {

@@ -22,9 +22,17 @@ public class RobotMap {
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
+	// public static int rangefinderModule = 1;	
 	public static int frontLeftDrive = 0;
 	public static int backLeftDrive = 1;
 	public static int frontRightDrive = 3;
 	public static int backRightDrive = 4;
+	
+	public static double defaultLeftP = 0.25;
+	public static double defaultLeftI = 0;
+	public static double defaultLeftD = 0;
+	
+	public static double defaultRightP = 0.25;
+	public static double defaultRightI = 0;
+	public static double defaultRightD = 0;
 }
