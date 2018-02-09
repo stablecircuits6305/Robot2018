@@ -126,6 +126,11 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
+	@Override
+	public void testInit() {
+		driveTrain.resetEncoders();
+	}
+	
 	/**
 	 * This function is called periodically during test mode.
 	 */

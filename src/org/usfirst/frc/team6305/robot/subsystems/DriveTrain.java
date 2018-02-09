@@ -57,12 +57,15 @@ public class DriveTrain extends Subsystem {
 		rightEncoder.reset();
 	}
 	
-	public int getLeftEncoderValue () {
-		return leftEncoder.get();
+	public double getLeftEncoderValue () {
+		// returns the rotation in degrees
+		double degree = leftEncoder.get();
+		return degree;
 	}
 	
-	public int getRightEncoderValue () {
-		return rightEncoder.get();
+	public double getRightEncoderValue () {
+		double degree = rightEncoder.get();
+		return degree;
 	}
 	
 	public static DriveTrain getInstance () {
