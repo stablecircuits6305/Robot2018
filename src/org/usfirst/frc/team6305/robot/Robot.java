@@ -7,9 +7,14 @@
 
 package org.usfirst.frc.team6305.robot;
 
+import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
+import org.usfirst.frc.team6305.robot.auto.AutoLeft;
+import org.usfirst.frc.team6305.robot.auto.AutoRight;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
-import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
 
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,8 +33,8 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 
 	Command teleopDrive, m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
-	DriveTrain driveTrain = DriveTrain.getInstance();
+	SendableChooser<Command> chooser = new SendableChooser<>();
+	NetworkTable autoTable;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -40,12 +45,14 @@ public class Robot extends TimedRobot {
 		Gyro.calibrate();
 		Gyro.reset();
 		m_oi = new OI();
-//		m_chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putNumber("Left P", RobotMap.defaultLeftP);
-		SmartDashboard.putNumber("Left I", RobotMap.defaultLeftI);
-		SmartDashboard.putNumber("Left D", RobotMap.defaultLeftD);
+		chooser.addDefault("Baseline", new AutoBaseline());
+		chooser.addObject("Left Side", new AutoLeft());
+		chooser.addObject("Right Side", new AutoRight());
+		SmartDashboard.putData("Auto mode", chooser);
 		teleopDrive = new TankDrive();
+		
+		NetworkTableInstance inst = NetworkTableInstance.getDefault();
+		autoTable = inst.getTable("autoTable");
 	}
 
 	/**
@@ -78,21 +85,24 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if(gameData.charAt(0) == 'L')
-		{
-			//Put left auto code here
+		if(gameData.charAt(0) == 'L') {}
+			
+		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
+		NetworkTableEntry scalePosition = autoTable.getEntry("scalePosition");
+		if (gameData.charAt(0) == 'L') {
+			switchPosition.setBoolean(false); // False is left, true is right
 		} else {
-			//Put right auto code here
+			switchPosition.setBoolean(true); // False is left, true is right
+		}
+		if (gameData.charAt(1) == 'L') {
+			scalePosition.setBoolean(false); // False is left, true is right
+		} else {
+			scalePosition.setBoolean(true); // False is left, true is right
 		}
 		
-		m_autonomousCommand = m_chooser.getSelected();
+		m_autonomousCommand = chooser.getSelected();
 
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
+		// TODO: add code here to choose the proper auto
 
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
@@ -128,17 +138,11 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 	}
 
-	@Override
-	public void testInit() {
-		driveTrain.resetEncoders();
-	}
-	
 	/**
 	 * This function is called periodically during test mode.
 	 */
 	@Override
 	public void testPeriodic() {
-//		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
-		System.out.println("Left encoder: " + driveTrain.getLeftEncoderValue() + " -- Right encoder: " + driveTrain.getRightEncoderValue());
+		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
 	}
 }

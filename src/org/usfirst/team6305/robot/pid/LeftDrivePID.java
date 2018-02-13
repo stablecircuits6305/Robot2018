@@ -1,4 +1,4 @@
-package PIDs;
+package org.usfirst.team6305.robot.pid;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class RightDrivePID {
+public class LeftDrivePID {
 	
-	public static RightDrivePID instance = new RightDrivePID();
+	public static LeftDrivePID instance = new LeftDrivePID();
 	DriveTrain driveTrain = DriveTrain.getInstance();
 	PIDController pidController;
 	double speed;
 	
-	public RightDrivePID() {
+	public LeftDrivePID() {
 		
 	}
 	
@@ -33,9 +33,9 @@ public class RightDrivePID {
 
 			@Override
 			public double pidGet() {
-				double distance = driveTrain.getRightEncoderValue();
-//				System.out.println(distance);
-				return distance;
+				double leftVal = driveTrain.getLeftEncoderValue();
+				System.out.println(leftVal);
+				return leftVal;
 			}
     	};
     	
@@ -46,9 +46,9 @@ public class RightDrivePID {
 			}
     	};
     	
-    	final double kP = SmartDashboard.getNumber("Right P", RobotMap.defaultRightP);
-    	final double kI= SmartDashboard.getNumber("Right I", RobotMap.defaultRightI);
-    	final double kD= SmartDashboard.getNumber("Right D", RobotMap.defaultRightD);
+    	final double kP = SmartDashboard.getNumber("Left P", RobotMap.defaultLeftP);
+    	final double kI= SmartDashboard.getNumber("Left I", RobotMap.defaultLeftI);
+    	final double kD= SmartDashboard.getNumber("Left D", RobotMap.defaultLeftD);
     	
     	pidController = new PIDController(kP, kI, kD, pidSource, pidOutput);
     	pidController.setAbsoluteTolerance(2);
@@ -71,7 +71,7 @@ public class RightDrivePID {
     	pidController.free();
 	}
 	
-	public static RightDrivePID getInstance() {
+	public static LeftDrivePID getInstance() {
 		return instance;
 	}
 	

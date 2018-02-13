@@ -2,9 +2,9 @@ package org.usfirst.frc.team6305.robot.commands;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
+import org.usfirst.team6305.robot.pid.LeftDrivePID;
+import org.usfirst.team6305.robot.pid.RightDrivePID;
 
-import PIDs.LeftDrivePID;
-import PIDs.RightDrivePID;
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
