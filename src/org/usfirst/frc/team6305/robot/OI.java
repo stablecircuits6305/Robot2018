@@ -8,7 +8,7 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
-
+import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.Levels;
 import org.usfirst.frc.team6305.robot.commands.intake;
 import org.usfirst.frc.team6305.robot.commands.outtake;
@@ -64,6 +64,7 @@ public class OI {
 		OI.xbox.y.whenPressed(new Levels(30));
 		OI.xbox.b.whenPressed(new Levels(20));
 		OI.xbox.a.whenPressed(new Levels(10));
+		OI.xbox.x.whenPressed(new GyroTest(90));
 		
 		
 	
