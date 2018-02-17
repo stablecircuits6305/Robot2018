@@ -46,4 +46,8 @@ public class RobotMap {
 	public static double defaultElevatorP = 0.25;
 	public static double defaultElevatorI = 0;
 	public static double defaultElevatorD = 0;
+	
+	public static double defaultGyroP = 0.1;
+	public static double defaultGyroI = 0;
+	public static double defaultGyroD = 0;
 	}
