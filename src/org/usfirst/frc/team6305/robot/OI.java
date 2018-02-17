@@ -9,8 +9,12 @@ package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
 
+import org.usfirst.frc.team6305.robot.commands.Levels;
+import org.usfirst.frc.team6305.robot.commands.intake;
+import org.usfirst.frc.team6305.robot.commands.outtake;
+
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
+
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -50,10 +54,18 @@ public class OI {
 	public static Joystick rightJoystick = new Joystick(1);
 	
 	public static JoystickButton button = new JoystickButton(leftJoystick, 1);
+	public static XboxController xbox = new XboxController(2);
 	
 	static {
 		
 		OI.button.whenPressed(new DrivePID(360));
+		OI.xbox.rt.whileHeld(new intake());
+		OI.xbox.lt.whileHeld(new outtake());
+		OI.xbox.y.whenPressed(new Levels(30));
+		OI.xbox.b.whenPressed(new Levels(20));
+		OI.xbox.a.whenPressed(new Levels(10));
+		
+		
 	
 	}
 }

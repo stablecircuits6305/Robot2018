@@ -1,6 +1,6 @@
 package org.usfirst.frc.team6305.robot.subsystems;
 
-import org.usfirst.frc.team6305.robot.OI;
+
 import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
 
@@ -39,10 +39,10 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void drive (double leftSpeed, double rightSpeed) {
-		frontLeftDrive.set(leftSpeed);
-		backLeftDrive.set(leftSpeed);
-		frontRightDrive.set(rightSpeed);
-		backRightDrive.set(rightSpeed);
+		frontLeftDrive.set(-leftSpeed);
+		backLeftDrive.set(-leftSpeed);
+		frontRightDrive.set(-rightSpeed);
+		backRightDrive.set(-rightSpeed);
 	}
 	
 	public void setLeftSpeed(double leftSpeed) {

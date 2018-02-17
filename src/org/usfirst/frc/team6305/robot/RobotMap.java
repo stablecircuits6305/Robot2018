@@ -27,6 +27,13 @@ public class RobotMap {
 	public static int backLeftDrive = 1;
 	public static int frontRightDrive = 3;
 	public static int backRightDrive = 4;
+	public static int elevator = 7;
+	public static int lRamp = 8;
+	public static int rRamp = 9;
+
+	
+	public static int clawSolenoid1 = 5;
+	public static int clawSolenoid2 = 6;
 	
 	public static double defaultLeftP = 0.25;
 	public static double defaultLeftI = 0;
@@ -35,4 +42,8 @@ public class RobotMap {
 	public static double defaultRightP = 0.25;
 	public static double defaultRightI = 0;
 	public static double defaultRightD = 0;
-}
+	
+	public static double defaultElevatorP = 0.25;
+	public static double defaultElevatorI = 0;
+	public static double defaultElevatorD = 0;
+	}
