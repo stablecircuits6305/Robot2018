@@ -7,13 +7,15 @@
 
 package org.usfirst.frc.team6305.robot;
 
+import org.usfirst.frc.team6305.robot.XboxController;
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
+import org.usfirst.frc.team6305.robot.commands.GyroTest;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-/**
+/**  
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
@@ -34,6 +36,7 @@ public class OI {
 	// Once you have a button, it's trivial to bind it to a button in one of
 	// three ways:
 
+	
 	// Start the command when the button is pressed and let it run the command
 	// until it is finished as determined by it's isFinished method.
 	// button.whenPressed(new ExampleCommand());
@@ -51,9 +54,11 @@ public class OI {
 	
 	public static JoystickButton button = new JoystickButton(leftJoystick, 1);
 	
+	public static XboxController xbox = new XboxController(2);
+	
 	static {
 		
-		OI.button.whenPressed(new DrivePID(360));
+		OI.button.whenPressed(new GyroTest(-90));
 	
 	}
 }

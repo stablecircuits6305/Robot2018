@@ -11,6 +11,7 @@ import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
 import org.usfirst.frc.team6305.robot.auto.AutoLeft;
 import org.usfirst.frc.team6305.robot.auto.AutoRight;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
+import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot {
 	Command teleopDrive, m_autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	NetworkTable autoTable;
+	DriveTrain driveTrain;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -50,6 +52,8 @@ public class Robot extends TimedRobot {
 		chooser.addObject("Right Side", new AutoRight());
 		SmartDashboard.putData("Auto mode", chooser);
 		teleopDrive = new TankDrive();
+
+		driveTrain = DriveTrain.getInstance();
 		
 		NetworkTableInstance inst = NetworkTableInstance.getDefault();
 		autoTable = inst.getTable("autoTable");
@@ -143,6 +147,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
+//		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
+		SmartDashboard.putNumberArray("Drive Encoders", new Double[]{driveTrain.getLeftEncoderValue(), driveTrain.getRightEncoderValue()});
+		SmartDashboard.putNumber("Gyro rate", Gyro.getRate());
 	}
 }
