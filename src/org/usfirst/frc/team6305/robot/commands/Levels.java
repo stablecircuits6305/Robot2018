@@ -1,15 +1,19 @@
 package org.usfirst.frc.team6305.robot.commands;
 
+import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import org.usfirst.team6305.robot.pid.elevatorPID;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class Levels extends Command {
+	DigitalInput limitElevator = new DigitalInput(RobotMap.elevatorLimit);
+	
 	Elevator elevator = Elevator.getInstance();
 	elevatorPID pid = elevatorPID.getInstance();
 	double targetDistance;
@@ -34,6 +38,9 @@ public class Levels extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	elevator.up(pid.getSpeed());
+    	if(limitElevator.get()){
+    		elevator.stop();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

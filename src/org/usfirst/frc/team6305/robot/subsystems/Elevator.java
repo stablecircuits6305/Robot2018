@@ -2,6 +2,7 @@ package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Elevator extends Subsystem {
+	
 	Spark elevator = new Spark(RobotMap.elevator);
 	static Encoder elevatorEnc = new Encoder(4,5, false, Encoder.EncodingType.k4X);
 	public static Elevator instance = new Elevator();

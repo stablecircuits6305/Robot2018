@@ -1,6 +1,7 @@
 package org.usfirst.team6305.robot.pid;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
+
 import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.PIDController;
@@ -10,6 +11,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class elevatorPID {
+	
 	public static elevatorPID instance = new elevatorPID();
 	Elevator elevator = Elevator.getInstance();
 	PIDController pidController;

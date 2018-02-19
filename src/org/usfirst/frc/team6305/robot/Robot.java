@@ -15,6 +15,7 @@ import org.usfirst.frc.team6305.robot.commands.TankDrive;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,6 +31,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * project.
  */
 public class Robot extends TimedRobot {
+	
 	public static OI m_oi;
 
 	Command teleopDrive, m_autonomousCommand;
@@ -42,6 +44,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		
 		Gyro.calibrate();
 		Gyro.reset();
 		m_oi = new OI();
@@ -63,6 +66,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 
+		
 	}
 
 	@Override
@@ -101,6 +105,11 @@ public class Robot extends TimedRobot {
 		}
 		
 		m_autonomousCommand = chooser.getSelected();
+		
+		if(switchPosition.equals(true)){
+			
+		}
+		
 
 		// TODO: add code here to choose the proper auto
 

@@ -8,10 +8,11 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
+
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.Levels;
-import org.usfirst.frc.team6305.robot.commands.intake;
-import org.usfirst.frc.team6305.robot.commands.outtake;
+import org.usfirst.frc.team6305.robot.commands.outTake;
+import org.usfirst.frc.team6305.robot.commands.pickUp;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -59,8 +60,8 @@ public class OI {
 	static {
 		
 		OI.button.whenPressed(new DrivePID(360));
-		OI.xbox.rt.whileHeld(new intake());
-		OI.xbox.lt.whileHeld(new outtake());
+		OI.xbox.rt.whileHeld(new pickUp());
+		OI.xbox.lt.whileHeld(new outTake());
 		OI.xbox.y.whenPressed(new Levels(30));
 		OI.xbox.b.whenPressed(new Levels(20));
 		OI.xbox.a.whenPressed(new Levels(10));

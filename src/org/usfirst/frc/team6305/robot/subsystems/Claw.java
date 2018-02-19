@@ -2,27 +2,36 @@ package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
 
+
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class Claw extends Subsystem {
-    DoubleSolenoid claw = new DoubleSolenoid(RobotMap.clawSolenoid1, RobotMap.clawSolenoid2);
+	
+	
+	DoubleSolenoid claw = new DoubleSolenoid(RobotMap.clawSolenoid1, RobotMap.clawSolenoid2);
+	
+    
     
     public static Claw instance = new Claw();
 		
-	public void output(){
+    
+   
+	public void open(){
 		claw.set(DoubleSolenoid.Value.kForward);
 	}
 	
-	public void input(){
+	public void close(){
 		claw.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 	public void stop(){
 		claw.set(DoubleSolenoid.Value.kOff);
+		
 	}
 	
 	public static Claw getInstance(){
