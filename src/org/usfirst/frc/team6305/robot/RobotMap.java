@@ -28,8 +28,8 @@ public class RobotMap {
 	public static int frontRightDrive = 3;
 	public static int backRightDrive = 4;
 	public static int elevator = 6;
-	public static int leftWheels;
-	public static int rightWheels;
+	public static int leftWheels = 5;
+	public static int rightWheels = 2;
 	
 	public static int lRamp = 8;
 	public static int rRamp = 9;
@@ -53,9 +53,9 @@ public class RobotMap {
 	public static double defaultGyroP = 0.1;
 	public static double defaultGyroI = 0;
 	public static double defaultGyroD = 0;
-	public static int elevatorLimit;
+	public static int elevatorLimit = 6;
 	public static int armLimit;
-	public static int arm;
+	public static int arm = 7;
 	public static double defaultArmP;
 	public static double defaultArmI;
 	public static double defaultArmD;

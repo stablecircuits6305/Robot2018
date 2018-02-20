@@ -40,21 +40,28 @@ public class Elevator extends Subsystem {
 
 	public void up(double speed){
 		elevator.set(speed);
+		if(limitElevator.get()){
+			elevator.set(speed);
+		}else{
+			stop();
+		}
 	}
 	
 	public void down(double speed){
 		elevator.set(-speed);
+		if(limitElevator.get()){
+			elevator.set(speed);
+		}
+		else{
+			stop();
+		}
 	}
 	
 	public void stop(){
 		elevator.set(0);
 	}
 	
-	public void limit(){
-		if(limitElevator.get()){
-			elevator.stopMotor();
-		}
-	}
+	
 	public double getElevatorEnc(){
 		double val = elevatorEnc.get();
 		return val;

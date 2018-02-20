@@ -23,6 +23,9 @@ public class Levels extends Command {
     public Levels(double dist) {
     	targetDistance = dist;
     	
+    	requires(elevator);
+    	
+    	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -38,7 +41,7 @@ public class Levels extends Command {
     protected void execute() {
     	
     	elevator.up(pid.getSpeed());
-    	elevator.limit();
+    	
     	
     }
 
