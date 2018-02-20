@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Elevator extends Subsystem {
+	DigitalInput limitElevator = new DigitalInput(RobotMap.elevatorLimit);
+	
 	
 	Spark elevator = new Spark(RobotMap.elevator);
 	static Encoder elevatorEnc = new Encoder(4,5, false, Encoder.EncodingType.k4X);
@@ -46,6 +48,12 @@ public class Elevator extends Subsystem {
 	
 	public void stop(){
 		elevator.set(0);
+	}
+	
+	public void limit(){
+		if(limitElevator.get()){
+			elevator.stopMotor();
+		}
 	}
 	public static double getElevatorEnc(){
 		double val = elevatorEnc.get();

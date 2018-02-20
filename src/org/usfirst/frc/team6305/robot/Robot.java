@@ -104,13 +104,9 @@ public class Robot extends TimedRobot {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
 		
-		m_autonomousCommand = chooser.getSelected();
-		
-		if(switchPosition.equals(true)){
+		if(switchPosition.equals(true) && scalePosition.equals(true)){
 			
 		}
-		
-
 		// TODO: add code here to choose the proper auto
 
 		// schedule the autonomous command (example)

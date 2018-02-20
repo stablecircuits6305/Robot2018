@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Levels extends Command {
-	DigitalInput limitElevator = new DigitalInput(RobotMap.elevatorLimit);
 	
 	Elevator elevator = Elevator.getInstance();
 	elevatorPID pid = elevatorPID.getInstance();
@@ -37,10 +36,10 @@ public class Levels extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	
     	elevator.up(pid.getSpeed());
-    	if(limitElevator.get()){
-    		elevator.stop();
-    	}
+    	elevator.limit();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

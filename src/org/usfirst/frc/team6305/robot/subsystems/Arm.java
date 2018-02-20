@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Arm extends Subsystem {
 	Spark arm = new Spark(RobotMap.arm);
 	
+	
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
