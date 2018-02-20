@@ -1,11 +1,11 @@
 package org.usfirst.frc.team6305.robot.commands;
 
-import org.usfirst.frc.team6305.robot.RobotMap;
+
 import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import org.usfirst.team6305.robot.pid.elevatorPID;
 
-import edu.wpi.first.wpilibj.DigitalInput;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**

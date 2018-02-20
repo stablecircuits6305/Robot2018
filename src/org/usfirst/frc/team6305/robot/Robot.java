@@ -8,6 +8,7 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
+
 import org.usfirst.frc.team6305.robot.auto.AutoLeft;
 import org.usfirst.frc.team6305.robot.auto.AutoRight;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
@@ -15,7 +16,7 @@ import org.usfirst.frc.team6305.robot.commands.TankDrive;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj.DigitalInput;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -33,6 +34,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 	
 	public static OI m_oi;
+	
+	Command autoBaseline;
 
 	Command teleopDrive, m_autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -53,7 +56,7 @@ public class Robot extends TimedRobot {
 		chooser.addObject("Right Side", new AutoRight());
 		SmartDashboard.putData("Auto mode", chooser);
 		teleopDrive = new TankDrive();
-		
+		autoBaseline = new AutoBaseline();
 		NetworkTableInstance inst = NetworkTableInstance.getDefault();
 		autoTable = inst.getTable("autoTable");
 	}
@@ -104,8 +107,8 @@ public class Robot extends TimedRobot {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
 		
-		if(switchPosition.equals(true) && scalePosition.equals(true)){
-			
+		if(switchPosition.equals(true) && scalePosition.equals(true)){	
+			m_autonomousCommand = autoBaseline;
 		}
 		// TODO: add code here to choose the proper auto
 

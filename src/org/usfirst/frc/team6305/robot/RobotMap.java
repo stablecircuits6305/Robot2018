@@ -56,4 +56,7 @@ public class RobotMap {
 	public static int elevatorLimit;
 	public static int armLimit;
 	public static int arm;
+	public static double defaultArmP;
+	public static double defaultArmI;
+	public static double defaultArmD;
 	}
