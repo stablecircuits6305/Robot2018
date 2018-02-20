@@ -15,7 +15,7 @@ public class Elevator extends Subsystem {
 	
 	
 	Spark elevator = new Spark(RobotMap.elevator);
-	static Encoder elevatorEnc = new Encoder(4,5, false, Encoder.EncodingType.k4X);
+	Encoder elevatorEnc = new Encoder(4,5, false, Encoder.EncodingType.k4X);
 	public static Elevator instance = new Elevator();
 
     // Put methods for controlling this subsystem
@@ -55,7 +55,7 @@ public class Elevator extends Subsystem {
 			elevator.stopMotor();
 		}
 	}
-	public static double getElevatorEnc(){
+	public double getElevatorEnc(){
 		double val = elevatorEnc.get();
 		return val;
 	}
