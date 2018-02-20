@@ -35,8 +35,8 @@ public class RobotMap {
 	public static int rRamp = 9;
 
 	
-	public static int clawSolenoid1 = 5;
-	public static int clawSolenoid2 = 6;
+	public static int clawSolenoid1 = 0;
+	public static int clawSolenoid2 = 1;
 	
 	public static double defaultLeftP = 0.25;
 	public static double defaultLeftI = 0;
