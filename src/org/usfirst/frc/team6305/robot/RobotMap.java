@@ -54,7 +54,7 @@ public class RobotMap {
 	public static double defaultGyroI = 0;
 	public static double defaultGyroD = 0;
 	public static int elevatorLimit = 6;
-	public static int armLimit;
+	public static int armLimit = 7;
 	public static int arm = 7;
 	public static double defaultArmP;
 	public static double defaultArmI;
