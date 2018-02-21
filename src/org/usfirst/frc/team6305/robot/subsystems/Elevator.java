@@ -40,10 +40,12 @@ public class Elevator extends Subsystem {
 
 	public void up(double speed){
 		elevator.set(speed);
+		if(speed > 0){
 		if(limitElevator.get()){
 			elevator.set(speed);
 		}else{
 			stop();
+		}
 		}
 	}
 	
