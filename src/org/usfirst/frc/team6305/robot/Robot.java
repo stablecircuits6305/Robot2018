@@ -11,11 +11,14 @@ import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
 import org.usfirst.frc.team6305.robot.auto.AutoLeft;
 import org.usfirst.frc.team6305.robot.auto.AutoRight;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
+import org.usfirst.frc.team6305.robot.subsystems.Arm;
 import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -37,6 +40,7 @@ public class Robot extends TimedRobot {
 	SendableChooser<Command> chooser = new SendableChooser<>();
 	NetworkTable autoTable;
 	DriveTrain driveTrain;
+	Compressor c;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -57,6 +61,8 @@ public class Robot extends TimedRobot {
 		
 		NetworkTableInstance inst = NetworkTableInstance.getDefault();
 		autoTable = inst.getTable("autoTable");
+		
+		c = new Compressor(0);
 	}
 
 	/**
@@ -66,7 +72,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		c.setClosedLoopControl(false);
 	}
 
 	@Override
@@ -132,6 +138,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		teleopDrive.start();
+		c.setClosedLoopControl(true);
 	}
 
 	/**
@@ -145,10 +152,12 @@ public class Robot extends TimedRobot {
 	/**
 	 * This function is called periodically during test mode.
 	 */
+	Elevator arm = Elevator.getInstance();
 	@Override
 	public void testPeriodic() {
 //		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
 		SmartDashboard.putNumberArray("Drive Encoders", new Double[]{driveTrain.getLeftEncoderValue(), driveTrain.getRightEncoderValue()});
 		SmartDashboard.putNumber("Gyro rate", Gyro.getRate());
+		System.out.println(arm.getLimit());
 	}
 }

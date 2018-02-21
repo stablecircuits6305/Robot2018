@@ -1,24 +1,20 @@
-package org.usfirst.frc.team6305.robot.commands.intake;
+package org.usfirst.frc.team6305.robot.commands.arm;
 
-import org.usfirst.frc.team6305.robot.XboxController;
-import org.usfirst.frc.team6305.robot.subsystems.Intake;
+import org.usfirst.frc.team6305.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class MoveIntake extends Command {
+public class HoldArm extends Command {
 
-	Intake intake = Intake.getInstance();
-	XboxController xbox = new XboxController();
-	double speed;
+	Arm arm = Arm.getInstance();
 	
-    public MoveIntake(double spd) {
+    public HoldArm() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	speed = spd;
-    	requires(intake);
+		requires(arm);
     }
 
     // Called just before this Command runs the first time
@@ -27,8 +23,7 @@ public class MoveIntake extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	intake.moveLeftIntake(speed);
-    	intake.moveRightIntake(speed);
+    	arm.moveArm(.15);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,13 +33,11 @@ public class MoveIntake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	intake.stopLeft();
-    	intake.stopRight();
+    	arm.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

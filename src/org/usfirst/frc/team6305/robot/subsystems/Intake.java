@@ -22,7 +22,7 @@ public class Intake extends Subsystem {
 	}
 	
 	public void moveRightIntake (double speed) {
-		rightIntake.set(speed);
+		rightIntake.set(-speed);
 	}
 	
 	public void stopLeft () {

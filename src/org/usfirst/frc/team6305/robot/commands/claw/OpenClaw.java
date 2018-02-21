@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class MoveClaw extends Command {
+public class OpenClaw extends Command {
 
 	Claw claw = Claw.getInstance();
 	
-    public MoveClaw() {
+    public OpenClaw() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(claw);
@@ -23,7 +23,7 @@ public class MoveClaw extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	claw.close();
+    	claw.open();
     }
 
     // Make this return true when this Command no longer needs to run execute()

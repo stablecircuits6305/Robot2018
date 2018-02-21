@@ -15,11 +15,11 @@ public class Claw extends Subsystem {
 	DoubleSolenoid claw = new DoubleSolenoid(0, 1);
 	
 	public void open () {
-		claw.set(DoubleSolenoid.Value.kOff);
+		claw.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public void close () {
-		claw.set(DoubleSolenoid.Value.kForward);
+		claw.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 	public static Claw getInstance () {

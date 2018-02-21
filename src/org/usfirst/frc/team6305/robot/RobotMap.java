@@ -27,10 +27,10 @@ public class RobotMap {
 	public static int backLeftDrive = 1;
 	public static int frontRightDrive = 3;
 	public static int backRightDrive = 4;
-	public static int elevator = 6;
-	public static int rightIntake = 2;
+	public static int elevator = 7;
+	public static int rightIntake = 6;
 	public static int leftIntake = 5;
-	public static int arm = 7;
+	public static int arm = 8;
 	
 	public static int elevatorLimit = 6;
 	public static int armLimit = 7;

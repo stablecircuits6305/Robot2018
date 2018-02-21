@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
+import org.usfirst.frc.team6305.robot.commands.arm.HoldArm;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
@@ -18,6 +19,10 @@ public class Arm extends Subsystem {
 	Spark arm = new Spark(RobotMap.arm);
 	DigitalInput armLimit = new DigitalInput(RobotMap.armLimit);
 	
+	public Arm () {
+		arm.setInverted(true);
+	}
+	
 	public void moveArm (double speed) {
 		if (speed > 0) {
 			if (armLimit.get()) {
@@ -31,7 +36,12 @@ public class Arm extends Subsystem {
 	}
 	
 	public void stop () {
-		arm.stopMotor();
+//		arm.stopMotor();
+		arm.set(.15);
+	}
+	
+	public Boolean getLimit () {
+		return armLimit.get();
 	}
 	
 	public static Arm getInstance () {
@@ -41,6 +51,7 @@ public class Arm extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new HoldArm());
     }
 }
 
