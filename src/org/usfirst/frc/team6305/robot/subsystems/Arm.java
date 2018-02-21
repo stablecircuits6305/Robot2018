@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
+import org.usfirst.frc.team6305.robot.commands.HoldArm;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -71,6 +72,7 @@ public class Arm extends Subsystem {
 	}
 
     public void initDefaultCommand() {
+    	setDefaultCommand(new HoldArm());
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }

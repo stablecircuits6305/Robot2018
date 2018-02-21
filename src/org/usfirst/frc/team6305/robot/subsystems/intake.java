@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
+import org.usfirst.frc.team6305.robot.commands.holdIntake;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,6 +20,8 @@ public class intake extends Subsystem {
     // here. Call these from Commands.
 
     public void initDefaultCommand() {
+    	
+    	setDefaultCommand(new holdIntake());
     	
     	
         // Set the default command for a subsystem here.
@@ -40,6 +43,8 @@ public class intake extends Subsystem {
     	rightWheels.stopMotor();
     	leftWheels.stopMotor();
     }
+    
+    
     
     public static intake getInstance(){
     	return instance;
