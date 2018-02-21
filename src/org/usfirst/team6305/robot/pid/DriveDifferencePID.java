@@ -9,18 +9,19 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class LeftDrivePID {
+public class DriveDifferencePID {
 	
-	public static LeftDrivePID instance = new LeftDrivePID();
+	public static DriveDifferencePID instance = new DriveDifferencePID();
 	DriveTrain driveTrain = DriveTrain.getInstance();
 	PIDController pidController;
-	double speed;
+	double additive;
+	double MAX_ADDITIVE = 0.05;
 	
-	public LeftDrivePID() {
+	public DriveDifferencePID() {
 		
 	}
 	
-	public void init(double targetDistance, double maxSpeed) {
+	public void init() {
     	PIDSource pidSource = new PIDSource() {
 			@Override
 			public void setPIDSourceType(PIDSourceType pidSource) {}
@@ -33,32 +34,35 @@ public class LeftDrivePID {
 
 			@Override
 			public double pidGet() {
-				double leftVal = driveTrain.getLeftEncoderValue();
-				return leftVal;
+				double driveDifference = driveTrain.getLeftEncoderValue() - driveTrain.getRightEncoderValue();
+				return driveDifference;
 			}
     	};
     	
     	PIDOutput pidOutput = new PIDOutput() {
 			@Override
 			public void pidWrite(double output) {
-				speed = -output;
+				additive = output;
 			}
     	};
     	
-    	final double kP = SmartDashboard.getNumber("Left P", RobotMap.defaultLeftP);
-    	final double kI= SmartDashboard.getNumber("Left I", RobotMap.defaultLeftI);
-    	final double kD= SmartDashboard.getNumber("Left D", RobotMap.defaultLeftD);
+//    	final double kP = SmartDashboard.getNumber("Left P", RobotMap.defaultLeftP);
+//    	final double kI= SmartDashboard.getNumber("Left I", RobotMap.defaultLeftI);
+//    	final double kD= SmartDashboard.getNumber("Left D", RobotMap.defaultLeftD);
+    	final double kP = 0.01;
+    	final double kI = 0;
+    	final double kD = 0;
     	
     	pidController = new PIDController(kP, kI, kD, pidSource, pidOutput);
     	pidController.setAbsoluteTolerance(2);
-    	pidController.setSetpoint(targetDistance);
-    	pidController.setOutputRange(-maxSpeed, maxSpeed);
+    	pidController.setSetpoint(0);
+    	pidController.setOutputRange(-MAX_ADDITIVE, MAX_ADDITIVE);
     	pidController.enable();
     	System.out.println("Button is pressed");
 	}
 	
-	public double getSpeed () {
-		return speed;
+	public double getAdditive () {
+		return -additive;
 	}
 	
 	public boolean onTarget () {
@@ -70,7 +74,7 @@ public class LeftDrivePID {
     	pidController.free();
 	}
 	
-	public static LeftDrivePID getInstance() {
+	public static DriveDifferencePID getInstance() {
 		return instance;
 	}
 	

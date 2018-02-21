@@ -10,6 +10,10 @@ package org.usfirst.frc.team6305.robot;
 import org.usfirst.frc.team6305.robot.XboxController;
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
+import org.usfirst.frc.team6305.robot.commands.arm.MoveArm;
+import org.usfirst.frc.team6305.robot.commands.claw.MoveClaw;
+import org.usfirst.frc.team6305.robot.commands.elevator.MoveElevator;
+import org.usfirst.frc.team6305.robot.commands.intake.MoveIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -52,13 +56,32 @@ public class OI {
 	public static Joystick leftJoystick = new Joystick(0);
 	public static Joystick rightJoystick = new Joystick(1);
 	
-	public static JoystickButton button = new JoystickButton(leftJoystick, 1);
+	public static JoystickButton leftTrigger = new JoystickButton(leftJoystick, 1);
+	public static JoystickButton leftButton3 = new JoystickButton(leftJoystick, 3);
+	public static JoystickButton leftButton4 = new JoystickButton(leftJoystick, 4);
+	public static JoystickButton leftButton5 = new JoystickButton(leftJoystick, 5);
+	public static JoystickButton leftButton6 = new JoystickButton(leftJoystick, 6);
+	
+	public static JoystickButton rightTrigger = new JoystickButton(rightJoystick, 1);
+	public static JoystickButton rightButton3 = new JoystickButton(rightJoystick, 3);
+	public static JoystickButton rightButton4 = new JoystickButton(rightJoystick, 4);
+	
 	
 	public static XboxController xbox = new XboxController(2);
 	
 	static {
 		
-		OI.button.whenPressed(new GyroTest(-90));
-	
+//		OI.leftTrigger.whenPressed(new GyroTest(-90));
+//		OI.rightTrigger.whenPressed(new GyroTest(90));
+//		OI.rightButton3.whenPressed(new DrivePID(180));
+//		OI.rightButton4.whenPressed(new DrivePID(-180));
+		OI.leftTrigger.whenPressed(new MoveClaw());
+		OI.leftButton3.whenPressed(new MoveElevator(0.1));
+		OI.leftButton4.whenPressed(new MoveElevator(-0.1));
+		OI.leftButton5.whenPressed(new MoveIntake(0.5));
+		OI.leftButton6.whenPressed(new MoveIntake(-0.5));
+		
+		OI.rightButton3.whenPressed(new MoveArm(0.2));
+		OI.rightButton4.whenPressed(new MoveArm(-0.2));
 	}
 }

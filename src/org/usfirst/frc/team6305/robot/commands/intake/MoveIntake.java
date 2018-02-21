@@ -1,22 +1,24 @@
-package org.usfirst.frc.team6305.robot.commands;
+package org.usfirst.frc.team6305.robot.commands.intake;
 
-import org.usfirst.frc.team6305.robot.OI;
-import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team6305.robot.XboxController;
+import org.usfirst.frc.team6305.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class TankDrive extends Command {
+public class MoveIntake extends Command {
 
-	DriveTrain driveTrain;
+	Intake intake = Intake.getInstance();
+	XboxController xbox = new XboxController();
+	double speed;
 	
-    public TankDrive() {
+    public MoveIntake(double spd) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	driveTrain = DriveTrain.getInstance();
-    	requires(driveTrain);
+    	speed = spd;
+    	requires(intake);
     }
 
     // Called just before this Command runs the first time
@@ -25,10 +27,8 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftSpeed = OI.leftJoystick.getY();
-    	double rightSpeed = OI.rightJoystick.getY();
-    	
-    	driveTrain.drive(leftSpeed, rightSpeed);
+    	intake.moveLeftIntake(speed);
+    	intake.moveRightIntake(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,11 +38,12 @@ public class TankDrive extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	driveTrain.stop();
+    	intake.stopLeft();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

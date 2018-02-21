@@ -2,39 +2,38 @@ package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class Arm extends Subsystem {
+public class Intake extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+
+	static Intake instance = new Intake();
+	Spark leftIntake = new Spark(RobotMap.leftIntake);
+	Spark rightIntake = new Spark(RobotMap.rightIntake);
 	
-	static Arm instance = new Arm();
-	Spark arm = new Spark(RobotMap.arm);
-	DigitalInput armLimit = new DigitalInput(RobotMap.armLimit);
-	
-	public void moveArm (double speed) {
-		if (speed > 0) {
-			if (armLimit.get()) {
-				arm.set(speed);
-			} else {
-				stop();
-			}
-		} else {
-			arm.set(speed);
-		}
+	public void moveLeftIntake (double speed) {
+		leftIntake.set(speed);
 	}
 	
-	public void stop () {
-		arm.stopMotor();
+	public void moveRightIntake (double speed) {
+		rightIntake.set(speed);
 	}
 	
-	public static Arm getInstance () {
+	public void stopLeft () {
+		leftIntake.stopMotor();
+	}
+	
+	public void stopRight () {
+		rightIntake.stopMotor();
+	}
+	
+	public static Intake getInstance() {
 		return instance;
 	}
 	

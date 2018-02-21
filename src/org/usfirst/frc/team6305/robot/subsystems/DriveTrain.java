@@ -24,6 +24,8 @@ public class DriveTrain extends Subsystem {
 	Encoder rightEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 	Encoder leftEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
 	
+	final double WHEEL_CIRCUM = Math.PI * 6;
+	
 	public static DriveTrain instance = new DriveTrain();
 	
 	public DriveTrain () {
@@ -39,15 +41,15 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void drive (double leftSpeed, double rightSpeed) {
-		frontLeftDrive.set(leftSpeed);
-		backLeftDrive.set(leftSpeed);
+		frontLeftDrive.set(-leftSpeed);
+		backLeftDrive.set(-leftSpeed);
 		frontRightDrive.set(rightSpeed);
 		backRightDrive.set(rightSpeed);
 	}
 	
 	public void setLeftSpeed(double leftSpeed) {
-		frontLeftDrive.set(leftSpeed);
-		backLeftDrive.set(leftSpeed);
+		frontLeftDrive.set(-leftSpeed);
+		backLeftDrive.set(-leftSpeed);
 	}
 
 	public void stop () {
@@ -63,14 +65,14 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public double getLeftEncoderValue () {
-		// returns the rotation in degrees
+		// returns the rotation in inches
 		double degree = leftEncoder.get();
-		return degree;
+		return (degree / 360) * WHEEL_CIRCUM;
 	}
 	
 	public double getRightEncoderValue () {
 		double degree = rightEncoder.get();
-		return degree;
+		return (degree / 360) * WHEEL_CIRCUM;
 	}
 	
 	public static DriveTrain getInstance () {
