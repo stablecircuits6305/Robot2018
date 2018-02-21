@@ -38,31 +38,28 @@ public class Arm extends Subsystem {
 	
 	public Arm(){
 		initEncoders();
+		arm.setInverted(true);
 	}
 
-	public void up(double speed){
+	public void move(double speed){
 		if(speed > 0){
 			if(limitArm.get()){
 				arm.set(speed);
 			}else{
-				arm.set(0);
+				stop();
 			}
+		}else{
+			arm.set(speed);
 		}
 	}
 	
-	public void down(double speed){
-		arm.set(-speed);
-	}
+	
 	
 	public void stop(){
-		arm.set(0);
+		arm.set(0.2);
 	}
 	
-	public void limit(){
-		if(limitArm.get()){
-			arm.stopMotor();
-		}
-	}
+	
 	public double getArmEnc(){
 		double val = armEnc.get();
 		return val;

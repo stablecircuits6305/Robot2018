@@ -21,12 +21,12 @@ public class moveElevator extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	elevator.stop();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	elevator.up(targetSpeed);
+    	elevator.move(targetSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

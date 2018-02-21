@@ -1,31 +1,29 @@
 package org.usfirst.frc.team6305.robot.commands;
 
-import org.usfirst.frc.team6305.robot.subsystems.Arm;
+import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class armDown extends Command {
-	Arm arm = Arm.getInstance();
-	double TargetSpeed;
+public class HoldElevator extends Command {
+	Elevator elevator = Elevator.getInstance();
+	
 
-    public armDown(double speed) {
-    	requires(arm);
-    	TargetSpeed = speed;
+    public HoldElevator() {
+    	requires(elevator);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	arm.stop();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	arm.down(TargetSpeed);
+    	elevator.move(0.2);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -35,12 +33,12 @@ public class armDown extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	arm.stop();
+    	elevator.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	arm.stop();
+    	elevator.stop();
     }
 }

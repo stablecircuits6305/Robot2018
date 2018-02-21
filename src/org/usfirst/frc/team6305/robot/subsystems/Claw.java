@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Claw extends Subsystem {
 	
 	
+	
+	
 	DoubleSolenoid claw = new DoubleSolenoid(RobotMap.clawSolenoid1, RobotMap.clawSolenoid2);
 	
     

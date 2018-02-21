@@ -10,9 +10,11 @@ package org.usfirst.frc.team6305.robot;
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
 
 
+
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.Levels;
-import org.usfirst.frc.team6305.robot.commands.armDown;
+
+import org.usfirst.frc.team6305.robot.commands.moveArm;
 import org.usfirst.frc.team6305.robot.commands.moveElevator;
 import org.usfirst.frc.team6305.robot.commands.outTake;
 import org.usfirst.frc.team6305.robot.commands.pickUp;
@@ -63,7 +65,7 @@ public class OI {
 	static {
 		
 		OI.xbox.dPad.up.whileHeld(new moveElevator(0.5));
-		OI.xbox.dPad.down.whileHeld(new armDown(0.5));
+		OI.xbox.dPad.down.whileHeld(new moveArm(0.5));
 		OI.button.whenPressed(new DrivePID(360));
 		OI.xbox.rt.whileHeld(new pickUp());
 		OI.xbox.lt.whileHeld(new outTake());

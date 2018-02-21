@@ -40,7 +40,7 @@ public class Levels extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	elevator.up(pid.getSpeed());
+    	elevator.move(pid.getSpeed());
     	
     	
     }

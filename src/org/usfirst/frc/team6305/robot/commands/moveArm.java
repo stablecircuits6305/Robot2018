@@ -1,7 +1,6 @@
 package org.usfirst.frc.team6305.robot.commands;
 
 import org.usfirst.frc.team6305.robot.subsystems.Arm;
-import org.usfirst.team6305.robot.pid.armPID;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,12 +10,13 @@ import edu.wpi.first.wpilibj.command.Command;
 public class moveArm extends Command {
 	
 	Arm arm = Arm.getInstance();
-	armPID pid = armPID.getInstance();
-	double targetDistance;
-	final double MAXSPEED = 0.5;
+	
+	double targetSpeed;
+	
 
-    public moveArm() {
+    public moveArm(double speed) {
     	requires(arm);
+    	targetSpeed = speed;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -24,13 +24,13 @@ public class moveArm extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	arm.resetEncoders();
-    	pid.init(targetDistance, MAXSPEED);
-    	pid.init(targetDistance, MAXSPEED);
+  
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	arm.up(pid.getSpeed());
+    	arm.move(targetSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

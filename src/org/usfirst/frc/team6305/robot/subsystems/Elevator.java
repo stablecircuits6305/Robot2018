@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
+import org.usfirst.frc.team6305.robot.commands.HoldElevator;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -36,9 +37,10 @@ public class Elevator extends Subsystem {
 	
 	public Elevator(){
 		initEncoders();
+		elevator.setInverted(true);
 	}
 
-	public void up(double speed){
+	public void move(double speed){
 		elevator.set(speed);
 		if(speed > 0){
 		if(limitElevator.get()){
@@ -46,21 +48,16 @@ public class Elevator extends Subsystem {
 		}else{
 			stop();
 		}
-		}
-	}
-	
-	public void down(double speed){
-		elevator.set(-speed);
-		if(limitElevator.get()){
+			
+		}else{
 			elevator.set(speed);
 		}
-		else{
-			stop();
-		}
 	}
 	
+	
+	
 	public void stop(){
-		elevator.set(0);
+		elevator.set(0.2);
 	}
 	
 	
@@ -77,6 +74,7 @@ public class Elevator extends Subsystem {
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new HoldElevator());
     }
 }
 
