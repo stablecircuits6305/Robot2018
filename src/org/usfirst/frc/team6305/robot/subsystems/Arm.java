@@ -41,7 +41,13 @@ public class Arm extends Subsystem {
 	}
 
 	public void up(double speed){
-		arm.set(speed);
+		if(speed > 0){
+			if(limitArm.get()){
+				arm.set(speed);
+			}else{
+				arm.set(0);
+			}
+		}
 	}
 	
 	public void down(double speed){
