@@ -30,6 +30,7 @@ public class RobotMap {
 	public static int elevator = 7;
 	public static int leftWheels = 5;
 	public static int rightWheels = 6;
+	public static int compresser = 0;
 	
 	//public static int lRamp = 8;
 	//public static int rRamp = 9;

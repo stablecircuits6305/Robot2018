@@ -1,6 +1,8 @@
 package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
+
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -8,8 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Claw extends Subsystem {
-	
-	
+	Compressor c = new Compressor(RobotMap.compresser);
 	
 	
 	DoubleSolenoid claw = new DoubleSolenoid(RobotMap.clawSolenoid1, RobotMap.clawSolenoid2);
@@ -21,15 +22,18 @@ public class Claw extends Subsystem {
     
    
 	public void open(){
+		c.setClosedLoopControl(true);
 		claw.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public void close(){
+		c.setClosedLoopControl(true);
 		claw.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 	public void stop(){
 		claw.set(DoubleSolenoid.Value.kOff);
+		c.setClosedLoopControl(false);
 		
 	}
 	
