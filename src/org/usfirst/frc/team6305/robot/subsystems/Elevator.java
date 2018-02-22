@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Elevator extends Subsystem {
-	DigitalInput limitElevator = new DigitalInput(RobotMap.elevatorLimit);
+	public DigitalInput limitElevator = new DigitalInput(RobotMap.elevatorLimit);
 	
 	
 	Spark elevator = new Spark(RobotMap.elevator);

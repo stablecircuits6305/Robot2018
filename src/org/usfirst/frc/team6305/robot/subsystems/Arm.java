@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Arm extends Subsystem {
 	
-	DigitalInput limitArm = new DigitalInput(RobotMap.armLimit);
+	public DigitalInput limitArm = new DigitalInput(RobotMap.armLimit);
 	
 	public static Arm instance = new Arm();
 	Spark arm = new Spark(RobotMap.arm);
@@ -42,7 +42,9 @@ public class Arm extends Subsystem {
 		arm.setInverted(true);
 	}
 
+
 	public void move(double speed){
+		
 		if(speed > 0){
 			if(limitArm.get()){
 				arm.set(speed);
