@@ -115,6 +115,10 @@ public class Robot extends TimedRobot {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
 		
+		if(m_oi.xbox.a.get() == true){
+			
+		}
+		
 		
 		
 		//

@@ -57,13 +57,16 @@ public class OI {
 	
 	static {
 		
+		
+		
 		OI.xbox.dPad.up.whileHeld(new moveElevator(0.5));
 		OI.xbox.dPad.down.whileHeld(new moveElevator(-0.5));
+		OI.xbox.rt.whileHeld(new pickUp());
+		
 		OI.xbox.y.whenPressed(new topElevator(0.5));
 		OI.xbox.b.whenPressed(new topArm(0.5));
 		//OI.button.whenPressed(new DrivePID(360));
-		OI.xbox.rt.whileHeld(new pickUp());
-		OI.xbox.lt.whileHeld(new outTake());
+		
 		
 		
 		//OI.xbox.x.whenPressed(new GyroTest(90));
