@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriveTrain extends Subsystem {
+	public static final double wheelDiameter = 6;
+	public static final double pulsePerRevolution = 360;
+	final double distanceperpulse = Math.PI*wheelDiameter/pulsePerRevolution;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -31,7 +34,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void initEncoders () {
-		leftEncoder.setDistancePerPulse(5);
+		leftEncoder.setDistancePerPulse(distanceperpulse);
 		leftEncoder.setSamplesToAverage(10);
 		
 		rightEncoder.setDistancePerPulse(5);

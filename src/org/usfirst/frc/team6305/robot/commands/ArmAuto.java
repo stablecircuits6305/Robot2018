@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ArmAuto extends Command {
+	
 	Arm arm = Arm.getInstance();
 	armPID pid = armPID.getInstance();
 	double targetDistance;

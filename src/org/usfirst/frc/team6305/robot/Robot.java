@@ -57,6 +57,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto mode", chooser);
 		teleopDrive = new TankDrive();
 		autoBaseline = new AutoBaseline();
+		
 		NetworkTableInstance inst = NetworkTableInstance.getDefault();
 		autoTable = inst.getTable("autoTable");
 	}
@@ -91,9 +92,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if(gameData.charAt(0) == 'L') {}
-			
+		gameData = DriverStation.getInstance().getGameSpecificMessage();	
 		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
 		NetworkTableEntry scalePosition = autoTable.getEntry("scalePosition");
 		if (gameData.charAt(0) == 'L') {
@@ -107,8 +106,11 @@ public class Robot extends TimedRobot {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
 		
-		if(switchPosition.equals(true) && scalePosition.equals(true)){	
-			m_autonomousCommand = autoBaseline;
+		//
+		
+		if(switchPosition.getBoolean(true)){
+			
+			
 		}
 		// TODO: add code here to choose the proper auto
 
@@ -151,6 +153,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		SmartDashboard.putBoolean("switchPosition", true);
+		
 		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
 	}
 }

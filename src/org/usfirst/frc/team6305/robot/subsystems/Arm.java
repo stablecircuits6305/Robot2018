@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Arm extends Subsystem {
+
 	
 	public DigitalInput limitArm = new DigitalInput(RobotMap.armLimit);
 	
@@ -28,8 +29,6 @@ public class Arm extends Subsystem {
 		armEnc.setDistancePerPulse(5);
 		armEnc.setSamplesToAverage(10);
 		
-		armEnc.setDistancePerPulse(5);
-		armEnc.setSamplesToAverage(10);
 	}
 	
 	public void resetEncoders(){

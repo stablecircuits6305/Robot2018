@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class LeftDrivePID {
 	
 	public static LeftDrivePID instance = new LeftDrivePID();
+	
 	DriveTrain driveTrain = DriveTrain.getInstance();
 	PIDController pidController;
 	double speed;
