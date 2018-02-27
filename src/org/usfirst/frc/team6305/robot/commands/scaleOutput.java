@@ -1,13 +1,13 @@
-package org.usfirst.frc.team6305.robot.auto;
+package org.usfirst.frc.team6305.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AutoRight extends CommandGroup {
+public class scaleOutput extends CommandGroup {
 
-    public AutoRight() {
+    public scaleOutput() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -24,5 +24,8 @@ public class AutoRight extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	addSequential(new topElevator(0.5));
+    	addSequential(new outTake());
+    	
     }
 }

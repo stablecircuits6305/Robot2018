@@ -7,10 +7,15 @@
 
 package org.usfirst.frc.team6305.robot;
 
+import org.usfirst.frc.team6305.robot.auto.A1_Left;
+import org.usfirst.frc.team6305.robot.auto.A1_Right;
+import org.usfirst.frc.team6305.robot.auto.A2_Left;
+import org.usfirst.frc.team6305.robot.auto.A3_Left;
+import org.usfirst.frc.team6305.robot.auto.A3_Right;
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
 
-import org.usfirst.frc.team6305.robot.auto.AutoLeft;
-import org.usfirst.frc.team6305.robot.auto.AutoRight;
+
+
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -52,8 +57,11 @@ public class Robot extends TimedRobot {
 		Gyro.reset();
 		m_oi = new OI();
 		chooser.addDefault("Baseline", new AutoBaseline());
-		chooser.addObject("Left Side", new AutoLeft());
-		chooser.addObject("Right Side", new AutoRight());
+		chooser.addObject("A1_Left", new A1_Left());
+		chooser.addObject("A1_Right", new A1_Right());
+		chooser.addObject("A2_Left", new A2_Left());
+		chooser.addObject("A3_Left", new A3_Left());
+		chooser.addObject("A3_Right", new A3_Right());
 		SmartDashboard.putData("Auto mode", chooser);
 		teleopDrive = new TankDrive();
 		autoBaseline = new AutoBaseline();
@@ -93,6 +101,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();	
+		NetworkTableEntry robotPosition = autoTable.getEntry("robotPosition");
 		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
 		NetworkTableEntry scalePosition = autoTable.getEntry("scalePosition");
 		if (gameData.charAt(0) == 'L') {
@@ -106,12 +115,11 @@ public class Robot extends TimedRobot {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
 		
+		
+		
 		//
 		
-		if(switchPosition.getBoolean(true)){
-			
-			
-		}
+		m_autonomousCommand = chooser.getSelected();
 		// TODO: add code here to choose the proper auto
 
 		// schedule the autonomous command (example)
