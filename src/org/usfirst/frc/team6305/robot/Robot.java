@@ -59,6 +59,7 @@ public class Robot extends TimedRobot {
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
+	@SuppressWarnings("static-access")
 	@Override
 	public void robotInit() {
 		
@@ -66,6 +67,9 @@ public class Robot extends TimedRobot {
 		Gyro.reset();
 		m_oi = new OI();
 		SmartDashboard.putString("Robot Mode", "Robot Init");
+		SmartDashboard.putString("Robot Position", "Baseline");
+		
+		
 		a1_left = new A1_Left();
 		a1_right = new A1_Right();
 		a2_left = new A2_Left();
@@ -81,6 +85,21 @@ public class Robot extends TimedRobot {
 		//SmartDashboard.putData("Auto mode", chooser);
 		teleopDrive = new TankDrive();
 		autoBaseline = new AutoBaseline();
+		if(m_oi.xbox.y.get() == true){
+			SmartDashboard.putString("Robot Position", "A1");
+		}
+		
+		else if(m_oi.xbox.b.get() == true){
+			SmartDashboard.putString("Robot Position", "A2");
+		}
+		
+		else if(m_oi.xbox.a.get() == true){
+			SmartDashboard.putString("Robot Position", "A4");
+		}
+		
+		else{
+			SmartDashboard.putString("Robot Position", "Baseline");
+		}
 		
 		NetworkTableInstance inst = NetworkTableInstance.getDefault();
 		autoTable = inst.getTable("autoTable");
@@ -118,7 +137,6 @@ public class Robot extends TimedRobot {
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();	
 		
-		NetworkTableEntry robotPosition = autoTable.getEntry("robotPosition");
 		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
 		NetworkTableEntry scalePosition = autoTable.getEntry("scalePosition");
 		if (gameData.charAt(0) == 'L') {
@@ -132,42 +150,26 @@ public class Robot extends TimedRobot {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
 		
-		if(m_oi.xbox.y.get() == true){
-			robotPosition.setString("A1");
-		}
-		
-		else if(m_oi.xbox.b.get() == true){
-			robotPosition.setString("A2");
-		}
-		
-		else if(m_oi.xbox.a.get() == true){
-			robotPosition.setString("A3");
-		}
-		
-		else{
-			robotPosition.setString("Auto Baseline");
-		}
-		
-		
-		if(robotPosition.getString("Auto Baseline") == "A1"){
+		if(SmartDashboard.getString("Robot Position", "Baseline") == "A1"){
 			if(switchPosition.getBoolean(false) == true){
 				m_autonomousCommand = a1_left;
 			}
 			else{
 				m_autonomousCommand = a1_right;
 			}
-			
 		}
-		if(robotPosition.getString("Auto Baseline") == "A2"){
+		
+		if(SmartDashboard.getString("Robot Position", "Baseline") == "A2"){
 			if(switchPosition.getBoolean(false) == true){
 				m_autonomousCommand = a2_left;
 			}
 			else{
 				m_autonomousCommand = a2_right;
 			}
-		
+			
 		}
-		if(robotPosition.getString("Auto Baseline") == "A3"){
+		
+		if(SmartDashboard.getString("Robot Position", "Baseline") == "A3"){
 			if(switchPosition.getBoolean(false) == true){
 				m_autonomousCommand = a3_left;
 			}
@@ -176,6 +178,11 @@ public class Robot extends TimedRobot {
 				
 			}
 		}
+		
+		
+		
+		
+		
 		
 		//
 		
