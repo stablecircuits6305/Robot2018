@@ -24,7 +24,7 @@ public class switchOutput extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new topArm(0.5));
+    	addSequential(new elevatorSet(9));
     	addSequential(new outTake());
     	
     }

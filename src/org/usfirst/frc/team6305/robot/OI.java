@@ -8,13 +8,14 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.commands.moveElevator;
-import org.usfirst.frc.team6305.robot.commands.outTake;
+
 import org.usfirst.frc.team6305.robot.commands.pickUp;
 import org.usfirst.frc.team6305.robot.commands.topArm;
 import org.usfirst.frc.team6305.robot.commands.topElevator;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -58,13 +59,24 @@ public class OI {
 	static {
 		
 		
+		if(SmartDashboard.getBoolean("Teleop Check", false) == true){
+			OI.xbox.dPad.up.whileHeld(new moveElevator(0.5));
+			OI.xbox.dPad.down.whileHeld(new moveElevator(-0.5));
+			OI.xbox.rt.whileHeld(new pickUp());
+			
+			OI.xbox.y.whenPressed(new topElevator(0.5));
+			OI.xbox.b.whenPressed(new topArm(0.5));
+			
+				
+				
+			}
+		}
 		
-		OI.xbox.dPad.up.whileHeld(new moveElevator(0.5));
-		OI.xbox.dPad.down.whileHeld(new moveElevator(-0.5));
-		OI.xbox.rt.whileHeld(new pickUp());
 		
-		OI.xbox.y.whenPressed(new topElevator(0.5));
-		OI.xbox.b.whenPressed(new topArm(0.5));
+		
+		
+		
+		
 		//OI.button.whenPressed(new DrivePID(360));
 		
 		
@@ -74,4 +86,4 @@ public class OI {
 		
 	
 	}
-}
+

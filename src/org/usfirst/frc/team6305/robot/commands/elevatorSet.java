@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class Levels extends Command {
+public class elevatorSet extends Command {
 	
 	Elevator elevator = Elevator.getInstance();
 	elevatorPID pid = elevatorPID.getInstance();
@@ -20,7 +20,7 @@ public class Levels extends Command {
 	
 	//I honestly ran out of names
 
-    public Levels(double dist) {
+    public elevatorSet(double dist) {
     	targetDistance = dist;
     	
     	requires(elevator);

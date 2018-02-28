@@ -1,5 +1,6 @@
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -8,8 +9,10 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.auto.A1_Left;
+
 import org.usfirst.frc.team6305.robot.auto.A1_Right;
 import org.usfirst.frc.team6305.robot.auto.A2_Left;
+import org.usfirst.frc.team6305.robot.auto.A2_Right;
 import org.usfirst.frc.team6305.robot.auto.A3_Left;
 import org.usfirst.frc.team6305.robot.auto.A3_Right;
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
@@ -41,6 +44,12 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	
 	Command autoBaseline;
+	Command a1_left;
+	Command a2_left;
+	Command a3_left;
+	Command a1_right;
+	Command a2_right;
+	Command a3_right;
 
 	Command teleopDrive, m_autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -56,13 +65,20 @@ public class Robot extends TimedRobot {
 		Gyro.calibrate();
 		Gyro.reset();
 		m_oi = new OI();
-		chooser.addDefault("Baseline", new AutoBaseline());
-		chooser.addObject("A1_Left", new A1_Left());
-		chooser.addObject("A1_Right", new A1_Right());
-		chooser.addObject("A2_Left", new A2_Left());
-		chooser.addObject("A3_Left", new A3_Left());
-		chooser.addObject("A3_Right", new A3_Right());
-		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putString("Robot Mode", "Robot Init");
+		a1_left = new A1_Left();
+		a1_right = new A1_Right();
+		a2_left = new A2_Left();
+		a2_right = new A2_Right();
+		a3_left = new A3_Left();
+		a3_right = new A3_Right();
+		//chooser.addDefault("Baseline", new AutoBaseline());
+		//chooser.addObject("A1_Left", new A1_Left());
+		//chooser.addObject("A1_Right", new A1_Right());
+		//chooser.addObject("A2_Left", new A2_Left());
+		//chooser.addObject("A3_Left", new A3_Left());
+		//chooser.addObject("A3_Right", new A3_Right());
+		//SmartDashboard.putData("Auto mode", chooser);
 		teleopDrive = new TankDrive();
 		autoBaseline = new AutoBaseline();
 		
@@ -101,6 +117,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();	
+		
 		NetworkTableEntry robotPosition = autoTable.getEntry("robotPosition");
 		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
 		NetworkTableEntry scalePosition = autoTable.getEntry("scalePosition");
@@ -115,15 +132,53 @@ public class Robot extends TimedRobot {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
 		
-		if(m_oi.xbox.a.get() == true){
-			
+		if(m_oi.xbox.y.get() == true){
+			robotPosition.setString("A1");
+		}
+		
+		else if(m_oi.xbox.b.get() == true){
+			robotPosition.setString("A2");
+		}
+		
+		else if(m_oi.xbox.a.get() == true){
+			robotPosition.setString("A3");
+		}
+		
+		else{
+			robotPosition.setString("Auto Baseline");
 		}
 		
 		
+		if(robotPosition.getString("Auto Baseline") == "A1"){
+			if(switchPosition.getBoolean(false) == true){
+				m_autonomousCommand = a1_left;
+			}
+			else{
+				m_autonomousCommand = a1_right;
+			}
+			
+		}
+		if(robotPosition.getString("Auto Baseline") == "A2"){
+			if(switchPosition.getBoolean(false) == true){
+				m_autonomousCommand = a2_left;
+			}
+			else{
+				m_autonomousCommand = a2_right;
+			}
+		
+		}
+		if(robotPosition.getString("Auto Baseline") == "A3"){
+			if(switchPosition.getBoolean(false) == true){
+				m_autonomousCommand = a3_left;
+			}
+			else{
+				m_autonomousCommand = a3_right;
+				
+			}
+		}
 		
 		//
 		
-		m_autonomousCommand = chooser.getSelected();
 		// TODO: add code here to choose the proper auto
 
 		// schedule the autonomous command (example)
@@ -137,11 +192,14 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		SmartDashboard.putString("Robot Mode", "Auto Periodic");
 		Scheduler.getInstance().run();
 	}
 
 	@Override
 	public void teleopInit() {
+		SmartDashboard.putBoolean("Teleop Check", isOperatorControl());
+		SmartDashboard.putString("Robot Mode", "Teleop Init");
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -157,6 +215,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		SmartDashboard.putString("Robot Mode", "Teleop Periodic");
 		Scheduler.getInstance().run();
 	}
 
@@ -164,8 +223,12 @@ public class Robot extends TimedRobot {
 	 * This function is called periodically during test mode.
 	 */
 	@Override
+	
 	public void testPeriodic() {
-		SmartDashboard.putBoolean("switchPosition", true);
+		SmartDashboard.putBoolean("Test Check", isTest());
+		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
+		switchPosition.setBoolean(true);
+		System.out.println(switchPosition.getBoolean(false));
 		
 		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
 	}
