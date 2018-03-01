@@ -12,7 +12,7 @@ public class clawOpen extends Command {
 	
 	Claw claw;
 	
-    public pickUp() {
+    public clawOpen() {
     	claw = Claw.getInstance();
     	
     	
