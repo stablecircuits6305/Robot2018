@@ -1,5 +1,6 @@
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
+
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
@@ -7,12 +8,15 @@
 
 package org.usfirst.frc.team6305.robot;
 
-import org.usfirst.frc.team6305.robot.commands.moveElevator;
-import org.usfirst.frc.team6305.robot.commands.outTake;
-import org.usfirst.frc.team6305.robot.commands.pickUp;
-import org.usfirst.frc.team6305.robot.commands.scaleOutput;
-import org.usfirst.frc.team6305.robot.commands.switchOutput;
-import org.usfirst.frc.team6305.robot.commands.vaultOutput;
+import org.usfirst.frc.team6305.robot.claw.clawClose;
+import org.usfirst.frc.team6305.robot.claw.clawOpen;
+import org.usfirst.frc.team6305.robot.elevator.moveElevator;
+//import org.usfirst.frc.team6305.robot.commands.pickUp;
+//import org.usfirst.frc.team6305.robot.commands.scaleOutput;
+//import org.usfirst.frc.team6305.robot.commands.switchOutput;
+//import org.usfirst.frc.team6305.robot.commands.vaultOutput;
+import org.usfirst.frc.team6305.robot.intake.input;
+import org.usfirst.frc.team6305.robot.intake.output;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -68,8 +72,28 @@ public class OI {
 	
 	static {
 		
+		if(SmartDashboard.getBoolean("Disabled Check", false)){
+			if(OI.xbox.y.get() == true){
+				SmartDashboard.putString("Robot Position", "A1");
+			}
+			
+			else if(OI.xbox.b.get() == true){
+				SmartDashboard.putString("Robot Position", "A2");
+			}
+			
+			else if(OI.xbox.a.get() == true){
+				SmartDashboard.putString("Robot Position", "A3");
+			}
+			
+			else{
+				SmartDashboard.putString("Robot Position", "Baseline");
+			}
+			
+
+		}
 		
-		if(SmartDashboard.getBoolean("Teleop Check", false) == true){
+		
+		if(SmartDashboard.getBoolean("Teleop Check", false)){
 			OI.xbox.dPad.up.whileHeld(new moveElevator(0.5));
 			OI.xbox.dPad.down.whileHeld(new moveElevator(-0.5));
 			OI.xbox.rt.whileHeld(new input());
@@ -89,7 +113,7 @@ public class OI {
 				
 			}
 		
-		if(SmartDashboard.getBoolean("Test Check", false)== true){
+		if(SmartDashboard.getBoolean("Test Check", false)){
 			OI.leftButton1.whileHeld(new input());
 			OI.rightButton1.whileHeld(new output());
 			OI.leftButton2.whileHeld(new clawOpen());

@@ -1,36 +1,38 @@
-package org.usfirst.frc.team6305.robot.commands;
+package org.usfirst.frc.team6305.robot.intake;
 
-import org.usfirst.frc.team6305.robot.subsystems.Arm;
+
+import org.usfirst.frc.team6305.robot.subsystems.intake;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class moveArm extends Command {
+public class input extends Command {
 	
-	Arm arm = Arm.getInstance();
+	intake inTake;
 	
-	double targetSpeed;
-	
-
-    public moveArm(double speed) {
-    	requires(arm);
-    	targetSpeed = speed;
+    public input() {
+    	inTake = intake.getInstance();
+    	
+    	
+    	requires(inTake);
+    	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	arm.resetEncoders();
-  
+    	
     	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	arm.move(targetSpeed);
+    	inTake.suckIn(0.5);
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -40,12 +42,13 @@ public class moveArm extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	arm.stop();
+    	inTake.stop();
+    
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	arm.stop();
+    	end();
     }
 }

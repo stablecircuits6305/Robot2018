@@ -1,27 +1,38 @@
-package org.usfirst.frc.team6305.robot.commands;
+package org.usfirst.frc.team6305.robot.claw;
 
-import org.usfirst.frc.team6305.robot.subsystems.Arm;
+import org.usfirst.frc.team6305.robot.subsystems.Claw;
+
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ArmGyro extends Command {
-	Arm arm = Arm.getInstance();
+public class clawClose extends Command {
 	
-
-    public ArmGyro() {
+	Claw claw;
+	
+    public clawClose() {
+    	claw = Claw.getInstance();
+    	
+    	
+    	requires(claw);
+    	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	claw.close();
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -31,10 +42,13 @@ public class ArmGyro extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	claw.stop();
+    
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

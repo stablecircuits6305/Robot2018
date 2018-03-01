@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
-import org.usfirst.frc.team6305.robot.commands.HoldArm;
+import org.usfirst.frc.team6305.robot.arm.HoldArm;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;

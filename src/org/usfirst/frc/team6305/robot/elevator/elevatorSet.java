@@ -1,4 +1,4 @@
-package org.usfirst.frc.team6305.robot.commands;
+package org.usfirst.frc.team6305.robot.elevator;
 
 
 import org.usfirst.frc.team6305.robot.subsystems.Elevator;

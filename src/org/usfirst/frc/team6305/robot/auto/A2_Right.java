@@ -1,9 +1,9 @@
 package org.usfirst.frc.team6305.robot.auto;
 
+import org.usfirst.frc.team6305.robot.arm.topArm;
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.outTake;
-import org.usfirst.frc.team6305.robot.commands.topArm;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

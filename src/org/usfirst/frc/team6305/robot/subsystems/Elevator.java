@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
-import org.usfirst.frc.team6305.robot.commands.HoldElevator;
+import org.usfirst.frc.team6305.robot.elevator.HoldElevator;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
