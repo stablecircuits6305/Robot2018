@@ -1,5 +1,6 @@
 package org.usfirst.team6305.robot.pid;
 
+import org.usfirst.frc.team6305.robot.GyroArm;
 import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.subsystems.Arm;
 
@@ -23,7 +24,7 @@ public class armPID {
 	
 	
 	
-	public void init(double targetDistance, double maxSpeed){
+	public void init(double targetAngle, double maxSpeed){
 		PIDSource pidSource = new PIDSource(){
 			@Override
 			public void setPIDSourceType(PIDSourceType pidSource){
@@ -33,14 +34,14 @@ public class armPID {
 			@Override
 			public PIDSourceType getPIDSourceType() {
 				// TODO Auto-generated method stub
-				return PIDSourceType.kDisplacement;
+				return null;
 			}
 
 			@Override
 			public double pidGet() {
-				double val = arm.getArmEnc();
+				double gyroVal = GyroArm.getAngle();
 				// TODO Auto-generated method stub
-				return val;
+				return gyroVal;
 			}
 		
 	};
@@ -59,7 +60,7 @@ public class armPID {
 	
 	pidController = new PIDController(kP, kI, kD, pidSource, pidOutput);
 	pidController.setAbsoluteTolerance(2);
-	pidController.setSetpoint(targetDistance);
+	pidController.setSetpoint(targetAngle);
 	pidController.setOutputRange(-maxSpeed, maxSpeed);
 	pidController.enable();
 	System.out.println("Button is pressed");

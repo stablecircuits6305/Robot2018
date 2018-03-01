@@ -8,11 +8,11 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.commands.moveElevator;
-
-
+import org.usfirst.frc.team6305.robot.commands.outTake;
 import org.usfirst.frc.team6305.robot.commands.pickUp;
-import org.usfirst.frc.team6305.robot.commands.topArm;
-import org.usfirst.frc.team6305.robot.commands.topElevator;
+import org.usfirst.frc.team6305.robot.commands.scaleOutput;
+import org.usfirst.frc.team6305.robot.commands.switchOutput;
+import org.usfirst.frc.team6305.robot.commands.vaultOutput;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -54,7 +54,11 @@ public class OI {
 	public static Joystick leftJoystick = new Joystick(0);
 	public static Joystick rightJoystick = new Joystick(1);
 	
-	public static JoystickButton button = new JoystickButton(leftJoystick, 1);
+	public static JoystickButton button1 = new JoystickButton(leftJoystick, 1);
+	public static JoystickButton button2 = new JoystickButton(leftJoystick, 2);
+	public static JoystickButton button3 = new JoystickButton(leftJoystick, 3);
+	public static JoystickButton button4 = new JoystickButton(leftJoystick, 4);
+	
 	public static XboxController xbox = new XboxController(2);
 	
 	static {
@@ -65,12 +69,21 @@ public class OI {
 			OI.xbox.dPad.down.whileHeld(new moveElevator(-0.5));
 			OI.xbox.rt.whileHeld(new pickUp());
 			
-			OI.xbox.y.whenPressed(new topElevator(0.5));
-			OI.xbox.b.whenPressed(new topArm(0.5));
 			
+			OI.xbox.y.whenPressed(new scaleOutput());
+			OI.xbox.a.whenPressed(new switchOutput());
+			OI.xbox.b.whenPressed(new vaultOutput());
 				
 				
 			}
+		
+		if(SmartDashboard.getBoolean("Test Check", false)== true){
+			OI.button1.whileHeld(new moveElevator(0.5));
+			OI.button2.whileHeld(new moveElevator(-0.5));
+			OI.button3.whileHeld(new pickUp());
+			OI.button4.whileHeld(new outTake());
+			//Put things here for testing
+		}
 		}
 		
 		

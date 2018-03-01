@@ -60,4 +60,9 @@ public class RobotMap {
 	public static double defaultArmP;
 	public static double defaultArmI;
 	public static double defaultArmD;
+	
+	public static double scaleHeightDefault= 72;
+	public static double scaleHeightTall;
+	public static double switchHeight = 9;
+	public static double vaultHeight;
 	}

@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class switchOutput extends CommandGroup {
+public class vaultOutput extends CommandGroup {
 
-    public switchOutput() {
+    public vaultOutput() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -26,8 +26,8 @@ public class switchOutput extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new elevatorSet(RobotMap.switchHeight));
-    	addSequential(new outTake());
     	
+    	addSequential(new elevatorSet(RobotMap.vaultHeight));
+    	addSequential(new outTake());
     }
 }

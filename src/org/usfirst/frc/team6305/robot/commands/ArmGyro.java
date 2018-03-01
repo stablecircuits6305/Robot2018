@@ -1,39 +1,27 @@
 package org.usfirst.frc.team6305.robot.commands;
 
-import org.usfirst.frc.team6305.robot.subsystems.Claw;
-import org.usfirst.frc.team6305.robot.subsystems.intake;
+import org.usfirst.frc.team6305.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class pickUp extends Command {
+public class ArmGyro extends Command {
+	Arm arm = Arm.getInstance();
 	
-	Claw claw;
-	intake inTake;
 
-    public pickUp() {
-    	claw = Claw.getInstance();
-    	inTake = intake.getInstance();
-    	
-    	requires(claw);
-    	requires(inTake);
+    public ArmGyro() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	claw.open();
-    	inTake.suckIn(0.5);
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -43,13 +31,10 @@ public class pickUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	claw.stop();
-    	inTake.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

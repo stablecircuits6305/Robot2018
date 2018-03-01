@@ -94,7 +94,7 @@ public class Robot extends TimedRobot {
 		}
 		
 		else if(m_oi.xbox.a.get() == true){
-			SmartDashboard.putString("Robot Position", "A4");
+			SmartDashboard.putString("Robot Position", "A3");
 		}
 		
 		else{
@@ -134,6 +134,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		SmartDashboard.putBoolean("Teleop Check", isOperatorControl());
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();	
 		
@@ -159,7 +160,7 @@ public class Robot extends TimedRobot {
 			}
 		}
 		
-		if(SmartDashboard.getString("Robot Position", "Baseline") == "A2"){
+		else if(SmartDashboard.getString("Robot Position", "Baseline") == "A2"){
 			if(switchPosition.getBoolean(false) == true){
 				m_autonomousCommand = a2_left;
 			}
@@ -169,7 +170,7 @@ public class Robot extends TimedRobot {
 			
 		}
 		
-		if(SmartDashboard.getString("Robot Position", "Baseline") == "A3"){
+		else if(SmartDashboard.getString("Robot Position", "Baseline") == "A3"){
 			if(switchPosition.getBoolean(false) == true){
 				m_autonomousCommand = a3_left;
 			}
@@ -177,6 +178,10 @@ public class Robot extends TimedRobot {
 				m_autonomousCommand = a3_right;
 				
 			}
+		}
+		
+		else{
+			m_autonomousCommand = autoBaseline;
 		}
 		
 		
