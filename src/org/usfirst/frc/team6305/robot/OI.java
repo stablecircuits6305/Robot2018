@@ -54,10 +54,15 @@ public class OI {
 	public static Joystick leftJoystick = new Joystick(0);
 	public static Joystick rightJoystick = new Joystick(1);
 	
-	public static JoystickButton button1 = new JoystickButton(leftJoystick, 1);
-	public static JoystickButton button2 = new JoystickButton(leftJoystick, 2);
-	public static JoystickButton button3 = new JoystickButton(leftJoystick, 3);
-	public static JoystickButton button4 = new JoystickButton(leftJoystick, 4);
+	public static JoystickButton leftButton1 = new JoystickButton(leftJoystick, 1);
+	public static JoystickButton leftButton2 = new JoystickButton(leftJoystick, 2);
+	public static JoystickButton leftButton3 = new JoystickButton(leftJoystick, 3);
+	public static JoystickButton leftButton4 = new JoystickButton(leftJoystick, 4);
+	
+	public static JoystickButton rightButton1 = new JoystickButton(rightJoystick, 1);
+	public static JoystickButton rightButton2 = new JoystickButton(rightJoystick, 2);
+	public static JoystickButton rightButton3 = new JoystickButton(rightJoystick, 3);
+	public static JoystickButton rightButton4 = new JoystickButton(rightJoystick, 4);
 	
 	public static XboxController xbox = new XboxController(2);
 	
@@ -67,21 +72,28 @@ public class OI {
 		if(SmartDashboard.getBoolean("Teleop Check", false) == true){
 			OI.xbox.dPad.up.whileHeld(new moveElevator(0.5));
 			OI.xbox.dPad.down.whileHeld(new moveElevator(-0.5));
-			OI.xbox.rt.whileHeld(new pickUp());
+			OI.xbox.rt.whileHeld(new input());
+			OI.xbox.lt.whileHeld(new output());
+			OI.xbox.rb.whileHeld(new clawOpen());
+			OI.xbox.rb.whileHeld(new clawClose());
 			
 			
-			OI.xbox.y.whenPressed(new scaleOutput());
-			OI.xbox.a.whenPressed(new switchOutput());
-			OI.xbox.b.whenPressed(new vaultOutput());
+			
+			
+			
+			
+			//OI.xbox.y.whenPressed(new scaleOutput());
+			//OI.xbox.a.whenPressed(new switchOutput());
+			//OI.xbox.b.whenPressed(new vaultOutput());
 				
 				
 			}
 		
 		if(SmartDashboard.getBoolean("Test Check", false)== true){
-			OI.button1.whileHeld(new moveElevator(0.5));
-			OI.button2.whileHeld(new moveElevator(-0.5));
-			OI.button3.whileHeld(new pickUp());
-			OI.button4.whileHeld(new outTake());
+			OI.leftButton1.whileHeld(new input());
+			OI.rightButton1.whileHeld(new output());
+			OI.leftButton2.whileHeld(new clawOpen());
+			OI.rightButton2.whileHeld(new clawClose());
 			//Put things here for testing
 		}
 		}
