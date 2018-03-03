@@ -24,7 +24,7 @@ import org.usfirst.frc.team6305.robot.commands.TankDrive;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
-
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
 	Command a1_right;
 	Command a2_right;
 	Command a3_right;
+	Compressor c;
 
 	Command teleopDrive, m_autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -68,6 +69,7 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		SmartDashboard.putString("Robot Mode", "Robot Init");
 		SmartDashboard.putString("Robot Position", "Baseline");
+		c= new Compressor(RobotMap.compresser);
 		
 	
 		
@@ -103,6 +105,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		SmartDashboard.putBoolean("Disabled Check", isDisabled());
+		c.setClosedLoopControl(false);
 		
 		
 	}
@@ -215,6 +218,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		teleopDrive.start();
+		c.setClosedLoopControl(true);
 	}
 
 	/**
@@ -222,6 +226,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		System.out.println(isOperatorControl());
+		
+		SmartDashboard.putBoolean("Teleop Check", isOperatorControl());
 		SmartDashboard.putString("Robot Mode", "Teleop Periodic");
 		Scheduler.getInstance().run();
 	}
@@ -232,6 +239,9 @@ public class Robot extends TimedRobot {
 	@Override
 	
 	public void testPeriodic() {
+		teleopDrive.start();
+		//Compressor c = new Compressor(RobotMap.compresser);
+		//c.setClosedLoopControl(true);
 		SmartDashboard.putBoolean("Test Check", isTest());
 		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
 		switchPosition.setBoolean(true);

@@ -8,6 +8,7 @@
 
 package org.usfirst.frc.team6305.robot;
 
+import org.usfirst.frc.team6305.robot.arm.moveArm;
 import org.usfirst.frc.team6305.robot.claw.clawClose;
 import org.usfirst.frc.team6305.robot.claw.clawOpen;
 import org.usfirst.frc.team6305.robot.elevator.moveElevator;
@@ -72,6 +73,28 @@ public class OI {
 	
 	static {
 		
+		
+		
+	
+		/*
+		OI.leftButton2.whileHeld(new moveElevator(0.5));
+		OI.leftButton3.whileHeld(new moveArm(0.5));
+		OI.rightButton3.whileHeld(new moveArm(-0.5));
+		OI.rightButton1.whileHeld(new output());
+		OI.rightButton2.whileHeld(new moveElevator(-0.5));
+		OI.leftButton1.whileHeld(new input());
+		*/
+		OI.xbox.rt.whileHeld(new moveElevator(1));
+		OI.xbox.rb.whileHeld(new moveArm(.8));
+		OI.xbox.lb.whileHeld(new moveArm(-.8));
+		OI.xbox.a.whileHeld(new clawClose());
+		OI.xbox.lt.whileHeld(new moveElevator(-.7));
+		OI.xbox.b.whileHeld(new clawOpen());
+		OI.xbox.x.whileHeld(new input());
+		OI.xbox.y.whileHeld(new output());
+		
+		
+		/*
 		if(SmartDashboard.getBoolean("Disabled Check", false)){
 			if(OI.xbox.y.get() == true){
 				SmartDashboard.putString("Robot Position", "A1");
@@ -93,7 +116,7 @@ public class OI {
 		}
 		
 		
-		if(SmartDashboard.getBoolean("Teleop Check", false)){
+		if(SmartDashboard.getBoolean("Teleop Check", false) ){
 			OI.xbox.dPad.up.whileHeld(new moveElevator(0.5));
 			OI.xbox.dPad.down.whileHeld(new moveElevator(-0.5));
 			OI.xbox.rt.whileHeld(new input());
@@ -119,6 +142,7 @@ public class OI {
 			OI.leftButton2.whileHeld(new clawOpen());
 			OI.rightButton2.whileHeld(new clawClose());
 			//Put things here for testing
+			 			 */
 		}
 		}
 		
@@ -135,5 +159,5 @@ public class OI {
 		
 		
 	
-	}
+	
 

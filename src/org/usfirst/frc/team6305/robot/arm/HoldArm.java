@@ -23,7 +23,7 @@ public class HoldArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	arm.move(0.2);
+    	arm.stop();
     }
 
     // Make this return true when this Command no longer needs to run execute()

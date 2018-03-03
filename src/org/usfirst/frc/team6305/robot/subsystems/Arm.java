@@ -18,26 +18,27 @@ public class Arm extends Subsystem {
 	
 	public static Arm instance = new Arm();
 	Spark arm = new Spark(RobotMap.arm);
-	Encoder armEnc = new Encoder(6,7, false, Encoder.EncodingType.k4X);
+	//Encoder armEnc = new Encoder(6,7, false, Encoder.EncodingType.k4X);
 	
 	
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	
+	/*
 	public void initEncoders(){
 		armEnc.setDistancePerPulse(5);
 		armEnc.setSamplesToAverage(10);
 		
 	}
 	
+	
 	public void resetEncoders(){
 		armEnc.reset();
 		armEnc.reset();
 	}
-	
+	*/
 	public Arm(){
-		initEncoders();
+		
 		arm.setInverted(true);
 	}
 
@@ -61,12 +62,12 @@ public class Arm extends Subsystem {
 		arm.set(0.2);
 	}
 	
-	
+	/*
 	public double getArmEnc(){
 		double val = armEnc.get();
 		return val;
 	}
-	
+	*/
 	
 	public static Arm getInstance(){
 		return instance;

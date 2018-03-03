@@ -28,7 +28,7 @@ public class TankDrive extends Command {
     	double leftSpeed = OI.leftJoystick.getY();
     	double rightSpeed = OI.rightJoystick.getY();
     	
-    	driveTrain.drive(-leftSpeed, rightSpeed);
+    	driveTrain.drive(leftSpeed, -rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

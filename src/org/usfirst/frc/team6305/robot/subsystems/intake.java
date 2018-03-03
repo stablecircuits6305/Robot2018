@@ -21,7 +21,7 @@ public class intake extends Subsystem {
 
     public void initDefaultCommand() {
     	
-    	setDefaultCommand(new holdIntake());
+    	
     	
     	
         // Set the default command for a subsystem here.
@@ -30,13 +30,13 @@ public class intake extends Subsystem {
     
     public void suckIn(double speed){
     	rightWheels.set(speed);
-    	leftWheels.set(speed);
+    	leftWheels.set(-speed);
     	
     }
     
     public void suckOut(double speed){
     	rightWheels.set(-speed);
-    	leftWheels.set(-speed);
+    	leftWheels.set(speed);
     }
     
     public void stop(){
