@@ -9,15 +9,22 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.arm.moveArm;
+
 import org.usfirst.frc.team6305.robot.claw.clawClose;
 import org.usfirst.frc.team6305.robot.claw.clawOpen;
+import org.usfirst.frc.team6305.robot.commands.outTake;
+import org.usfirst.frc.team6305.robot.commands.pickUp;
+import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
 import org.usfirst.frc.team6305.robot.elevator.moveElevator;
+import org.usfirst.frc.team6305.robot.intake.holdIntake;
 //import org.usfirst.frc.team6305.robot.commands.pickUp;
 //import org.usfirst.frc.team6305.robot.commands.scaleOutput;
 //import org.usfirst.frc.team6305.robot.commands.switchOutput;
 //import org.usfirst.frc.team6305.robot.commands.vaultOutput;
 import org.usfirst.frc.team6305.robot.intake.input;
 import org.usfirst.frc.team6305.robot.intake.output;
+//import org.usfirst.frc.team6305.robot.output.reset;
+import org.usfirst.frc.team6305.robot.output.scaleOutput;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -34,6 +41,7 @@ public class OI {
 	// You create one by telling it which joystick it's on and which button
 	// number it is.
 	// Joystick stick = new Joystick(port);
+	
 	// Button button = new JoystickButton(stick, buttonNumber);
 
 	// There are a few additional built in buttons you can use. Additionally,
@@ -73,6 +81,9 @@ public class OI {
 	
 	static {
 		
+		//OI.rightButton1.whenPressed(new clawOpen());
+		//OI.leftButton1.whenPressed(new clawClose());
+		
 		
 		
 	
@@ -87,11 +98,21 @@ public class OI {
 		OI.xbox.rt.whileHeld(new moveElevator(1));
 		OI.xbox.rb.whileHeld(new moveArm(.8));
 		OI.xbox.lb.whileHeld(new moveArm(-.8));
-		OI.xbox.a.whileHeld(new clawClose());
+	    OI.xbox.a.whileHeld(new clawClose());
 		OI.xbox.lt.whileHeld(new moveElevator(-.7));
-		OI.xbox.b.whileHeld(new clawOpen());
+		OI.xbox.b.whenPressed(new clawOpen());
 		OI.xbox.x.whileHeld(new input());
 		OI.xbox.y.whileHeld(new output());
+		
+		/*
+		OI.xbox.a.whileHeld(new pickUp());
+		OI.xbox.b.whileHeld(new clawOpen());
+		OI.xbox.y.whileHeld(new outTake());
+		*/
+	    OI.xbox.dPad.up.whenPressed(new scaleOutput());
+	    //OI.xbox.dPad.down.whenPressed(new elevatorAuto(-1,1));
+		//OI.xbox.dPad.down.whenPressed(new reset());
+		
 		
 		
 		/*

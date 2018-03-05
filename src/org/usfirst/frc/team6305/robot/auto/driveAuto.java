@@ -1,39 +1,44 @@
-package org.usfirst.frc.team6305.robot.commands;
+package org.usfirst.frc.team6305.robot.auto;
 
-import org.usfirst.frc.team6305.robot.subsystems.Claw;
-import org.usfirst.frc.team6305.robot.subsystems.intake;
+import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class pickUp extends Command {
-	
-	Claw claw;
-	intake inTake;
+public class driveAuto extends Command {
+	DriveTrain drive = DriveTrain.getInstance();
+	Timer timer = new Timer();
+	double targetSpeed;
+	double time;
 
-    public pickUp() {
-    	claw = Claw.getInstance();
-    	inTake = intake.getInstance();
+    public driveAuto(double speed, double wantedTime) {
     	
-    	requires(claw);
-    	requires(inTake);
+    	requires(drive);
+    	targetSpeed = speed;
+    	time = wantedTime;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
-    	
+    	timer.reset();
+    	timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	claw.close();
-    	inTake.suckIn(.7);
-    	
+    	if(timer.get() < time) {
+    		drive.drive(targetSpeed, -targetSpeed);
+    		
+    	}
+    	if(timer.get() >= time) {
+    		drive.drive(0, 0);
+    	}
+    
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -43,13 +48,12 @@ public class pickUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	claw.stop();
-    	inTake.stop();
+    	timer.stop();
+    	timer.reset();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

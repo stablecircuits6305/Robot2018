@@ -17,9 +17,7 @@ import org.usfirst.frc.team6305.robot.auto.A2_Right;
 import org.usfirst.frc.team6305.robot.auto.A3_Left;
 import org.usfirst.frc.team6305.robot.auto.A3_Right;
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
-
-
-
+import org.usfirst.frc.team6305.robot.auto.driveAuto;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -44,6 +42,7 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	
 	Command autoBaseline;
+	Command autoDrive;
 	Command a1_left;
 	Command a2_left;
 	Command a3_left;
@@ -63,13 +62,13 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void robotInit() {
-		
+		//autoDrive = new driveAuto(-0.5);
 		Gyro.calibrate();
 		Gyro.reset();
 		m_oi = new OI();
 		SmartDashboard.putString("Robot Mode", "Robot Init");
 		SmartDashboard.putString("Robot Position", "Baseline");
-		c= new Compressor(RobotMap.compresser);
+		
 		
 	
 		
@@ -105,7 +104,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledInit() {
 		SmartDashboard.putBoolean("Disabled Check", isDisabled());
-		c.setClosedLoopControl(false);
+		
 		
 		
 	}
@@ -128,6 +127,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		/*
 		SmartDashboard.putBoolean("Teleop Check", isOperatorControl());
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();	
@@ -181,8 +181,8 @@ public class Robot extends TimedRobot {
 		
 		else{
 			m_autonomousCommand = autoBaseline;
-		}
-		
+		}*/
+		m_autonomousCommand = autoBaseline;
 		
 		
 		
@@ -218,7 +218,7 @@ public class Robot extends TimedRobot {
 			m_autonomousCommand.cancel();
 		}
 		teleopDrive.start();
-		c.setClosedLoopControl(true);
+		
 	}
 
 	/**
@@ -226,7 +226,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		System.out.println(isOperatorControl());
 		
 		SmartDashboard.putBoolean("Teleop Check", isOperatorControl());
 		SmartDashboard.putString("Robot Mode", "Teleop Periodic");

@@ -1,7 +1,9 @@
 package org.usfirst.frc.team6305.robot.auto;
 
-import org.usfirst.frc.team6305.robot.commands.DrivePID;
 
+
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -10,6 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoBaseline extends CommandGroup {
 
     public AutoBaseline() {
+    	
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -26,6 +29,11 @@ public class AutoBaseline extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new DrivePID(84));
+    	addSequential(new driveAuto(0.5, 2));
+    	
+    	
+    	}
     }
-}
+
+	
+

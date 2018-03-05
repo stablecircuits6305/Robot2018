@@ -34,7 +34,7 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void initEncoders () {
-		leftEncoder.setDistancePerPulse(distanceperpulse);
+		leftEncoder.setDistancePerPulse(5);
 		leftEncoder.setSamplesToAverage(10);
 		
 		rightEncoder.setDistancePerPulse(5);

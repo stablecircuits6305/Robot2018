@@ -30,7 +30,7 @@ public class input extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	inTake.suckIn(1);
+    	inTake.suckIn(.6);
     	
     	
     }

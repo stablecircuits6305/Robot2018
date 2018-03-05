@@ -1,35 +1,41 @@
-package org.usfirst.frc.team6305.robot.commands;
+package org.usfirst.frc.team6305.robot.elevator;
 
-import org.usfirst.frc.team6305.robot.subsystems.Claw;
-import org.usfirst.frc.team6305.robot.subsystems.intake;
+import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class outTake extends Command {
-	Claw claw;
-	intake inTake;
+public class elevatorAuto extends Command {
+	
+	Elevator elevator = Elevator.getInstance();
+	Timer timer = new Timer();
+	double targetSpeed, time;
 
-    public outTake() {
-    	claw = Claw.getInstance();
-    	inTake = intake.getInstance();
-    	requires(claw);
-    	requires(inTake);
-    	// Use requires() here to declare subsystem dependencies
+    public elevatorAuto(double speed, double wantedTime) {
+    	requires(elevator);
+    	targetSpeed = speed;
+    	time = wantedTime;
+        // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	timer.reset();
+    	timer.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	claw.open();
-    	
+    	if(timer.get() < time) {
+    		elevator.move(targetSpeed);
+    	}
+    	if(timer.get() >= time) {
+    		elevator.move(targetSpeed);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,12 +45,10 @@ public class outTake extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }
