@@ -95,6 +95,7 @@ public class OI {
 		OI.rightButton2.whileHeld(new moveElevator(-0.5));
 		OI.leftButton1.whileHeld(new input());
 		*/
+		
 		OI.xbox.rt.whileHeld(new moveElevator(1));
 		OI.xbox.rb.whileHeld(new moveArm(.8));
 		OI.xbox.lb.whileHeld(new moveArm(-.8));

@@ -65,4 +65,5 @@ public class RobotMap {
 	public static double scaleHeightTall;
 	public static double switchHeight = 9;
 	public static double vaultHeight;
+	public static int bottomLimit = 5;
 	}

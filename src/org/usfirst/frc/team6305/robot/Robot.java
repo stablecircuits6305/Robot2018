@@ -19,9 +19,11 @@ import org.usfirst.frc.team6305.robot.auto.A3_Right;
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
 import org.usfirst.frc.team6305.robot.auto.driveAuto;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
+import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -68,6 +70,10 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		SmartDashboard.putString("Robot Mode", "Robot Init");
 		SmartDashboard.putString("Robot Position", "Baseline");
+		CameraServer.getInstance().startAutomaticCapture();
+		/*
+		 * 
+		 */
 		
 		
 	
@@ -235,17 +241,16 @@ public class Robot extends TimedRobot {
 	/**
 	 * This function is called periodically during test mode.
 	 */
-	@Override
+	@Override 
 	
 	public void testPeriodic() {
 		teleopDrive.start();
 		//Compressor c = new Compressor(RobotMap.compresser);
 		//c.setClosedLoopControl(true);
-		SmartDashboard.putBoolean("Test Check", isTest());
-		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
-		switchPosition.setBoolean(true);
-		System.out.println(switchPosition.getBoolean(false));
+		Elevator elevator = Elevator.getInstance();
+		System.out.println(elevator.limitElevator.get());
 		
-		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
+		
+		//System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
 	}
 }

@@ -32,7 +32,7 @@ public class elevatorSet extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	elevator.resetEncoders();
+    	//elevator.resetEncoders();
     	pid.init(targetDistance, MAXSPEED);
     	pid.init(targetDistance, MAXSPEED);
     }
