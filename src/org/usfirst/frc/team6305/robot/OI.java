@@ -83,6 +83,10 @@ public class OI {
 	
 	static {
 		
+		if(OI.leftButton1.get()){
+			
+		}
+		
 		//OI.rightButton1.whenPressed(new clawOpen());
 		//OI.leftButton1.whenPressed(new clawClose());
 		
