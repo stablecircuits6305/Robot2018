@@ -29,6 +29,7 @@ public class outTake extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	claw.open();
+    	inTake.suckOut(.7);
     	
     }
 

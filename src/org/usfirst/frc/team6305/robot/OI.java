@@ -12,6 +12,8 @@ import org.usfirst.frc.team6305.robot.arm.moveArm;
 
 import org.usfirst.frc.team6305.robot.claw.clawClose;
 import org.usfirst.frc.team6305.robot.claw.clawOpen;
+import org.usfirst.frc.team6305.robot.commands.ClawOuttake;
+import org.usfirst.frc.team6305.robot.commands.clawIntake;
 import org.usfirst.frc.team6305.robot.commands.outTake;
 import org.usfirst.frc.team6305.robot.commands.pickUp;
 import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
@@ -99,12 +101,15 @@ public class OI {
 		OI.xbox.rt.whileHeld(new moveElevator(1));
 		OI.xbox.rb.whileHeld(new moveArm(.8));
 		OI.xbox.lb.whileHeld(new moveArm(-.8));
-	    OI.xbox.a.whileHeld(new clawClose());
+	    //OI.xbox.a.whileHeld(new clawClose());
 		OI.xbox.lt.whileHeld(new moveElevator(-.7));
-		OI.xbox.b.whenPressed(new clawOpen());
-		OI.xbox.x.whileHeld(new input());
-		OI.xbox.y.whileHeld(new output());
-		
+		//OI.xbox.b.whenPressed(new clawOpen());
+		//OI.xbox.x.whileHeld(new input());
+		//OI.xbox.y.whileHeld(new output());
+		OI.xbox.y.whileHeld(new input());
+		OI.xbox.a.whileHeld(new ClawOuttake());
+		//OI.xbox.x.whenPressed(new clawOpen());
+		OI.xbox.b.whenPressed(new clawClose());
 		/*
 		OI.xbox.a.whileHeld(new pickUp());
 		OI.xbox.b.whileHeld(new clawOpen());
