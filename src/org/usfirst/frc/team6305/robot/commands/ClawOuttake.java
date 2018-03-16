@@ -1,8 +1,9 @@
 package org.usfirst.frc.team6305.robot.commands;
 
-import org.usfirst.frc.team6305.robot.claw.clawClose;
+//import org.usfirst.frc.team6305.robot.claw.clawClose;
+
 import org.usfirst.frc.team6305.robot.claw.clawOpen;
-import org.usfirst.frc.team6305.robot.intake.input;
+//import org.usfirst.frc.team6305.robot.intake.input;
 import org.usfirst.frc.team6305.robot.intake.output;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;

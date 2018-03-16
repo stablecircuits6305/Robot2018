@@ -11,26 +11,26 @@ package org.usfirst.frc.team6305.robot;
 import org.usfirst.frc.team6305.robot.arm.moveArm;
 
 import org.usfirst.frc.team6305.robot.claw.clawClose;
-import org.usfirst.frc.team6305.robot.claw.clawOpen;
+//import org.usfirst.frc.team6305.robot.claw.clawOpen;
 import org.usfirst.frc.team6305.robot.commands.ClawOuttake;
-import org.usfirst.frc.team6305.robot.commands.clawIntake;
-import org.usfirst.frc.team6305.robot.commands.outTake;
-import org.usfirst.frc.team6305.robot.commands.pickUp;
-import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
+//import org.usfirst.frc.team6305.robot.commands.clawIntake;
+//import org.usfirst.frc.team6305.robot.commands.outTake;
+//import org.usfirst.frc.team6305.robot.commands.pickUp;
+//import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
 import org.usfirst.frc.team6305.robot.elevator.moveElevator;
-import org.usfirst.frc.team6305.robot.intake.holdIntake;
+//import org.usfirst.frc.team6305.robot.intake.holdIntake;
 //import org.usfirst.frc.team6305.robot.commands.pickUp;
 //import org.usfirst.frc.team6305.robot.commands.scaleOutput;
 //import org.usfirst.frc.team6305.robot.commands.switchOutput;
 //import org.usfirst.frc.team6305.robot.commands.vaultOutput;
 import org.usfirst.frc.team6305.robot.intake.input;
-import org.usfirst.frc.team6305.robot.intake.output;
+//import org.usfirst.frc.team6305.robot.intake.output;
 //import org.usfirst.frc.team6305.robot.output.reset;
 import org.usfirst.frc.team6305.robot.output.scaleOutput;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator

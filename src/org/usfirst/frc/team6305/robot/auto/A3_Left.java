@@ -1,13 +1,14 @@
 package org.usfirst.frc.team6305.robot.auto;
 
 
-import org.usfirst.frc.team6305.robot.arm.topArm;
+//import org.usfirst.frc.team6305.robot.arm.topArm;
+
 import org.usfirst.frc.team6305.robot.claw.clawOpen;
-import org.usfirst.frc.team6305.robot.commands.DrivePID;
+//import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
-import org.usfirst.frc.team6305.robot.commands.outTake;
-import org.usfirst.frc.team6305.robot.commands.pickUp;
-import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
+//import org.usfirst.frc.team6305.robot.commands.outTake;
+//import org.usfirst.frc.team6305.robot.commands.pickUp;
+//import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
 import org.usfirst.frc.team6305.robot.intake.holdIntake;
 import org.usfirst.frc.team6305.robot.intake.output;
 import org.usfirst.frc.team6305.robot.output.scaleOutput;
@@ -57,6 +58,6 @@ public class A3_Left extends CommandGroup {
     	addSequential(new output());
     	addSequential(new holdIntake());
     	addSequential(new clawOpen());
-    	//addSequential(new elevatorAuto(-1, .5));
+    	    	//addSequential(new elevatorAuto(-1, .5));
     }
 }

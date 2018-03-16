@@ -11,21 +11,22 @@ package org.usfirst.frc.team6305.robot;
 import org.usfirst.frc.team6305.robot.auto.A1_Left;
 
 
+
 import org.usfirst.frc.team6305.robot.auto.A1_Right;
 import org.usfirst.frc.team6305.robot.auto.A2_Left;
 import org.usfirst.frc.team6305.robot.auto.A2_Right;
 import org.usfirst.frc.team6305.robot.auto.A3_Left;
 import org.usfirst.frc.team6305.robot.auto.A3_Right;
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
-import org.usfirst.frc.team6305.robot.auto.driveAuto;
+//import org.usfirst.frc.team6305.robot.auto.driveAuto;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
 import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
+//import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DriverStation;
+//import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
