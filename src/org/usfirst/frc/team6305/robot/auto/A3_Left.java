@@ -51,12 +51,12 @@ public class A3_Left extends CommandGroup {
     	addSequential(new GyroTest(90));
     	addSequential(new pickUp());
     	*/
-    	addSequential(new driveAuto(0.5,4));
+    	//addSequential(new driveAuto(0.5,4));
     	addSequential(new GyroTest(90));
     	addSequential(new scaleOutput());
     	addSequential(new output());
     	addSequential(new holdIntake());
     	addSequential(new clawOpen());
-    	addSequential(new elevatorAuto(-1, .5));
+    	//addSequential(new elevatorAuto(-1, .5));
     }
 }

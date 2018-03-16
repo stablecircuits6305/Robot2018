@@ -18,12 +18,12 @@ public class Elevator extends Subsystem {
 	
 	
 	Spark elevator = new Spark(RobotMap.elevator);
-	//Encoder elevatorEnc = new Encoder(4,5, false, Encoder.EncodingType.k4X);
+	Encoder elevatorEnc = new Encoder(4,5, false, Encoder.EncodingType.k4X);
 	public static Elevator instance = new Elevator();
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	/*
+	
 	public void initEncoders(){
 		elevatorEnc.setDistancePerPulse(5);
 		elevatorEnc.setSamplesToAverage(10);
@@ -37,9 +37,9 @@ public class Elevator extends Subsystem {
 		elevatorEnc.reset();
 		elevatorEnc.reset();
 	}
-	*/
+	
 	public Elevator(){
-		//initEncoders();
+		initEncoders();
 		elevator.setInverted(true);
 	}
 
@@ -63,7 +63,7 @@ public class Elevator extends Subsystem {
 		elevator.set(0.2);
 	}
 	
-	/*
+	
 	public double getElevatorEnc(){
 		double val = elevatorEnc.get();
 		return val;
@@ -72,7 +72,7 @@ public class Elevator extends Subsystem {
 	public void getBottomLimit() {
 		System.out.println(bottomLimit);
 	}
-	*/
+	
 	
 	public static Elevator getInstance(){
 		return instance;
