@@ -5,6 +5,9 @@ package org.usfirst.frc.team6305.robot.auto;
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.resetGyro;
+import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
+import org.usfirst.frc.team6305.robot.subsystems.Arm;
+import org.usfirst.team6305.robot.pid.armPID;
 import org.usfirst.team6305.robot.pid.elevatorPID;
 
 import edu.wpi.first.wpilibj.Timer;
@@ -38,8 +41,8 @@ public class AutoBaseline extends CommandGroup {
     	addSequential(new resetGyro());
     	addSequential(new DrivePID(120));
     	addSequential(new GyroTest(0));
-    	addSequential(new elevatorPID(5));
-    	addSequential(new ArmPID(5));
+    	addSequential(new elevatorAuto(5));
+    	//addSequential(new armPID(5));
     	
     	
     	
