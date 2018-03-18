@@ -4,6 +4,7 @@ import org.usfirst.frc.team6305.robot.arm.topArm;
 //import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.outTake;
+import org.usfirst.frc.team6305.robot.commands.resetGyro;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -30,6 +31,7 @@ public class E3_Right extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	//addSequential(new DrivePID(84));
+    	addSequential(new resetGyro());
     	addSequential(new driveEmergency(84, 0.5));
     	addSequential(new GyroTest(90));
     	//addSequential(new DrivePID(225));
