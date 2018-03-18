@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveTrain extends Subsystem {
 	public static final double wheelDiameter = 6;
 	public static final double pulsePerRevolution = 360;
-	final double distanceperpulse = Math.PI*wheelDiameter/pulsePerRevolution;
+	//final double distanceperpulse = Math.PI*wheelDiameter/pulsePerRevolution;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -28,6 +28,9 @@ public class DriveTrain extends Subsystem {
 	Encoder leftEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
 	
 	public static DriveTrain instance = new DriveTrain();
+	final double WHEEL_CIRCUM = Math.PI * 6;
+	
+	
 	
 	public DriveTrain () {
 		initEncoders();
@@ -47,11 +50,12 @@ public class DriveTrain extends Subsystem {
 		frontRightDrive.set(-rightSpeed);
 		backRightDrive.set(-rightSpeed);
 	}
-	
+	/*
 	public void setLeftSpeed(double leftSpeed) {
 		frontLeftDrive.set(leftSpeed);
 		backLeftDrive.set(leftSpeed);
 	}
+	*/
 
 	public void stop () {
 		frontLeftDrive.set(0);
@@ -68,12 +72,12 @@ public class DriveTrain extends Subsystem {
 	public double getLeftEncoderValue () {
 		// returns the rotation in degrees
 		double degree = leftEncoder.get();
-		return degree;
+		return (degree/360) * WHEEL_CIRCUM;
 	}
 	
 	public double getRightEncoderValue () {
 		double degree = rightEncoder.get();
-		return degree;
+		return -((degree/360) * WHEEL_CIRCUM);
 	}
 	
 	public static DriveTrain getInstance () {

@@ -1,27 +1,17 @@
-package org.usfirst.frc.team6305.robot.auto;
-
-
-
-import org.usfirst.frc.team6305.robot.commands.DrivePID;
+package org.usfirst.frc.team6305.robot.emergency;
 
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.resetGyro;
 import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
-//import org.usfirst.frc.team6305.robot.subsystems.Arm;
-//import org.usfirst.team6305.robot.pid.armPID;
-//import org.usfirst.team6305.robot.pid.elevatorPID;
 
-//import edu.wpi.first.wpilibj.Timer;
-//import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AutoBaseline extends CommandGroup {
+public class emergencyBaseline extends CommandGroup {
 
-    public AutoBaseline() {
-    	
+    public emergencyBaseline() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -38,17 +28,9 @@ public class AutoBaseline extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	//addSequential(new driveAuto(0.5, 2));
     	addSequential(new resetGyro());
-    	addSequential(new DrivePID(120));
+    	addSequential(new driveEmergency(120, 0.5));
     	addSequential(new GyroTest(0));
     	addSequential(new elevatorAuto(19));
-    	//addSequential(new armPID(5));
-    	
-    	
-    	
-    	}
     }
-
-	
-
+}

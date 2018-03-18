@@ -35,14 +35,14 @@ public class RightDrivePID {
 			public double pidGet() {
 				double distance = driveTrain.getRightEncoderValue();
 //				System.out.println(distance);
-				return distance;
+				return (distance);
 			}
     	};
     	
     	PIDOutput pidOutput = new PIDOutput() {
 			@Override
 			public void pidWrite(double output) {
-				speed = -output;
+				speed = output;
 			}
     	};
     	

@@ -1,20 +1,16 @@
-package org.usfirst.frc.team6305.robot.output;
+package org.usfirst.frc.team6305.robot.auto;
 
-
-import org.usfirst.frc.team6305.robot.RobotMap;
-import org.usfirst.frc.team6305.robot.claw.clawOpen;
-import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
-//import org.usfirst.frc.team6305.robot.elevator.moveElevator;
-import org.usfirst.frc.team6305.robot.intake.autoOutput;
+import org.usfirst.frc.team6305.robot.claw.clawClose;
+import org.usfirst.frc.team6305.robot.intake.autoInput;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class scaleOutput extends CommandGroup {
+public class cubeAuto extends CommandGroup {
 
-    public scaleOutput() {
+    public cubeAuto() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -31,12 +27,7 @@ public class scaleOutput extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new elevatorAuto(RobotMap.scaleHeightDefault));
-    	addParallel(new autoOutput(0.5,0.5));
-    	addSequential(new clawOpen());
-    	addSequential(new elevatorAuto(-RobotMap.scaleHeightDefault));
-    	
-    	
-    	
+    	addSequential(new clawClose());
+    	addSequential(new autoInput(0.5,0.5));
     }
 }
