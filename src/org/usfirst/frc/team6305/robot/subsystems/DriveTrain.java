@@ -5,6 +5,7 @@ import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -23,6 +24,7 @@ public class DriveTrain extends Subsystem {
 	Spark backLeftDrive = new Spark(RobotMap.backLeftDrive);
 	Spark frontRightDrive = new Spark(RobotMap.frontRightDrive);
 	Spark backRightDrive = new Spark(RobotMap.backRightDrive);
+	
 	
 	Encoder rightEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
 	Encoder leftEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k4X);
@@ -45,10 +47,11 @@ public class DriveTrain extends Subsystem {
 	}
 	
 	public void drive (double leftSpeed, double rightSpeed) {
+		
 		frontLeftDrive.set(-leftSpeed);
 		backLeftDrive.set(-leftSpeed);
-		frontRightDrive.set(-rightSpeed);
-		backRightDrive.set(-rightSpeed);
+		frontRightDrive.set(rightSpeed);
+		backRightDrive.set(rightSpeed);
 	}
 	/*
 	public void setLeftSpeed(double leftSpeed) {

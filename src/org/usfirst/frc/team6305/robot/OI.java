@@ -17,11 +17,13 @@ import org.usfirst.frc.team6305.robot.arm.moveArm;
 import org.usfirst.frc.team6305.robot.claw.clawClose;
 //import org.usfirst.frc.team6305.robot.claw.clawOpen;
 import org.usfirst.frc.team6305.robot.commands.ClawOuttake;
+import org.usfirst.frc.team6305.robot.commands.DrivePID;
 //import org.usfirst.frc.team6305.robot.commands.clawIntake;
 //import org.usfirst.frc.team6305.robot.commands.outTake;
 //import org.usfirst.frc.team6305.robot.commands.pickUp;
 //import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
 import org.usfirst.frc.team6305.robot.elevator.moveElevator;
+import org.usfirst.frc.team6305.robot.emergency.driveEmergency;
 //import org.usfirst.frc.team6305.robot.intake.holdIntake;
 //import org.usfirst.frc.team6305.robot.commands.pickUp;
 //import org.usfirst.frc.team6305.robot.commands.scaleOutput;
@@ -95,6 +97,9 @@ public class OI {
 		OI.leftButton3.whenPressed(new posUpdate(3));
 		OI.leftButton4.whenPressed(new autoCheck(true));
 		OI.leftButton5.whenPressed(new autoCheck(false));
+		
+		//OI.rightButton1.whenPressed(new driveEmergency(0.5, 100));
+		OI.rightButton1.whenPressed(new DrivePID(120));
 
 
 

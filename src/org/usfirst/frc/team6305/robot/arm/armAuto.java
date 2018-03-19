@@ -25,7 +25,7 @@ public class armAuto extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	arm.resetEncoders();
+    	//arm.resetEncoders();
     	pid.init(targetDistance, MAXSPEED);
     }
 

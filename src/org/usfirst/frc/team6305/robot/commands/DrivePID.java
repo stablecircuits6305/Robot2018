@@ -38,7 +38,7 @@ public class DrivePID extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double additive = driveDifference.getAdditive();
-    	driveTrain.drive(leftDrivePID.getSpeed() + additive, -rightDrivePID.getSpeed() + additive);
+    	driveTrain.drive(leftDrivePID.getSpeed() + additive, rightDrivePID.getSpeed() - additive);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -39,7 +39,8 @@ public class armPID {
 
 			@Override
 			public double pidGet() {
-				double val = arm.getArmEnc();
+				//double val = arm.getArmEnc();
+				double val= 0.1;
 				// TODO Auto-generated method stub
 				return val;
 			}

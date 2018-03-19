@@ -28,6 +28,6 @@ public class clawIntake extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addParallel(new clawOpen());
-    	addParallel(new input());
+    	addParallel(new input(0.5));
     }
 }

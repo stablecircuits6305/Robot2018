@@ -31,6 +31,6 @@ public class ClawOuttake extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addParallel(new clawOpen());
-    	addParallel(new output());
+    	addParallel(new output(0.5));
     }
 }
