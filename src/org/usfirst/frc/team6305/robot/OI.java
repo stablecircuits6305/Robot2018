@@ -7,7 +7,10 @@
 /*----------------------------------------------------------------------------*/
 
 package org.usfirst.frc.team6305.robot;
-
+import org.usfirst.frc.team6305.robot.claw.clawOpen;
+import org.usfirst.frc.team6305.robot.intake.output;
+import org.usfirst.frc.team6305.robot.dashboard.posUpdate;
+import edu.wpi.cscore.UsbCamera;
 import org.usfirst.frc.team6305.robot.arm.moveArm;
 
 import org.usfirst.frc.team6305.robot.claw.clawClose;
@@ -68,6 +71,7 @@ public class OI {
 	
 	public static Joystick leftJoystick = new Joystick(0);
 	public static Joystick rightJoystick = new Joystick(1);
+	public static Joystick wheel;
 	
 	public static JoystickButton leftButton1 = new JoystickButton(leftJoystick, 1);
 	public static JoystickButton leftButton2 = new JoystickButton(leftJoystick, 2);
@@ -82,17 +86,15 @@ public class OI {
 	public static XboxController xbox = new XboxController(2);
 	
 	static {
-		
-		if(OI.leftButton1.get()){
-			
-		}
-		
 		//OI.rightButton1.whenPressed(new clawOpen());
 		//OI.leftButton1.whenPressed(new clawClose());
-		
-		
-		
-	
+		OI.leftButton1.whenPressed(new posUpdate(1));
+		OI.leftButton2.whenPressed(new posUpdate(2));
+		OI.leftButton3.whenPressed(new posUpdate(3));
+
+
+
+
 		/*
 		OI.leftButton2.whileHeld(new moveElevator(0.5));
 		OI.leftButton3.whileHeld(new moveArm(0.5));
@@ -101,52 +103,55 @@ public class OI {
 		OI.rightButton2.whileHeld(new moveElevator(-0.5));
 		OI.leftButton1.whileHeld(new input());
 		*/
-		
+
 		OI.xbox.rt.whileHeld(new moveElevator(1));
-		OI.xbox.rb.whileHeld(new moveArm(.8));
-		OI.xbox.lb.whileHeld(new moveArm(-.8));
-	    //OI.xbox.a.whileHeld(new clawClose());
-		OI.xbox.lt.whileHeld(new moveElevator(-.7));
+		OI.xbox.lt.whileHeld(new moveElevator(-.8));
+
+		OI.xbox.rb.whileHeld(new moveArm(.5));
+		OI.xbox.lb.whileHeld(new moveArm(-.5));
+		//OI.xbox.a.whileHeld(new clawClose());
+
 		//OI.xbox.b.whenPressed(new clawOpen());
 		//OI.xbox.x.whileHeld(new input());
 		//OI.xbox.y.whileHeld(new output());
-		OI.xbox.y.whileHeld(new input());
-		OI.xbox.a.whileHeld(new ClawOuttake());
-		//OI.xbox.x.whenPressed(new clawOpen());
+		OI.xbox.y.whileHeld(new input(1));
+		OI.xbox.a.whileHeld(new clawOpen());
+		OI.xbox.x.whileHeld(new output(.6));
 		OI.xbox.b.whenPressed(new clawClose());
 		/*
 		OI.xbox.a.whileHeld(new pickUp());
 		OI.xbox.b.whileHeld(new clawOpen());
 		OI.xbox.y.whileHeld(new outTake());
 		*/
-	    OI.xbox.dPad.up.whenPressed(new scaleOutput());
-	    //OI.xbox.dPad.down.whenPressed(new elevatorAuto(-1,1));
+		//OI.xbox.start.whenPressed(new DrivePID(12));
+		OI.xbox.dPad.up.whenPressed(new scaleOutput());
+		//OI.leftButton1.whenPressed(new AutoBaseline());
+		//OI.xbox.dPad.down.whenPressed(new elevatorAuto(-1,1));
 		//OI.xbox.dPad.down.whenPressed(new reset());
-		
-		
-		
+
+
+
 		/*
 		if(SmartDashboard.getBoolean("Disabled Check", false)){
 			if(OI.xbox.y.get() == true){
 				SmartDashboard.putString("Robot Position", "A1");
 			}
-			
+
 			else if(OI.xbox.b.get() == true){
 				SmartDashboard.putString("Robot Position", "A2");
 			}
-			
+
 			else if(OI.xbox.a.get() == true){
 				SmartDashboard.putString("Robot Position", "A3");
 			}
-			
+
 			else{
 				SmartDashboard.putString("Robot Position", "Baseline");
 			}
-			
 
 		}
-		
-		
+
+
 		if(SmartDashboard.getBoolean("Teleop Check", false) ){
 			OI.xbox.dPad.up.whileHeld(new moveElevator(0.5));
 			OI.xbox.dPad.down.whileHeld(new moveElevator(-0.5));
@@ -154,19 +159,19 @@ public class OI {
 			OI.xbox.lt.whileHeld(new output());
 			OI.xbox.rb.whileHeld(new clawOpen());
 			OI.xbox.rb.whileHeld(new clawClose());
-			
-			
-			
-			
-			
-			
+
+
+
+
+
+
 			//OI.xbox.y.whenPressed(new scaleOutput());
 			//OI.xbox.a.whenPressed(new switchOutput());
 			//OI.xbox.b.whenPressed(new vaultOutput());
-				
-				
+
+
 			}
-		
+
 		if(SmartDashboard.getBoolean("Test Check", false)){
 			OI.leftButton1.whileHeld(new input());
 			OI.rightButton1.whileHeld(new output());
@@ -174,21 +179,22 @@ public class OI {
 			OI.rightButton2.whileHeld(new clawClose());
 			//Put things here for testing
 			 			 */
-		}
-		}
-		
-		
-		
-		
-		
-		
-		//OI.button.whenPressed(new DrivePID(360));
-		
-		
-		
-		//OI.xbox.x.whenPressed(new GyroTest(90));
-		
-		
+	}
+}
+
+
+
+
+
+
+//OI.button.whenPressed(new DrivePID(360));
+
+
+
+//OI.xbox.x.whenPressed(new GyroTest(90));
+
+
+
 	
 	
 

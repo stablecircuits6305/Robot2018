@@ -8,8 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class holdIntake extends Command {
-	
+
 	intake in = intake.getInstance();
+
 
     public holdIntake() {
     	requires(in);

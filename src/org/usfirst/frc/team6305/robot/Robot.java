@@ -8,6 +8,7 @@
 
 package org.usfirst.frc.team6305.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team6305.robot.auto.A1_Left;
 
 
@@ -20,6 +21,7 @@ import org.usfirst.frc.team6305.robot.auto.A3_Right;
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
 //import org.usfirst.frc.team6305.robot.auto.driveAuto;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
+import org.usfirst.frc.team6305.robot.emergency.*;
 import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -52,6 +54,12 @@ public class Robot extends TimedRobot {
 	Command a1_right;
 	Command a2_right;
 	Command a3_right;
+	Command e1_left;
+	Command e1_right;
+	Command e2_left;
+	Command e2_right;
+	Command e3_left;
+	Command e3_right;
 	Compressor c;
 
 	Command teleopDrive, m_autonomousCommand;
@@ -86,6 +94,13 @@ public class Robot extends TimedRobot {
 		a2_right = new A2_Right();
 		a3_left = new A3_Left();
 		a3_right = new A3_Right();
+		e1_left = new E1_Left();
+		e1_right = new E1_Right();
+		e2_left = new E2_Left();
+		e2_right = new E2_Right();
+		e3_left = new E3_Left();
+		e3_right = new E3_Right();
+
 		//chooser.addDefault("Baseline", new AutoBaseline());
 		//chooser.addObject("A1_Left", new A1_Left());
 		//chooser.addObject("A1_Right", new A1_Right());
@@ -134,11 +149,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		int nine;
+
 		/*
 		SmartDashboard.putBoolean("Teleop Check", isOperatorControl());
 		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();	
-		
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+
 		//NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
 		//NetworkTableEntry scalePosition = autoTable.getEntry("scalePosition");
 		if (gameData.charAt(0) == 'L') {
@@ -147,7 +164,7 @@ public class Robot extends TimedRobot {
 		} else {
 			SmartDashboard.putBoolean("switchPosition", true);
 			//switchPosition.setBoolean(true); // False is left, true is right
-			
+
 		}
 		if (gameData.charAt(1) == 'L') {
 			SmartDashboard.putBoolean("scalePosition", false);
@@ -156,7 +173,7 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putBoolean("scalePosition", true);
 			//scalePosition.setBoolean(true); // False is left, true is right
 		}
-		
+
 		if(SmartDashboard.getString("Robot Position", "Baseline") == "A1"){
 			if(SmartDashboard.getBoolean("switchPosition", false)){
 				m_autonomousCommand = a1_right;
@@ -165,7 +182,7 @@ public class Robot extends TimedRobot {
 				m_autonomousCommand = a1_left;
 			}
 		}
-		
+
 		else if(SmartDashboard.getString("Robot Position", "Baseline") == "A2"){
 			if(SmartDashboard.getBoolean("switchPosition", false)){
 				m_autonomousCommand = a2_right;
@@ -173,19 +190,19 @@ public class Robot extends TimedRobot {
 			else{
 				m_autonomousCommand = a2_left;
 			}
-			
+
 		}
-		
+
 		else if(SmartDashboard.getString("Robot Position", "Baseline") == "A3"){
 			if(SmartDashboard.getBoolean("switchPosition", false)){
 				m_autonomousCommand = a3_right;
 			}
 			else{
 				m_autonomousCommand = a3_left;
-				
+
 			}
 		}
-		
+
 		else{
 			m_autonomousCommand = autoBaseline;
 		}*/
