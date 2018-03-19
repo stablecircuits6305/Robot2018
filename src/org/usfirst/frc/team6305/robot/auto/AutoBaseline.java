@@ -39,6 +39,7 @@ public class AutoBaseline extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	//addSequential(new driveAuto(0.5, 2));
+		addSequential(new getOut());
     	addSequential(new resetGyro());
     	addSequential(new DrivePID(120));
     	addSequential(new GyroTest(0));

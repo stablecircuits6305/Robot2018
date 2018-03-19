@@ -1,7 +1,7 @@
 package org.usfirst.frc.team6305.robot.auto;
 
 //import org.usfirst.frc.team6305.robot.arm.topArm;
-
+import org.usfirst.frc.team6305.robot.auto.getOut;
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 //import org.usfirst.frc.team6305.robot.commands.outTake;
@@ -32,6 +32,7 @@ public class A2_Left extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+		addSequential(new getOut());
     	addSequential(new resetGyro());
     	addSequential(new DrivePID(84));
     	addSequential(new GyroTest(0));

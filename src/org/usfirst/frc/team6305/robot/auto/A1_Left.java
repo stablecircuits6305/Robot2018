@@ -8,6 +8,8 @@ import org.usfirst.frc.team6305.robot.commands.GyroTest;
 //import org.usfirst.frc.team6305.robot.commands.outTake;
 import org.usfirst.frc.team6305.robot.commands.resetGyro;
 import org.usfirst.frc.team6305.robot.output.switchOutput;
+import org.usfirst.frc.team6305.robot.auto.getOut;
+
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -34,6 +36,7 @@ public class A1_Left extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	//addSequential(new AutoBaseline());
+		addSequential(new getOut());
     	addSequential(new resetGyro());
     	addSequential(new DrivePID(84));
     	addSequential(new GyroTest(0));

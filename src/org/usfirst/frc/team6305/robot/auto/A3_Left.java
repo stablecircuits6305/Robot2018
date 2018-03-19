@@ -45,7 +45,7 @@ public class A3_Left extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	
+    	addSequential(new getOut());
     	addSequential(new resetGyro());
     	addSequential(new DrivePID(192));
     	addSequential(new GyroTest(0));
