@@ -8,6 +8,7 @@
 
 package org.usfirst.frc.team6305.robot;
 
+
 import edu.wpi.first.wpilibj.DriverStation;
 import org.usfirst.frc.team6305.robot.auto.A1_Left;
 
@@ -61,6 +62,7 @@ public class Robot extends TimedRobot {
 	Command e3_left;
 	Command e3_right;
 	Compressor c;
+
 
 	Command teleopDrive, m_autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -149,8 +151,18 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		int nine;
+		boolean autoCheck;
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 
+
+
+		if(SmartDashboard.getBoolean("A1", false) == true){
+			if(gameData.charAt(0) == 'L'){
+
+
+
+			}
+		}
 		/*
 		SmartDashboard.putBoolean("Teleop Check", isOperatorControl());
 		String gameData;

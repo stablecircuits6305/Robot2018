@@ -8,6 +8,7 @@
 
 package org.usfirst.frc.team6305.robot;
 import org.usfirst.frc.team6305.robot.claw.clawOpen;
+import org.usfirst.frc.team6305.robot.dashboard.autoCheck;
 import org.usfirst.frc.team6305.robot.intake.output;
 import org.usfirst.frc.team6305.robot.dashboard.posUpdate;
 import edu.wpi.cscore.UsbCamera;
@@ -77,6 +78,7 @@ public class OI {
 	public static JoystickButton leftButton2 = new JoystickButton(leftJoystick, 2);
 	public static JoystickButton leftButton3 = new JoystickButton(leftJoystick, 3);
 	public static JoystickButton leftButton4 = new JoystickButton(leftJoystick, 4);
+	public static JoystickButton leftButton5 = new JoystickButton(leftJoystick, 5);
 	
 	public static JoystickButton rightButton1 = new JoystickButton(rightJoystick, 1);
 	public static JoystickButton rightButton2 = new JoystickButton(rightJoystick, 2);
@@ -91,6 +93,8 @@ public class OI {
 		OI.leftButton1.whenPressed(new posUpdate(1));
 		OI.leftButton2.whenPressed(new posUpdate(2));
 		OI.leftButton3.whenPressed(new posUpdate(3));
+		OI.leftButton4.whenPressed(new autoCheck(true));
+		OI.leftButton5.whenPressed(new autoCheck(false));
 
 
 
