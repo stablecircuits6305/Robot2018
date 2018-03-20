@@ -33,6 +33,7 @@ public class DrivePID extends Command {
     	driveTrain.resetEncoders();
     	leftDrivePID.init(targetDistance, MAXSPEED);
     	rightDrivePID.init(targetDistance, MAXSPEED);
+    	driveDifference.init();
     }
 
     // Called repeatedly when this Command is scheduled to run
