@@ -23,7 +23,7 @@ public class DrivePID extends Command {
 	RightDrivePID rightDrivePID = RightDrivePID.getInstance();
 	DriveDifferencePID driveDifferencePID = DriveDifferencePID.getInstance();
 	double targetDistance;
-	final double MAXSPEED = 0.25;
+	final double MAXSPEED = 0.5;
 	
     public DrivePID(double dist) {
         // Use requires() here to declare subsystem dependencies
@@ -49,7 +49,7 @@ public class DrivePID extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return leftDrivePID.onTarget() && rightDrivePID.onTarget();
+        return leftDrivePID.onTarget() || rightDrivePID.onTarget();
     }
 
     // Called once after isFinished returns true

@@ -25,7 +25,7 @@ public class Elevator extends Subsystem {
 	
 	public void moveElevator (double speed) {
 		Boolean bool = elevatorLimit.get();
-		System.out.println(bool);
+//		System.out.println(bool);
 		if (speed > 0.3) {
 			if (bool) {
 				elevator.set(speed);

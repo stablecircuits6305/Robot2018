@@ -1,5 +1,6 @@
 package org.usfirst.team6305.robot.pid;
 
+import org.usfirst.frc.team6305.robot.Gyro;
 import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
 
@@ -34,7 +35,8 @@ public class DriveDifferencePID {
 
 			@Override
 			public double pidGet() {
-				double driveDifference = driveTrain.getLeftEncoderValue() - driveTrain.getRightEncoderValue();
+//				double driveDifference = driveTrain.getLeftEncoderValue() - driveTrain.getRightEncoderValue();
+				double driveDifference = Gyro.getAngle();
 				return driveDifference;
 			}
     	};

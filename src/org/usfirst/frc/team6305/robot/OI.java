@@ -8,6 +8,7 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.XboxController;
+import org.usfirst.frc.team6305.robot.auto.ForwardDrive;
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.arm.MoveArm;
@@ -82,8 +83,10 @@ public class OI {
 		OI.leftButton5.whileHeld(new MoveIntake(0.5));
 		OI.leftButton6.whileHeld(new MoveIntake(-0.5));
 		
-		OI.rightTrigger.whenPressed(new CloseClaw());
+//		OI.rightTrigger.whenPressed(new CloseClaw());
 		OI.rightButton3.whileHeld(new MoveArm(0.6));
 		OI.rightButton4.whileHeld(new MoveArm(-0.2));
+		
+		OI.rightTrigger.whenPressed(new ForwardDrive());
 	}
 }

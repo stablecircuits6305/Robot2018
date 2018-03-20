@@ -28,7 +28,7 @@ public class DriveTrain extends Subsystem {
 	
 	public static DriveTrain instance = new DriveTrain();
 	
-	public DriveTrain () {
+	public DriveTrain () {		
 		initEncoders();
 	}
 	
@@ -53,10 +53,14 @@ public class DriveTrain extends Subsystem {
 	}
 
 	public void stop () {
-		frontLeftDrive.set(0);
-		backLeftDrive.set(0);
-		frontRightDrive.set(0);
-		backRightDrive.set(0);
+//		frontLeftDrive.set(0);
+//		backLeftDrive.set(0);
+//		frontRightDrive.set(0);
+//		backRightDrive.set(0);
+		frontLeftDrive.stopMotor();
+		backLeftDrive.stopMotor();
+		frontRightDrive.stopMotor();
+		backRightDrive.stopMotor();
 	}
 	
 	public void resetEncoders () {
