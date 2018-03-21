@@ -2,7 +2,9 @@ package org.usfirst.frc.team6305.robot.auto;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import org.usfirst.frc.team6305.robot.arm.armAuto;
+import org.usfirst.frc.team6305.robot.arm.timedArm;
 import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
+import org.usfirst.frc.team6305.robot.elevator.timedElevator;
 
 
 public class getOut extends CommandGroup {
@@ -22,8 +24,13 @@ public class getOut extends CommandGroup {
         // A command group will require all of the subsystems that each member would require.
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the arm.
+    	/*
         addParallel(new elevatorAuto(2));
         addSequential(new armAuto(3));
+        */
+    	
+    	addParallel(new timedElevator(1.25, 1));
+    	addSequential(new timedArm(2.25, 0.5));
 
     }
 }

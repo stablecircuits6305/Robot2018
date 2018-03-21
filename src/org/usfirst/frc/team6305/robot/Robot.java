@@ -10,6 +10,7 @@ package org.usfirst.frc.team6305.robot;
 
 
 import edu.wpi.first.wpilibj.DriverStation;
+
 import org.usfirst.frc.team6305.robot.auto.A1_Left;
 
 
@@ -22,7 +23,7 @@ import org.usfirst.frc.team6305.robot.auto.A3_Right;
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
 //import org.usfirst.frc.team6305.robot.auto.driveAuto;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
-import org.usfirst.frc.team6305.robot.emergency.*;
+//import org.usfirst.frc.team6305.robot.emergency.*;
 import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -65,7 +66,8 @@ public class Robot extends TimedRobot {
 
 
 	Command teleopDrive, m_autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	//SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<String> chooser = new SendableChooser<>();
 	NetworkTable autoTable;
 	
 	/**
@@ -96,13 +98,24 @@ public class Robot extends TimedRobot {
 		a2_right = new A2_Right();
 		a3_left = new A3_Left();
 		a3_right = new A3_Right();
+		
+		
+		
+		
+		chooser.addDefault("Baseline", "Baseline");
+		chooser.addObject("Left", "A3");
+		chooser.addObject("Right","A1");
+		SmartDashboard.putData("Auto mode", chooser);
+		
+		
+		/*
 		e1_left = new E1_Left();
 		e1_right = new E1_Right();
 		e2_left = new E2_Left();
 		e2_right = new E2_Right();
 		e3_left = new E3_Left();
 		e3_right = new E3_Right();
-
+*/
 		//chooser.addDefault("Baseline", new AutoBaseline());
 		//chooser.addObject("A1_Left", new A1_Left());
 		//chooser.addObject("A1_Right", new A1_Right());
@@ -127,7 +140,6 @@ public class Robot extends TimedRobot {
 	
 	@Override
 	public void disabledInit() {
-		SmartDashboard.putBoolean("Disabled Check", isDisabled());
 		
 		
 		
@@ -151,83 +163,32 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		boolean autoCheck;
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-
-
-
-		if(SmartDashboard.getBoolean("A1", false) == true){
+		String position = (String) chooser.getSelected();
+		if(position == "Baseline"){
+			m_autonomousCommand = autoBaseline;
+		}
+		else if(position == "A1"){
 			if(gameData.charAt(0) == 'L'){
-
-
-
-			}
-		}
-		/*
-		SmartDashboard.putBoolean("Teleop Check", isOperatorControl());
-		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-
-		//NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
-		//NetworkTableEntry scalePosition = autoTable.getEntry("scalePosition");
-		if (gameData.charAt(0) == 'L') {
-			SmartDashboard.putBoolean("switchPosition", false);
-			//switchPosition.setBoolean(false); // False is left, true is right
-		} else {
-			SmartDashboard.putBoolean("switchPosition", true);
-			//switchPosition.setBoolean(true); // False is left, true is right
-
-		}
-		if (gameData.charAt(1) == 'L') {
-			SmartDashboard.putBoolean("scalePosition", false);
-			//scalePosition.setBoolean(false); // False is left, true is right
-		} else {
-			SmartDashboard.putBoolean("scalePosition", true);
-			//scalePosition.setBoolean(true); // False is left, true is right
-		}
-
-		if(SmartDashboard.getString("Robot Position", "Baseline") == "A1"){
-			if(SmartDashboard.getBoolean("switchPosition", false)){
-				m_autonomousCommand = a1_right;
-			}
-			else{
 				m_autonomousCommand = a1_left;
 			}
-		}
-
-		else if(SmartDashboard.getString("Robot Position", "Baseline") == "A2"){
-			if(SmartDashboard.getBoolean("switchPosition", false)){
-				m_autonomousCommand = a2_right;
+			else if(gameData.charAt(0) == 'R'){
+				m_autonomousCommand = a1_right;
 			}
-			else{
-				m_autonomousCommand = a2_left;
-			}
-
+			
 		}
-
-		else if(SmartDashboard.getString("Robot Position", "Baseline") == "A3"){
-			if(SmartDashboard.getBoolean("switchPosition", false)){
+		else if(position == "A3"){
+			if(gameData.charAt(0) == 'L'){
+				m_autonomousCommand = a3_left;
+			}
+			else if(gameData.charAt(0) == 'R'){
 				m_autonomousCommand = a3_right;
 			}
-			else{
-				m_autonomousCommand = a3_left;
-
-			}
 		}
-
 		else{
 			m_autonomousCommand = autoBaseline;
-		}*/
-		m_autonomousCommand = autoBaseline;
-		
-		
-		
-		
-		
-		//
-		
-	
-		// schedule the autonomous command (example)
+		}
+
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}
@@ -238,14 +199,14 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		SmartDashboard.putString("Robot Mode", "Auto Periodic");
+		//SmartDashboard.putString("Robot Mode", "Auto Periodic");
 		Scheduler.getInstance().run();
 	}
 
 	@Override
 	public void teleopInit() {
-		SmartDashboard.putBoolean("Teleop Check", isOperatorControl());
-		SmartDashboard.putString("Robot Mode", "Teleop Init");
+		//SmartDashboard.putBoolean("Teleop Check", isOperatorControl());
+		//SmartDashboard.putString("Robot Mode", "Teleop Init");
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

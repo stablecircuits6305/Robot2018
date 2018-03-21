@@ -23,7 +23,7 @@ import org.usfirst.frc.team6305.robot.commands.DrivePID;
 //import org.usfirst.frc.team6305.robot.commands.pickUp;
 //import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
 import org.usfirst.frc.team6305.robot.elevator.moveElevator;
-import org.usfirst.frc.team6305.robot.emergency.driveEmergency;
+//import org.usfirst.frc.team6305.robot.emergency.driveEmergency;
 //import org.usfirst.frc.team6305.robot.intake.holdIntake;
 //import org.usfirst.frc.team6305.robot.commands.pickUp;
 //import org.usfirst.frc.team6305.robot.commands.scaleOutput;
