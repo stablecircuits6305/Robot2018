@@ -92,11 +92,6 @@ public class OI {
 	static {
 		//OI.rightButton1.whenPressed(new clawOpen());
 		//OI.leftButton1.whenPressed(new clawClose());
-		OI.leftButton1.whenPressed(new posUpdate(1));
-		OI.leftButton2.whenPressed(new posUpdate(2));
-		OI.leftButton3.whenPressed(new posUpdate(3));
-		OI.leftButton4.whenPressed(new autoCheck(true));
-		OI.leftButton5.whenPressed(new autoCheck(false));
 		
 		//OI.rightButton1.whenPressed(new driveEmergency(0.5, 100));
 		OI.rightButton1.whenPressed(new DrivePID(120));

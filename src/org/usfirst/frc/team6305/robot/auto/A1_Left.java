@@ -7,6 +7,8 @@ import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 //import org.usfirst.frc.team6305.robot.commands.outTake;
 import org.usfirst.frc.team6305.robot.commands.resetGyro;
+import org.usfirst.frc.team6305.robot.elevator.timedElevator;
+import org.usfirst.frc.team6305.robot.intake.timedOutput;
 import org.usfirst.frc.team6305.robot.output.switchOutput;
 import org.usfirst.frc.team6305.robot.auto.getOut;
 
@@ -36,30 +38,18 @@ public class A1_Left extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	//addSequential(new AutoBaseline());
-		addSequential(new getOut());
-    	addSequential(new resetGyro());
-    	addSequential(new DrivePID(84));
-    	addSequential(new GyroTest(0));
-    	addSequential(new GyroTest(-90));
-    	addSequential(new resetGyro());
-    	addSequential(new DrivePID(225));
-    	addSequential(new GyroTest(0));
-    	addSequential(new GyroTest(90));
-    	addSequential(new resetGyro());
-    	addSequential(new DrivePID(108));
-    	addSequential(new GyroTest(0));
-    	addSequential(new GyroTest(90));
-    	addSequential(new resetGyro());
-    	addSequential(new DrivePID(73.1));
-    	addSequential(new GyroTest(0));
-    	addParallel(new switchOutput());
-    	addSequential(new resetGyro());
-    	addSequential(new DrivePID(-73.1));
-    	addSequential(new GyroTest(0));
-    	addSequential(new GyroTest(-90));
-    	addSequential(new resetGyro());
-    	addSequential(new DrivePID(60));
-    	addSequential(new GyroTest(0));
+    	//A1 here is considered the left most side
+    	//This case is when FMS data reads the left side of the switch is favored for us
+    	
+		addParallel(new getOut());
+		addSequential(new DrivePID(165));
+		addSequential(new GyroTest(92));
+		addSequential(new resetGyro());
+		addSequential(new DrivePID(24));
+		addSequential(new timedOutput(0.5, 0.6));
+		addSequential(new DrivePID(-12));
+		addSequential(new timedElevator(0.6, -0.5));
+		
     	
     }
 }

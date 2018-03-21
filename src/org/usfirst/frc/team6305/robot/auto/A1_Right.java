@@ -7,6 +7,7 @@ import org.usfirst.frc.team6305.robot.commands.GyroTest;
 //import org.usfirst.frc.team6305.robot.commands.outTake;
 //import org.usfirst.frc.team6305.robot.commands.pickUp;
 import org.usfirst.frc.team6305.robot.commands.resetGyro;
+import org.usfirst.frc.team6305.robot.intake.timedOutput;
 import org.usfirst.frc.team6305.robot.output.switchOutput;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -33,27 +34,21 @@ public class A1_Right extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-		addSequential(new getOut());
+    	//A1 is considered the left most side
+    	//Case is for right side of the switch favoring us
+    	addParallel(new getOut());
     	addSequential(new resetGyro());
-    	addSequential(new DrivePID(192));
-    	addSequential(new GyroTest(0));
-    	addSequential(new GyroTest(-90));
+    	addSequential(new DrivePID(225));
+    	addSequential(new GyroTest(92));
     	addSequential(new resetGyro());
-    	addSequential(new DrivePID(73.1));
-    	addSequential(new GyroTest(0));
-    	addSequential(new switchOutput());
+    	addSequential(new DrivePID(225));
+    	addSequential(new GyroTest(92));
     	addSequential(new resetGyro());
-    	addSequential(new DrivePID(-73.1));
-    	addSequential(new GyroTest(0));
-    	addSequential(new GyroTest(90));
+    	addSequential(new DrivePID(50));
+    	addSequential(new GyroTest(92));
     	addSequential(new resetGyro());
-    	addSequential(new DrivePID(60));
-    	addSequential(new GyroTest(0));
-    	addSequential(new GyroTest(-90));
-    	addSequential(new resetGyro());
-    	addSequential(new DrivePID(102.75));
-    	addSequential(new GyroTest(0));
-    	addSequential(new GyroTest(-90));
-    	addSequential(new cubeAuto());
+    	addSequential(new DrivePID(8));
+    	addSequential(new timedOutput(0.5, 0.6));
+    	
     }
 }
