@@ -37,7 +37,7 @@ public class Arm extends Subsystem {
 	
 	public void stop () {
 //		arm.stopMotor();
-		arm.set(.15);
+		arm.set(.2);
 	}
 	
 	public Boolean getLimit () {

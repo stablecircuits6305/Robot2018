@@ -1,8 +1,8 @@
 package org.usfirst.team6305.robot.pid;
 
-import org.usfirst.frc.team6305.robot.Gyro;
 import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -10,19 +10,18 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DriveDifferencePID {
+public class ElevatorPID {
 	
-	public static DriveDifferencePID instance = new DriveDifferencePID();
-	DriveTrain driveTrain = DriveTrain.getInstance();
+	public static ElevatorPID instance = new ElevatorPID();
+	Elevator elevator = Elevator.getInstance();
 	PIDController pidController;
-	double additive;
-	double MAX_ADDITIVE = 0.05;
+	double speed;
 	
-	public DriveDifferencePID() {
+	public ElevatorPID() {
 		
 	}
 	
-	public void init() {
+	public void init(double targetDistance, double maxSpeed) {
     	PIDSource pidSource = new PIDSource() {
 			@Override
 			public void setPIDSourceType(PIDSourceType pidSource) {}
@@ -35,36 +34,32 @@ public class DriveDifferencePID {
 
 			@Override
 			public double pidGet() {
-//				double driveDifference = driveTrain.getLeftEncoderValue() - driveTrain.getRightEncoderValue();
-				double driveDifference = Gyro.getAngle();
-				return driveDifference;
+//				double leftVal = driveTrain.getLeftEncoderValue();
+				return 0;
 			}
     	};
     	
     	PIDOutput pidOutput = new PIDOutput() {
 			@Override
 			public void pidWrite(double output) {
-				additive = output;
+				speed = -output;
 			}
     	};
     	
-//    	final double kP = SmartDashboard.getNumber("Left P", RobotMap.defaultLeftP);
-//    	final double kI= SmartDashboard.getNumber("Left I", RobotMap.defaultLeftI);
-//    	final double kD= SmartDashboard.getNumber("Left D", RobotMap.defaultLeftD);
-    	final double kP = 0.1;
-    	final double kI = 0;
-    	final double kD = 0;
+    	final double kP = SmartDashboard.getNumber("Left P", RobotMap.defaultLeftP);
+    	final double kI= SmartDashboard.getNumber("Left I", RobotMap.defaultLeftI);
+    	final double kD= SmartDashboard.getNumber("Left D", RobotMap.defaultLeftD);
     	
     	pidController = new PIDController(kP, kI, kD, pidSource, pidOutput);
     	pidController.setAbsoluteTolerance(2);
-    	pidController.setSetpoint(0);
-    	pidController.setOutputRange(-MAX_ADDITIVE, MAX_ADDITIVE);
+    	pidController.setSetpoint(targetDistance);
+    	pidController.setOutputRange(-maxSpeed, maxSpeed);
     	pidController.enable();
     	System.out.println("Button is pressed");
 	}
 	
-	public double getAdditive () {
-		return -additive;
+	public double getSpeed () {
+		return speed;
 	}
 	
 	public boolean onTarget () {
@@ -76,7 +71,7 @@ public class DriveDifferencePID {
     	pidController.free();
 	}
 	
-	public static DriveDifferencePID getInstance() {
+	public static ElevatorPID getInstance() {
 		return instance;
 	}
 	

@@ -1,20 +1,23 @@
-package org.usfirst.frc.team6305.robot.commands.arm;
+package org.usfirst.frc.team6305.robot.commands.elevator;
 
-import org.usfirst.frc.team6305.robot.subsystems.Arm;
+import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  *
  */
-public class HoldArm extends Command {
+public class TimedElevator extends TimedCommand {
 
-	Arm arm = Arm.getInstance();
+	Elevator elevator = Elevator.getInstance();
+	double targetSpeed;
 	
-    public HoldArm() {
+    public TimedElevator(double timeout, double speed) {
+        super(timeout);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-		requires(arm);
+        requires(elevator);
+        targetSpeed = speed;
     }
 
     // Called just before this Command runs the first time
@@ -23,17 +26,12 @@ public class HoldArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	arm.stop();
+    	elevator.moveElevator(targetSpeed);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
-
-    // Called once after isFinished returns true
+    // Called once after timeout
     protected void end() {
-    	arm.stop();
+    	elevator.stop();
     }
 
     // Called when another command which requires one or more of the same

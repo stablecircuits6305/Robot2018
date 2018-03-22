@@ -8,13 +8,18 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.XboxController;
+import org.usfirst.frc.team6305.robot.auto.AutoLeft;
+import org.usfirst.frc.team6305.robot.auto.AutoRight;
 import org.usfirst.frc.team6305.robot.auto.ForwardDrive;
+import org.usfirst.frc.team6305.robot.auto.StartRelease;
+import org.usfirst.frc.team6305.robot.commands.ClawOutake;
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.arm.MoveArm;
 import org.usfirst.frc.team6305.robot.commands.claw.CloseClaw;
 import org.usfirst.frc.team6305.robot.commands.claw.OpenClaw;
 import org.usfirst.frc.team6305.robot.commands.elevator.MoveElevator;
+import org.usfirst.frc.team6305.robot.commands.elevator.TimedElevator;
 import org.usfirst.frc.team6305.robot.commands.intake.MoveIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -77,16 +82,17 @@ public class OI {
 //		OI.rightTrigger.whenPressed(new GyroTest(90));
 //		OI.rightButton3.whenPressed(new DrivePID(180));
 //		OI.rightButton4.whenPressed(new DrivePID(-180));
-		OI.leftTrigger.whenPressed(new OpenClaw());
+//		OI.leftTrigger.whenPressed();
 		OI.leftButton3.whileHeld(new MoveElevator(1));
 		OI.leftButton4.whileHeld(new MoveElevator(-.5));
-		OI.leftButton5.whileHeld(new MoveIntake(0.5));
-		OI.leftButton6.whileHeld(new MoveIntake(-0.5));
+		OI.leftButton5.whileHeld(new MoveIntake(1));
+		OI.leftButton6.whileHeld(new MoveIntake(-1));
 		
 //		OI.rightTrigger.whenPressed(new CloseClaw());
 		OI.rightButton3.whileHeld(new MoveArm(0.6));
 		OI.rightButton4.whileHeld(new MoveArm(-0.2));
 		
-		OI.rightTrigger.whenPressed(new ForwardDrive());
+		OI.rightTrigger.whenPressed(new AutoLeft());
+//		OI.rightTrigger.whenPressed(new GyroTest(90));
 	}
 }

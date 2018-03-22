@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class GyroTest extends Command {
 	
 	DriveTrain driveTrain = DriveTrain.getInstance();
-	GyroPID gyroPID = GyroPID.getInstance();
+	GyroPID gyroPID = new GyroPID();
 	double targetAngle;
-	final double MAXSPEED = 0.25;
+	final double MAXSPEED = 0.35;
 	
     public GyroTest(double angle) {
         // Use requires() here to declare subsystem dependencies

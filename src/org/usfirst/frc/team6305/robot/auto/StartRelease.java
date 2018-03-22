@@ -1,17 +1,16 @@
 package org.usfirst.frc.team6305.robot.auto;
 
-import org.usfirst.frc.team6305.robot.commands.DrivePID;
-import org.usfirst.frc.team6305.robot.commands.GyroTest;
-import org.usfirst.frc.team6305.robot.commands.ResetGyro;
+import org.usfirst.frc.team6305.robot.commands.arm.ArmTimed;
+import org.usfirst.frc.team6305.robot.commands.elevator.TimedElevator;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AutoRight extends CommandGroup {
+public class StartRelease extends CommandGroup {
 
-    public AutoRight() {
+    public StartRelease() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,10 +27,7 @@ public class AutoRight extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(140));
-    	addSequential(new GyroTest(-90));
-    	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(20));
+    	addParallel(new TimedElevator(1, 1));
+    	addSequential(new ArmTimed(2.5, 0.5));
     }
 }

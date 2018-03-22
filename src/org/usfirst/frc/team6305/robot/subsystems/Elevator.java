@@ -4,6 +4,7 @@ import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.commands.elevator.HoldElevator;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,7 +18,8 @@ public class Elevator extends Subsystem {
 	static Elevator instance = new Elevator();
 	Spark elevator = new Spark(RobotMap.elevator);
 	DigitalInput elevatorLimit = new DigitalInput(RobotMap.elevatorLimit);
-	final double HOLD_SPEED = 0.2;
+	final double HOLD_SPEED = 0.3;
+	Encoder enc = new Encoder(4, 5, false, Encoder.EncodingType.k4X);
 	
 	public Elevator () {
 		elevator.setInverted(true);
@@ -44,6 +46,14 @@ public class Elevator extends Subsystem {
 	
 	public Boolean getLimit () {
 		return elevatorLimit.get();
+	}
+	
+	public double getEnc () {
+		return enc.getDistance();
+	}
+	
+	public void resetEnc () {
+		enc.reset();
 	}
 	
 	public static Elevator getInstance() {
