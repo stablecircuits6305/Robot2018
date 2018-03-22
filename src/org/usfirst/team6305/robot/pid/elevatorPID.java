@@ -32,7 +32,8 @@ public class elevatorPID {
 
 			@Override
 			public double pidGet() {
-				double val = elevator.getElevatorEnc();
+				//double val = elevator.getElevatorEnc();
+				double val = 0.1;
 				// TODO Auto-generated method stub
 				return val;
 			}

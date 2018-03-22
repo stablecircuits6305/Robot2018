@@ -1,10 +1,13 @@
 package org.usfirst.frc.team6305.robot.output;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
-import org.usfirst.frc.team6305.robot.commands.outTake;
-import org.usfirst.frc.team6305.robot.elevator.elevatorSet;
+import org.usfirst.frc.team6305.robot.claw.clawOpen;
+//import org.usfirst.frc.team6305.robot.commands.outTake;
+import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
+//import org.usfirst.frc.team6305.robot.elevator.elevatorSet;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import org.usfirst.frc.team6305.robot.intake.timedOutput;
 
 /**
  *
@@ -28,8 +31,11 @@ public class switchOutput extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new elevatorSet(RobotMap.switchHeight));
-    	addSequential(new outTake());
+    	addSequential(new elevatorAuto(RobotMap.switchHeight));
+    	addParallel(new timedOutput(0.5, 0.5));
+    	addSequential(new clawOpen());
+    	addSequential(new elevatorAuto(-RobotMap.switchHeight));
+    	//addSequential(new outTake());
     	
     }
 }

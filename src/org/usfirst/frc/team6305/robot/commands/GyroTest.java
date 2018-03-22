@@ -31,7 +31,7 @@ public class GyroTest extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	driveTrain.drive(-gyroPID.getSpeed(), -gyroPID.getSpeed());
+    	driveTrain.drive(gyroPID.getSpeed(), -gyroPID.getSpeed());
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -35,7 +35,7 @@ public class RightDrivePID {
 			public double pidGet() {
 				double distance = driveTrain.getRightEncoderValue();
 //				System.out.println(distance);
-				return distance;
+				return (distance);
 			}
     	};
     	

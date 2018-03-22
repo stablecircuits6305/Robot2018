@@ -2,6 +2,7 @@ package org.usfirst.frc.team6305.robot.commands;
 
 
 import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
+import org.usfirst.team6305.robot.pid.DriveDifferencePID;
 import org.usfirst.team6305.robot.pid.LeftDrivePID;
 import org.usfirst.team6305.robot.pid.RightDrivePID;
 
@@ -16,6 +17,7 @@ public class DrivePID extends Command {
 	DriveTrain driveTrain = DriveTrain.getInstance();
 	LeftDrivePID leftDrivePID = LeftDrivePID.getInstance();
 	RightDrivePID rightDrivePID = RightDrivePID.getInstance();
+	DriveDifferencePID driveDifference = DriveDifferencePID.getInstance();
 	double targetDistance;
 	final double MAXSPEED = 0.5;
 	
@@ -31,16 +33,18 @@ public class DrivePID extends Command {
     	driveTrain.resetEncoders();
     	leftDrivePID.init(targetDistance, MAXSPEED);
     	rightDrivePID.init(targetDistance, MAXSPEED);
+    	driveDifference.init();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	driveTrain.drive(leftDrivePID.getSpeed(), rightDrivePID.getSpeed());
+    	double additive = driveDifference.getAdditive();
+    	driveTrain.drive(leftDrivePID.getSpeed() + additive, rightDrivePID.getSpeed() - additive);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return leftDrivePID.onTarget() && rightDrivePID.onTarget();
+        return leftDrivePID.onTarget() || rightDrivePID.onTarget();
     }
 
     // Called once after isFinished returns true

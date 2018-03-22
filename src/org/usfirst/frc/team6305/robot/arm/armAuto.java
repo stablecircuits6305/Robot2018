@@ -1,45 +1,48 @@
-package org.usfirst.frc.team6305.robot.commands;
+package org.usfirst.frc.team6305.robot.arm;
 
-import org.usfirst.frc.team6305.robot.subsystems.Claw;
-import org.usfirst.frc.team6305.robot.subsystems.intake;
+import org.usfirst.frc.team6305.robot.subsystems.Arm;
+import org.usfirst.team6305.robot.pid.armPID;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class outTake extends Command {
-	Claw claw;
-	intake inTake;
+public class armAuto extends Command {
+	
+	Arm arm = Arm.getInstance();
+	armPID pid = armPID.getInstance();
+	double targetDistance;
+	final double MAXSPEED = 0.5;
 
-    public outTake() {
-    	claw = Claw.getInstance();
-    	inTake = intake.getInstance();
-    	requires(claw);
-    	requires(inTake);
-    	// Use requires() here to declare subsystem dependencies
+    public armAuto(double dist) {
+    	requires(arm);
+    	targetDistance = dist;
+        // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	//arm.resetEncoders();
+    	pid.init(targetDistance, MAXSPEED);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	claw.open();
+    	arm.move(pid.getSpeed());
     	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return pid.onTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	
+    	arm.stop();
+    	pid.end();
     }
 
     // Called when another command which requires one or more of the same

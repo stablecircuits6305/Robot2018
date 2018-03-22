@@ -1,18 +1,22 @@
 package org.usfirst.frc.team6305.robot.elevator;
 
+import org.usfirst.frc.team6305.robot.subsystems.Arm;
 import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.TimedCommand;
 
 /**
  *
  */
-public class topElevator extends Command {
-	Elevator elevator = Elevator.getInstance();
+public class timedElevator extends TimedCommand {
+	
 	double targetSpeed;
+	Elevator elevator = Elevator.getInstance();
 
-    public topElevator(double speed) {
-    	targetSpeed = speed;
+    public timedElevator(double timeout, double speed) {
+        super(timeout);
+        requires(elevator);
+        targetSpeed = speed;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -26,17 +30,14 @@ public class topElevator extends Command {
     	elevator.move(targetSpeed);
     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return !elevator.limitElevator.get();
-    }
-
-    // Called once after isFinished returns true
+    // Called once after timeout
     protected void end() {
+    	elevator.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }
