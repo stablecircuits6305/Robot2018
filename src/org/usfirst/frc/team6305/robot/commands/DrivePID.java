@@ -25,7 +25,7 @@ public class DrivePID extends Command {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(driveTrain);
-    	targetDistance = -dist;
+    	targetDistance = dist;
     }
 
     // Called just before this Command runs the first time
@@ -44,7 +44,7 @@ public class DrivePID extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return leftDrivePID.onTarget() && rightDrivePID.onTarget();
+        return leftDrivePID.onTarget() || rightDrivePID.onTarget();
     }
 
     // Called once after isFinished returns true

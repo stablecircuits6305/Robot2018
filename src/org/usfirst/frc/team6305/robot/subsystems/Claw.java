@@ -14,7 +14,7 @@ public class Claw extends Subsystem {
 	
 	
 	DoubleSolenoid claw = new DoubleSolenoid(RobotMap.clawSolenoid1, RobotMap.clawSolenoid2);
-	Compressor c= new Compressor(RobotMap.compresser);
+	Compressor c= new Compressor(RobotMap.compressor);
 	
     
     

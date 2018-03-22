@@ -16,8 +16,8 @@ import org.usfirst.frc.team6305.robot.auto.A1_Left;
 
 
 import org.usfirst.frc.team6305.robot.auto.A1_Right;
-import org.usfirst.frc.team6305.robot.auto.A2_Left;
-import org.usfirst.frc.team6305.robot.auto.A2_Right;
+//import org.usfirst.frc.team6305.robot.auto.A2_Left;
+//import org.usfirst.frc.team6305.robot.auto.A2_Right;
 import org.usfirst.frc.team6305.robot.auto.A3_Left;
 import org.usfirst.frc.team6305.robot.auto.A3_Right;
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
@@ -51,17 +51,9 @@ public class Robot extends TimedRobot {
 	Command autoBaseline;
 	Command autoDrive;
 	Command a1_left;
-	Command a2_left;
 	Command a3_left;
 	Command a1_right;
-	Command a2_right;
 	Command a3_right;
-	Command e1_left;
-	Command e1_right;
-	Command e2_left;
-	Command e2_right;
-	Command e3_left;
-	Command e3_right;
 	Compressor c;
 
 
@@ -94,8 +86,6 @@ public class Robot extends TimedRobot {
 		
 		a1_left = new A1_Left();
 		a1_right = new A1_Right();
-		a2_left = new A2_Left();
-		a2_right = new A2_Right();
 		a3_left = new A3_Left();
 		a3_right = new A3_Right();
 		

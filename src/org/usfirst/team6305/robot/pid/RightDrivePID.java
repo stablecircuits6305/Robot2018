@@ -42,7 +42,7 @@ public class RightDrivePID {
     	PIDOutput pidOutput = new PIDOutput() {
 			@Override
 			public void pidWrite(double output) {
-				speed = output;
+				speed = -output;
 			}
     	};
     	

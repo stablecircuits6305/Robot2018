@@ -13,14 +13,16 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Elevator extends Subsystem {
 	public DigitalInput limitElevator = new DigitalInput(RobotMap.elevatorLimit);
-	public DigitalInput bottomLimit = new DigitalInput(RobotMap.bottomLimit);
+	//public DigitalInput bottomLimit = new DigitalInput(RobotMap.bottomLimit);
 	
 	
 	
 	Spark elevator = new Spark(RobotMap.elevator);
+	/*
 	int firstNum;
 	int secondNum;
 	Encoder elevatorEnc = new Encoder(firstNum,secondNum, false, Encoder.EncodingType.k4X);
+	*/
 	public static Elevator instance = new Elevator();
 
     // Put methods for controlling this subsystem
