@@ -9,13 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class output extends Command {
-    double targetSpeed;
 	
 	intake inTake;
 	
-    public output(double speed) {
+    public output() {
     	inTake = intake.getInstance();
-    	targetSpeed = speed;
     	
     	
     	requires(inTake);
@@ -32,7 +30,7 @@ public class output extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	inTake.suckOut(targetSpeed);
+    	inTake.suckOut(.6);
     	
     	
     }

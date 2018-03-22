@@ -1,6 +1,6 @@
-package org.usfirst.frc.team6305.robot.elevator;
+package org.usfirst.frc.team6305.robot.auto;
 
-import org.usfirst.frc.team6305.robot.subsystems.Elevator;
+import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,14 +8,15 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class elevatorAuto extends Command {
-	
-	Elevator elevator = Elevator.getInstance();
+public class driveAuto extends Command {
+	DriveTrain drive = DriveTrain.getInstance();
 	Timer timer = new Timer();
-	double targetSpeed, time;
+	double targetSpeed;
+	double time;
 
-    public elevatorAuto(double speed, double wantedTime) {
-    	requires(elevator);
+    public driveAuto(double speed, double wantedTime) {
+    	
+    	requires(drive);
     	targetSpeed = speed;
     	time = wantedTime;
         // Use requires() here to declare subsystem dependencies
@@ -31,11 +32,13 @@ public class elevatorAuto extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if(timer.get() < time) {
-    		elevator.move(targetSpeed);
+    		drive.drive(targetSpeed, -targetSpeed);
+    		
     	}
     	if(timer.get() >= time) {
-    		elevator.move(targetSpeed);
+    		drive.drive(0, 0);
     	}
+    
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -45,6 +48,8 @@ public class elevatorAuto extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	timer.stop();
+    	timer.reset();
     }
 
     // Called when another command which requires one or more of the same

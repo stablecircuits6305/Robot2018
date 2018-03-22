@@ -1,17 +1,18 @@
-package org.usfirst.frc.team6305.robot.output;
+package org.usfirst.frc.team6305.robot.auto;
 
-import org.usfirst.frc.team6305.robot.RobotMap;
+import org.usfirst.frc.team6305.robot.arm.topArm;
+import org.usfirst.frc.team6305.robot.commands.DrivePID;
+import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.outTake;
-import org.usfirst.frc.team6305.robot.elevator.elevatorSet;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class switchOutput extends CommandGroup {
+public class A2_Right extends CommandGroup {
 
-    public switchOutput() {
+    public A2_Right() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,8 +29,17 @@ public class switchOutput extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new elevatorSet(RobotMap.switchHeight));
+    	addSequential(new DrivePID(84));
+    	addSequential(new GyroTest(90));
+    	addSequential(new DrivePID(55.8));
+    	addSequential(new GyroTest(-90));
+    	addSequential(new DrivePID(108));
+    	addSequential(new GyroTest(-90));
+    	addParallel(new topArm(0.5));
     	addSequential(new outTake());
+    	addSequential(new DrivePID(-73.1));
+    	addSequential(new GyroTest(90));
+    	addSequential(new DrivePID(60));
     	
     }
 }

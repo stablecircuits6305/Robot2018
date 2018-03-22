@@ -14,7 +14,7 @@ public class Claw extends Subsystem {
 	
 	
 	DoubleSolenoid claw = new DoubleSolenoid(RobotMap.clawSolenoid1, RobotMap.clawSolenoid2);
-	Compressor c= new Compressor(RobotMap.compressor);
+	Compressor c= new Compressor(RobotMap.compresser);
 	
     
     
@@ -24,12 +24,12 @@ public class Claw extends Subsystem {
    
 	public void open(){
 		c.setClosedLoopControl(true);
-		claw.set(DoubleSolenoid.Value.kForward);
+		claw.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 	public void close(){
 		c.setClosedLoopControl(true);
-		claw.set(DoubleSolenoid.Value.kReverse);
+		claw.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public void stop(){

@@ -23,14 +23,14 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;	
-	public static int frontLeftDrive = 0;
-	public static int backLeftDrive = 1;
-	public static int frontRightDrive = 3;
-	public static int backRightDrive = 4;
+	public static int frontLeftDrive = 1;
+	public static int backLeftDrive = 0;
+	public static int frontRightDrive = 4;
+	public static int backRightDrive = 3;
 	public static int elevator = 7;
 	public static int leftWheels = 5;
 	public static int rightWheels = 6;
-	public static int compressor = 0;
+	public static int compresser = 0;
 	
 	//public static int lRamp = 8;
 	//public static int rRamp = 9;
@@ -46,10 +46,10 @@ public class RobotMap {
 	public static double defaultRightP = 0.25;
 	public static double defaultRightI = 0;
 	public static double defaultRightD = 0;
-
-	public static double defaultElevatorP;
-	public static double defaultElevatorI;
-	public static double defaultElevatorD;
+	
+	public static double defaultElevatorP = 0.25;
+	public static double defaultElevatorI = 0;
+	public static double defaultElevatorD = 0;
 	
 	public static double defaultGyroP = 0.1;
 	public static double defaultGyroI = 0;
@@ -65,5 +65,4 @@ public class RobotMap {
 	public static double scaleHeightTall;
 	public static double switchHeight = 9;
 	public static double vaultHeight;
-	public static int bottomLimit = 5;
 	}

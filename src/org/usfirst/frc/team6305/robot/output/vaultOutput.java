@@ -1,13 +1,10 @@
 package org.usfirst.frc.team6305.robot.output;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
-import org.usfirst.frc.team6305.robot.claw.clawOpen;
-//import org.usfirst.frc.team6305.robot.commands.outTake;
-//import org.usfirst.frc.team6305.robot.elevator.elevatorSet;
-import org.usfirst.frc.team6305.robot.elevator.elevatorAuto;
+import org.usfirst.frc.team6305.robot.commands.outTake;
+import org.usfirst.frc.team6305.robot.elevator.elevatorSet;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import org.usfirst.frc.team6305.robot.intake.timedOutput;
 
 /**
  *
@@ -32,9 +29,7 @@ public class vaultOutput extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	addSequential(new elevatorAuto(RobotMap.vaultHeight));
-    	addParallel(new timedOutput(0.5, 0.5));
-    	addSequential(new clawOpen());
-    	
+    	addSequential(new elevatorSet(RobotMap.vaultHeight));
+    	addSequential(new outTake());
     }
 }

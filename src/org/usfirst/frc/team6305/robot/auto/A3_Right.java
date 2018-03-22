@@ -1,14 +1,9 @@
 package org.usfirst.frc.team6305.robot.auto;
 
-//import org.usfirst.frc.team6305.robot.arm.topArm;
-
+import org.usfirst.frc.team6305.robot.arm.topArm;
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
-//import org.usfirst.frc.team6305.robot.commands.outTake;
-import org.usfirst.frc.team6305.robot.commands.resetGyro;
-import org.usfirst.frc.team6305.robot.elevator.timedElevator;
-import org.usfirst.frc.team6305.robot.intake.timedOutput;
-import org.usfirst.frc.team6305.robot.output.switchOutput;
+import org.usfirst.frc.team6305.robot.commands.outTake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -34,15 +29,19 @@ public class A3_Right extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addParallel(new getOut());
-		addSequential(new DrivePID(165));
-		addSequential(new GyroTest(-92));
-		addSequential(new resetGyro());
-		addSequential(new DrivePID(24));
-		addSequential(new timedOutput(0.5, 0.6));
-		addSequential(new DrivePID(-12));
-		addSequential(new timedElevator(0.6, -0.5));
-		
+    	
+    	addSequential(new DrivePID(84));
+    	addSequential(new GyroTest(90));
+    	addSequential(new DrivePID(225));
+    	addSequential(new GyroTest(-90));
+    	addSequential(new DrivePID(108));
+    	addSequential(new GyroTest(-90));
+    	addSequential(new DrivePID(73.1));
+    	addParallel(new topArm(0.5));
+    	addSequential(new outTake());
+    	addSequential(new DrivePID(-73.1));
+    	addSequential(new GyroTest(90));
+    	addSequential(new DrivePID(60));
     }
     
 }

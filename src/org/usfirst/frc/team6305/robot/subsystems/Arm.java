@@ -36,7 +36,6 @@ public class Arm extends Subsystem {
 		armEnc.reset();
 		armEnc.reset();
 	}
-	
 	*/
 	public Arm(){
 		
@@ -69,7 +68,6 @@ public class Arm extends Subsystem {
 		return val;
 	}
 	*/
-	
 	
 	public static Arm getInstance(){
 		return instance;

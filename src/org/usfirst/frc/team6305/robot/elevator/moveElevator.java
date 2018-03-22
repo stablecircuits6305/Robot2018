@@ -27,17 +27,16 @@ public class moveElevator extends Command {
     	
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    // Called repeatedly when this Command is scheduled to run/
     protected void execute() {
     	elevator.move(targetSpeed);
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	timer.reset();
     	timer.start();
-        return elevator.limitElevator.get();
+        return !elevator.limitElevator.get();
         
         
     }

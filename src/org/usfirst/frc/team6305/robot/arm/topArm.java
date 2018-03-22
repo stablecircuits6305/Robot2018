@@ -2,20 +2,18 @@ package org.usfirst.frc.team6305.robot.arm;
 
 import org.usfirst.frc.team6305.robot.subsystems.Arm;
 
-import edu.wpi.first.wpilibj.command.TimedCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class timedArm extends TimedCommand {
-	
-	double targetSpeed;
+public class topArm extends Command {
 	Arm arm = Arm.getInstance();
+	double targetSpeed;
 
-    public timedArm(double timeout, double speed) {
-        super(timeout);
-        requires(arm);
-        targetSpeed = speed;
+    public topArm(double speed) {
+    	requires(arm);
+    	targetSpeed = speed;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -29,14 +27,18 @@ public class timedArm extends TimedCommand {
     	arm.move(targetSpeed);
     }
 
-    // Called once after timeout
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+    	return !arm.limitArm.get();
+    }
+
+    // Called once after isFinished returns true
     protected void end() {
-    	arm.stop();
+    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

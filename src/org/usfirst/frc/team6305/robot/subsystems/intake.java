@@ -1,8 +1,7 @@
 package org.usfirst.frc.team6305.robot.subsystems;
 
 import org.usfirst.frc.team6305.robot.RobotMap;
-
-//import org.usfirst.frc.team6305.robot.intake.holdIntake;
+import org.usfirst.frc.team6305.robot.intake.holdIntake;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.command.Subsystem;

@@ -1,5 +1,6 @@
 package org.usfirst.team6305.robot.pid;
 
+import org.usfirst.frc.team6305.robot.GyroArm;
 import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.subsystems.Arm;
 
@@ -13,7 +14,6 @@ public class armPID {
 	
 	public static armPID instance = new armPID();
 	PIDController pidController;
-	//Arm arm = Arm.getInstance();
 	double speed;
 	
 	Arm arm = Arm.getInstance();
@@ -39,10 +39,9 @@ public class armPID {
 
 			@Override
 			public double pidGet() {
-				//double val = arm.getArmEnc();
-				double val= 0.1;
+				double gyroVal = GyroArm.getAngle();
 				// TODO Auto-generated method stub
-				return val;
+				return gyroVal;
 			}
 		
 	};
