@@ -83,16 +83,25 @@ public class OI {
 //		OI.rightButton3.whenPressed(new DrivePID(180));
 //		OI.rightButton4.whenPressed(new DrivePID(-180));
 //		OI.leftTrigger.whenPressed();
-		OI.leftButton3.whileHeld(new MoveElevator(1));
-		OI.leftButton4.whileHeld(new MoveElevator(-.5));
-		OI.leftButton5.whileHeld(new MoveIntake(1));
-		OI.leftButton6.whileHeld(new MoveIntake(-1));
+//		OI.leftButton3.whileHeld(new MoveElevator(1));
+//		OI.leftButton4.whileHeld(new MoveElevator(-.5));
+//		OI.leftButton5.whileHeld(new MoveIntake(1));
+//		OI.leftButton6.whileHeld(new MoveIntake(-1));
 		
 //		OI.rightTrigger.whenPressed(new CloseClaw());
-		OI.rightButton3.whileHeld(new MoveArm(0.6));
-		OI.rightButton4.whileHeld(new MoveArm(-0.2));
+//		OI.rightButton3.whileHeld(new MoveArm(0.6));
+//		OI.rightButton4.whileHeld(new MoveArm(-0.2));
 		
-		OI.rightTrigger.whenPressed(new AutoLeft());
+//		OI.rightTrigger.whenPressed(new AutoLeft());
 //		OI.rightTrigger.whenPressed(new GyroTest(90));
+		
+		OI.xbox.rt.whileHeld(new MoveElevator(1));
+		OI.xbox.lt.whileHeld(new MoveElevator(-0.8));
+		OI.xbox.rb.whileHeld(new MoveArm(0.5));
+		OI.xbox.lb.whileHeld(new MoveArm(-0.35));
+		OI.xbox.y.whileHeld(new MoveIntake(1));
+		OI.xbox.a.whileHeld(new OpenClaw());
+		OI.xbox.x.whileHeld(new MoveIntake(-0.6));
+		OI.xbox.b.whenPressed(new CloseClaw());
 	}
 }

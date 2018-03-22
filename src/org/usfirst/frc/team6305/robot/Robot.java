@@ -9,7 +9,11 @@ package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
 import org.usfirst.frc.team6305.robot.auto.AutoLeft;
+import org.usfirst.frc.team6305.robot.auto.AutoLeft_Left;
+import org.usfirst.frc.team6305.robot.auto.AutoLeft_Right;
 import org.usfirst.frc.team6305.robot.auto.AutoRight;
+import org.usfirst.frc.team6305.robot.auto.AutoRight_Left;
+import org.usfirst.frc.team6305.robot.auto.AutoRight_Right;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
 import org.usfirst.frc.team6305.robot.subsystems.Arm;
 import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
@@ -35,9 +39,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	public static OI m_oi;
-
-	Command teleopDrive, m_autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	Command teleopDrive;
+	Command autoCommand = null;
+	SendableChooser<Integer> chooser = new SendableChooser<Integer>();
 	NetworkTable autoTable;
 	DriveTrain driveTrain;
 	Compressor c;
@@ -51,9 +55,10 @@ public class Robot extends TimedRobot {
 		Gyro.calibrate();
 		Gyro.reset();
 		m_oi = new OI();
-		chooser.addDefault("Baseline", new AutoBaseline());
-		chooser.addObject("Left Side", new AutoLeft());
-		chooser.addObject("Right Side", new AutoRight());
+//		chooser.addDefault("Baseline", new AutoBaseline());
+		chooser.addDefault("Baseline", 0); // Baseline
+		chooser.addObject("Left Side", 1); // Left Side
+		chooser.addObject("Right Side", 2); // Right Side
 		SmartDashboard.putData("Auto mode", chooser);
 		teleopDrive = new TankDrive();
 
@@ -93,10 +98,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		String gameData;
-		gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if(gameData.charAt(0) == 'L') {}
-			
+		c.setClosedLoopControl(true);
+		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
 		NetworkTableEntry scalePosition = autoTable.getEntry("scalePosition");
 		if (gameData.charAt(0) == 'L') {
@@ -109,16 +112,27 @@ public class Robot extends TimedRobot {
 		} else {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
-		
-		m_autonomousCommand = chooser.getSelected();
-
-		// TODO: add code here to choose the proper auto
+		int auto = (int) chooser.getSelected();
+		if (auto == 0) {
+			autoCommand = new AutoBaseline();
+		} else if (auto == 1) {
+			if (switchPosition.getBoolean(false)) {
+				autoCommand = new AutoLeft_Right();
+			} else {
+				autoCommand = new AutoLeft_Left();
+			}
+		} else if (auto == 2) {
+			if (switchPosition.getBoolean(true)) {
+				autoCommand = new AutoRight_Right();
+			} else {
+				autoCommand = new AutoRight_Left();
+			}
+		}
 
 		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
+		if (autoCommand != null) {
+			autoCommand.start();
 		}
-		c.setClosedLoopControl(true);
 	}
 
 	/**
@@ -135,11 +149,11 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
+		c.setClosedLoopControl(true);
+		if (autoCommand != null) {
+			autoCommand.cancel();
 		}
 		teleopDrive.start();
-		c.setClosedLoopControl(true);
 	}
 
 	/**
