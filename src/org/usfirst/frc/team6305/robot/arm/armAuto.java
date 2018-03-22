@@ -14,7 +14,6 @@ public class armAuto extends Command {
 	armPID pid = armPID.getInstance();
 	double targetDistance;
 	final double MAXSPEED = 0.5;
-	
 
     public armAuto(double dist) {
     	requires(arm);
