@@ -99,9 +99,9 @@ public class OI {
 		OI.xbox.lt.whileHeld(new MoveElevator(-0.8));
 		OI.xbox.rb.whileHeld(new MoveArm(0.5));
 		OI.xbox.lb.whileHeld(new MoveArm(-0.35));
-		OI.xbox.y.whileHeld(new MoveIntake(1));
+		OI.xbox.y.whileHeld(new MoveIntake(0.4));
 		OI.xbox.a.whileHeld(new OpenClaw());
-		OI.xbox.x.whileHeld(new MoveIntake(-0.6));
+		OI.xbox.x.whileHeld(new MoveIntake(-0.55));
 		OI.xbox.b.whenPressed(new CloseClaw());
 	}
 }
