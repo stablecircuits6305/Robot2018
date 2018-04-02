@@ -1,18 +1,19 @@
 package org.usfirst.frc.team6305.robot.auto;
 
-import org.usfirst.frc.team6305.robot.Gyro;
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.ResetGyro;
+import org.usfirst.frc.team6305.robot.commands.intake.MoveIntake;
+import org.usfirst.frc.team6305.robot.commands.intake.TimedIntake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class ForwardDrive extends CommandGroup {
+public class AutoCenter_Left extends CommandGroup {
 
-    public ForwardDrive() {
+    public AutoCenter_Left() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -30,7 +31,17 @@ public class ForwardDrive extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(120));
-//    	addSequential(new GyroTest(0));
+    	addSequential(new GyroTest(-33));
+    	addSequential(new ResetGyro());
+    	addParallel(new StartRelease());
+    	addSequential(new DrivePID(150));
+    	addSequential(new ResetGyro());
+    	addSequential(new GyroTest(33));
+    	addSequential(new ResetGyro());
+    	addSequential(new GyroTest(90));
+    	addSequential(new ResetGyro());
+    	addSequential(new TimedIntake(0.5, 0.4));
+    	
+    	
     }
 }

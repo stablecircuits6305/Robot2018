@@ -1,54 +1,42 @@
-package org.usfirst.frc.team6305.robot.commands;
+package org.usfirst.frc.team6305.robot.commands.arm;
 
-import org.usfirst.frc.team6305.robot.Gyro;
-
-import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
-import org.usfirst.team6305.robot.pid.GyroPID;
+import org.usfirst.frc.team6305.robot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class GyroTest extends Command {
+public class returnLimit extends Command {
 	
-	DriveTrain driveTrain = DriveTrain.getInstance();
-	GyroPID gyroPID = new GyroPID();
-	double targetAngle;
-	final double MAXSPEED = 0.35;
-	
-    public GyroTest(double angle) {
+	Arm arm = Arm.getInstance();
+
+    public returnLimit() {
+    	requires(arm);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(driveTrain);
-    	targetAngle = angle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Gyro.reset();
-    	gyroPID.init(targetAngle, MAXSPEED);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	driveTrain.drive(gyroPID.getSpeed(), -gyroPID.getSpeed());
+    	System.out.println("Arm limit: " + arm.getLimit());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return gyroPID.onTarget();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	gyroPID.end();
-    	driveTrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

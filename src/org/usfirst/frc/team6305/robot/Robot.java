@@ -8,20 +8,21 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
-import org.usfirst.frc.team6305.robot.auto.AutoLeft;
+
 import org.usfirst.frc.team6305.robot.auto.AutoLeft_Left;
 import org.usfirst.frc.team6305.robot.auto.AutoLeft_Right;
-import org.usfirst.frc.team6305.robot.auto.AutoRight;
 import org.usfirst.frc.team6305.robot.auto.AutoRight_Left;
 import org.usfirst.frc.team6305.robot.auto.AutoRight_Right;
+import org.usfirst.frc.team6305.robot.commands.CalibrateGyro;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
-import org.usfirst.frc.team6305.robot.subsystems.Arm;
+import org.usfirst.frc.team6305.robot.commands.arm.returnLimit;
 import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -40,11 +41,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 	public static OI m_oi;
 	Command teleopDrive;
-	Command autoCommand = null;
+	CameraServer camera = CameraServer.getInstance();
+	Command autoCommand;
 	SendableChooser<Integer> chooser = new SendableChooser<Integer>();
 	NetworkTable autoTable;
 	DriveTrain driveTrain;
-	Compressor c;
+//	Compressor c;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -52,22 +54,22 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
+		camera.startAutomaticCapture();
 		Gyro.calibrate();
 		Gyro.reset();
 		m_oi = new OI();
 //		chooser.addDefault("Baseline", new AutoBaseline());
 		chooser.addDefault("Baseline", 0); // Baseline
+		
 		chooser.addObject("Left Side", 1); // Left Side
 		chooser.addObject("Right Side", 2); // Right Side
-		SmartDashboard.putData("Auto mode", chooser);
+	    SmartDashboard.putData("Auto mode", chooser);
 		teleopDrive = new TankDrive();
-
+		autoCommand = null;
 		driveTrain = DriveTrain.getInstance();
-		
 		NetworkTableInstance inst = NetworkTableInstance.getDefault();
 		autoTable = inst.getTable("autoTable");
-		
-		c = new Compressor(0);
+//		c = new Compressor(0);
 	}
 
 	/**
@@ -77,7 +79,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		c.setClosedLoopControl(false);
+//		c.setClosedLoopControl(false);
 	}
 
 	@Override
@@ -98,7 +100,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		c.setClosedLoopControl(true);
+		//Gyro.calibrate();
+		
+//		c.setClosedLoopControl(true);
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
 		NetworkTableEntry scalePosition = autoTable.getEntry("scalePosition");
@@ -115,6 +119,7 @@ public class Robot extends TimedRobot {
 		int auto = (int) chooser.getSelected();
 		if (auto == 0) {
 			autoCommand = new AutoBaseline();
+			
 		} else if (auto == 1) {
 			if (switchPosition.getBoolean(false)) {
 				autoCommand = new AutoLeft_Right();
@@ -128,9 +133,16 @@ public class Robot extends TimedRobot {
 				autoCommand = new AutoRight_Left();
 			}
 		}
+		else {
+			autoCommand = new AutoBaseline();
+		}
+		
+		
 
 		// schedule the autonomous command (example)
 		if (autoCommand != null) {
+			
+			
 			autoCommand.start();
 		}
 	}
@@ -149,7 +161,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		c.setClosedLoopControl(true);
+//		c.setClosedLoopControl(true);
 		if (autoCommand != null) {
 			autoCommand.cancel();
 		}
@@ -171,6 +183,19 @@ public class Robot extends TimedRobot {
 	@Override
 	public void testPeriodic() {
 //		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
+		int choice = (int) chooser.getSelected();
+		if(choice == 0) {
+			System.out.println("Baseline");
+		}
+		else if(choice == 1) {
+			System.out.println("Left Side");
+		}
+		else if(choice == 2) {
+			System.out.println("Right Side");
+		}
+		Command armCheck = new returnLimit();
+		armCheck.start();
+		
 		SmartDashboard.putNumberArray("Drive Encoders", new Double[]{driveTrain.getLeftEncoderValue(), driveTrain.getRightEncoderValue()});
 		SmartDashboard.putNumber("Gyro rate", Gyro.getRate());
 		System.out.println(arm.getLimit());

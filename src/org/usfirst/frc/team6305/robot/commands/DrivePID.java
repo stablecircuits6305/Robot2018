@@ -1,17 +1,12 @@
 package org.usfirst.frc.team6305.robot.commands;
 
-import org.usfirst.frc.team6305.robot.RobotMap;
+
 import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
 import org.usfirst.team6305.robot.pid.DriveDifferencePID;
 import org.usfirst.team6305.robot.pid.LeftDrivePID;
 import org.usfirst.team6305.robot.pid.RightDrivePID;
 
-import edu.wpi.first.wpilibj.PIDController;
-import edu.wpi.first.wpilibj.PIDOutput;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -23,7 +18,7 @@ public class DrivePID extends Command {
 	RightDrivePID rightDrivePID = RightDrivePID.getInstance();
 	DriveDifferencePID driveDifferencePID = DriveDifferencePID.getInstance();
 	double targetDistance;
-	final double MAXSPEED = 0.5;
+	final double MAXSPEED = 0.6;
 	
     public DrivePID(double dist) {
         // Use requires() here to declare subsystem dependencies
@@ -43,7 +38,7 @@ public class DrivePID extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double additive = driveDifferencePID.getAdditive();
-    	System.out.println("Drive additive: " + additive);
+    	System.out.println("Drive speed: " + leftDrivePID.getSpeed());
     	driveTrain.drive(leftDrivePID.getSpeed() + additive, rightDrivePID.getSpeed() - additive);
     }
 

@@ -8,22 +8,16 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.XboxController;
-import org.usfirst.frc.team6305.robot.auto.AutoLeft;
-import org.usfirst.frc.team6305.robot.auto.AutoRight;
-import org.usfirst.frc.team6305.robot.auto.ForwardDrive;
+import org.usfirst.frc.team6305.robot.auto.AutoLeft_Left;
 import org.usfirst.frc.team6305.robot.auto.StartRelease;
-import org.usfirst.frc.team6305.robot.commands.ClawOutake;
-import org.usfirst.frc.team6305.robot.commands.DrivePID;
-import org.usfirst.frc.team6305.robot.commands.GyroTest;
+import org.usfirst.frc.team6305.robot.commands.ResetGyro;
 import org.usfirst.frc.team6305.robot.commands.arm.MoveArm;
 import org.usfirst.frc.team6305.robot.commands.claw.CloseClaw;
 import org.usfirst.frc.team6305.robot.commands.claw.OpenClaw;
 import org.usfirst.frc.team6305.robot.commands.elevator.MoveElevator;
-import org.usfirst.frc.team6305.robot.commands.elevator.TimedElevator;
 import org.usfirst.frc.team6305.robot.commands.intake.MoveIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**  
@@ -74,34 +68,30 @@ public class OI {
 	public static JoystickButton rightButton4 = new JoystickButton(rightJoystick, 4);
 	
 	
+	
 	public static XboxController xbox = new XboxController(2);
 	
 	static {
 		
-//		OI.leftTrigger.whenPressed(new GyroTest(-90));
-//		OI.rightTrigger.whenPressed(new GyroTest(90));
-//		OI.rightButton3.whenPressed(new DrivePID(180));
-//		OI.rightButton4.whenPressed(new DrivePID(-180));
-//		OI.leftTrigger.whenPressed();
-//		OI.leftButton3.whileHeld(new MoveElevator(1));
-//		OI.leftButton4.whileHeld(new MoveElevator(-.5));
-//		OI.leftButton5.whileHeld(new MoveIntake(1));
-//		OI.leftButton6.whileHeld(new MoveIntake(-1));
+		//Emergency base driver functions
+		OI.leftTrigger.whenPressed(new AutoLeft_Left());
 		
-//		OI.rightTrigger.whenPressed(new CloseClaw());
-//		OI.rightButton3.whileHeld(new MoveArm(0.6));
-//		OI.rightButton4.whileHeld(new MoveArm(-0.2));
+		OI.rightTrigger.whenPressed(new OpenClaw());
 		
-//		OI.rightTrigger.whenPressed(new AutoLeft());
-//		OI.rightTrigger.whenPressed(new GyroTest(90));
+		OI.leftButton3.whileHeld(new MoveIntake(0.8));
+		OI.rightButton3.whileHeld(new MoveIntake(-0.55));
+		
+	    //All xbox controls for co-driving 
 		
 		OI.xbox.rt.whileHeld(new MoveElevator(1));
-		OI.xbox.lt.whileHeld(new MoveElevator(-0.8));
-		OI.xbox.rb.whileHeld(new MoveArm(0.5));
-		OI.xbox.lb.whileHeld(new MoveArm(-0.35));
-		OI.xbox.y.whileHeld(new MoveIntake(0.4));
-		OI.xbox.a.whileHeld(new OpenClaw());
-		OI.xbox.x.whileHeld(new MoveIntake(-0.55));
+		OI.xbox.lt.whileHeld(new MoveElevator(-0.5));
+		OI.xbox.rb.whileHeld(new MoveArm(0.6));
+		OI.xbox.lb.whileHeld(new MoveArm(-0.35)); 
+		OI.xbox.x.whileHeld(new MoveIntake(0.55));
+		OI.xbox.a.whenPressed(new OpenClaw());
+		OI.xbox.y.whileHeld(new MoveIntake(-0.8));
 		OI.xbox.b.whenPressed(new CloseClaw());
+		OI.xbox.start.whenPressed(new ResetGyro());
+		OI.xbox.dPad.up.whenPressed(new StartRelease());
 	}
 }

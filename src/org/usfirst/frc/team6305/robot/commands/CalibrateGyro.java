@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 /**
  *
  */
-public class ResetGyro extends InstantCommand {
+public class CalibrateGyro extends InstantCommand {
 
-    public ResetGyro() {
+    public CalibrateGyro() {
         super();
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -17,8 +17,7 @@ public class ResetGyro extends InstantCommand {
 
     // Called once when the command executes
     protected void initialize() {
-    	
-    	Gyro.reset();
+    	Gyro.calibrate();
     }
 
 }

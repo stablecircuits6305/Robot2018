@@ -35,15 +35,15 @@ public class RobotMap {
 	public static int elevatorLimit = 6;
 	public static int armLimit = 7;
 	
-	public static double defaultLeftP = 0.25;
+	public static double defaultLeftP = 0.02;
 	public static double defaultLeftI = 0;
 	public static double defaultLeftD = 0;
 	
-	public static double defaultRightP = 0.25;
+	public static double defaultRightP = 0.02;
 	public static double defaultRightI = 0;
 	public static double defaultRightD = 0;
 	
-	public static double defaultGyroP = 0.1;
+	public static double defaultGyroP = 0.02;
 	public static double defaultGyroI = 0;
 	public static double defaultGyroD = 0;
 }

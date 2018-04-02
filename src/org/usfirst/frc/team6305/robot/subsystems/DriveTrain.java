@@ -1,6 +1,6 @@
 package org.usfirst.frc.team6305.robot.subsystems;
 
-import org.usfirst.frc.team6305.robot.OI;
+
 import org.usfirst.frc.team6305.robot.RobotMap;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
 

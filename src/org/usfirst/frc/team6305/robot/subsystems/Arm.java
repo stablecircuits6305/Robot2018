@@ -20,7 +20,7 @@ public class Arm extends Subsystem {
 	DigitalInput armLimit = new DigitalInput(RobotMap.armLimit);
 	
 	public Arm () {
-		arm.setInverted(true);
+		arm.setInverted(false);
 	}
 	
 	public void moveArm (double speed) {

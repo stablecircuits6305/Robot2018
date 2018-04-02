@@ -1,6 +1,7 @@
 package org.usfirst.frc.team6305.robot.auto;
 
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
+import org.usfirst.frc.team6305.robot.commands.ResetGyro;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -26,6 +27,8 @@ public class AutoBaseline extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new DrivePID(60));
+    	addParallel(new StartRelease());
+    	addSequential(new ResetGyro());
+    	addSequential(new DrivePID(120));
     }
 }
