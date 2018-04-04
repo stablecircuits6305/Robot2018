@@ -14,7 +14,7 @@ public class DriveDifferencePID {
 	DriveTrain driveTrain = DriveTrain.getInstance();
 	PIDController pidController;
 	double additive;
-	double MAX_ADDITIVE = 0.05;
+	double MAX_ADDITIVE = 0.5;
 	
 	public DriveDifferencePID() {
 		
@@ -49,7 +49,7 @@ public class DriveDifferencePID {
 //    	final double kP = SmartDashboard.getNumber("Left P", RobotMap.defaultLeftP);
 //    	final double kI= SmartDashboard.getNumber("Left I", RobotMap.defaultLeftI);
 //    	final double kD= SmartDashboard.getNumber("Left D", RobotMap.defaultLeftD);
-    	final double kP = 0.1;
+    	final double kP = .05;
     	final double kI = 0;
     	final double kD = 0;
     	

@@ -1,17 +1,16 @@
-package org.usfirst.frc.team6305.robot.auto;
+package org.usfirst.frc.team6305.robot.commands;
 
-import org.usfirst.frc.team6305.robot.commands.DrivePID;
-import org.usfirst.frc.team6305.robot.commands.FullDrive;
-import org.usfirst.frc.team6305.robot.commands.ResetGyro;
+import org.usfirst.frc.team6305.robot.commands.claw.CloseClaw;
+import org.usfirst.frc.team6305.robot.commands.intake.TimedIntake;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class AutoBaseline extends CommandGroup {
+public class PickUp extends CommandGroup {
 
-    public AutoBaseline() {
+    public PickUp() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -28,8 +27,9 @@ public class AutoBaseline extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addParallel(new StartRelease());
-    	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(120));
+    	addSequential(new CloseClaw());
+    	addSequential(new TimedIntake(0.5, -0.4));
+    	
+    	
     }
 }

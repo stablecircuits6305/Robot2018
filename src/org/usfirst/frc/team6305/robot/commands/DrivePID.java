@@ -18,7 +18,7 @@ public class DrivePID extends Command {
 	RightDrivePID rightDrivePID = RightDrivePID.getInstance();
 	DriveDifferencePID driveDifferencePID = DriveDifferencePID.getInstance();
 	double targetDistance;
-	final double MAXSPEED = 0.6;
+	final double MAXSPEED = .65;
 	
     public DrivePID(double dist) {
         // Use requires() here to declare subsystem dependencies
@@ -37,8 +37,10 @@ public class DrivePID extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double additive = driveDifferencePID.getAdditive();
-    	System.out.println("Drive speed: " + leftDrivePID.getSpeed());
+    	double multiplier = -(leftDrivePID.getSpeed() + rightDrivePID.getSpeed()) / 2;
+    	double additive = driveDifferencePID.getAdditive();// * multiplier;
+    	System.out.println(multiplier);
+//    	System.out.println("Drive speed: " + leftDrivePID.getSpeed());
     	driveTrain.drive(leftDrivePID.getSpeed() + additive, rightDrivePID.getSpeed() - additive);
     }
 

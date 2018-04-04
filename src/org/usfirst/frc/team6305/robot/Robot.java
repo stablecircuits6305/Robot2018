@@ -116,23 +116,45 @@ public class Robot extends TimedRobot {
 		} else {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
-		int auto = chooser.getSelected();
-		switch(auto){
-		default:
+		int auto = (int) chooser.getSelected();
+		if(auto == 0) {
 			autoCommand = new AutoBaseline();
-		case 1:
+		}
+		else if(auto == 1) {
 			if (switchPosition.getBoolean(false)) {
 				autoCommand = new AutoLeft_Right();
 			} else {
 				autoCommand = new AutoLeft_Left();
 			}
-		case 2:
+		}
+		else if(auto == 2) {
 			if (switchPosition.getBoolean(false)) {
 				autoCommand = new AutoRight_Right();
 			} else {
 				autoCommand = new AutoRight_Left();
 			}	
 		}
+		else {
+			autoCommand = new AutoBaseline();
+		}
+		
+//		
+//		switch(auto){
+//		default:
+//			autoCommand = new AutoBaseline();
+//		case 1:
+//			if (switchPosition.getBoolean(false)) {
+//				autoCommand = new AutoLeft_Right();
+//			} else {
+//				autoCommand = new AutoLeft_Left();
+//			}
+//		case 2:
+//			if (switchPosition.getBoolean(false)) {
+//				autoCommand = new AutoRight_Right();
+//			} else {
+//				autoCommand = new AutoRight_Left();
+//			}	
+//		}
 	
 				
 
@@ -181,6 +203,17 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 //		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
 		int choice = (int) chooser.getSelected();
+		
+		switch(choice) {
+		default:
+			System.out.println("Baseline");
+		case 1:
+			System.out.println("Left Side");
+		case 2:
+			System.out.println("Right Side");
+		}
+		
+		
 		if(choice == 0) {
 			System.out.println("Baseline");
 		}
