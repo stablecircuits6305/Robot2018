@@ -116,28 +116,25 @@ public class Robot extends TimedRobot {
 		} else {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
-		int auto = (int) chooser.getSelected();
-		if (auto == 0) {
+		int auto = chooser.getSelected();
+		switch(auto){
+		default:
 			autoCommand = new AutoBaseline();
-			
-		} else if (auto == 1) {
+		case 1:
 			if (switchPosition.getBoolean(false)) {
 				autoCommand = new AutoLeft_Right();
 			} else {
 				autoCommand = new AutoLeft_Left();
 			}
-		} else if (auto == 2) {
-			if (switchPosition.getBoolean(true)) {
+		case 2:
+			if (switchPosition.getBoolean(false)) {
 				autoCommand = new AutoRight_Right();
 			} else {
 				autoCommand = new AutoRight_Left();
-			}
+			}	
 		}
-		else {
-			autoCommand = new AutoBaseline();
-		}
-		
-		
+	
+				
 
 		// schedule the autonomous command (example)
 		if (autoCommand != null) {

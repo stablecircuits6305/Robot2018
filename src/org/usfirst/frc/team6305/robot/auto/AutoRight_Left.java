@@ -45,21 +45,36 @@ public class AutoRight_Left extends CommandGroup {
     	
     	
     	
-    	addParallel(new StartRelease());
+//    	addParallel(new StartRelease());
+//    	addSequential(new ResetGyro());
+//    	addSequential(new DrivePID(221));
+//    	addSequential(new ResetGyro());
+//    	addSequential(new GyroTest(-92));
+//    	addSequential(new ResetGyro());
+//    	addSequential(new DrivePID(210));
+//    	addSequential(new ResetGyro());
+//    	addSequential(new GyroTest(-92));
+//    	addSequential(new ResetGyro());
+//    	addSequential(new DrivePID(50));
+//    	addSequential(new ResetGyro());
+//    	addSequential(new GyroTest(-92));
+//    	addSequential(new ResetGyro());
+//    	addSequential(new DrivePID(8));
+//    	addSequential(new TimedIntake(0.5, 0.6));
     	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(221));
+    	addSequential(new DrivePID(233));
     	addSequential(new ResetGyro());
-    	addSequential(new GyroTest(-92));
+    	addSequential(new GyroTest(90));
     	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(210));
+    	addSequential(new DrivePID(222));
     	addSequential(new ResetGyro());
-    	addSequential(new GyroTest(-92));
+    	addSequential(new GyroTest(90));
     	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(50));
+    	addSequential(new DrivePID(63));
     	addSequential(new ResetGyro());
-    	addSequential(new GyroTest(-92));
+    	addSequential(new GyroTest(85));
     	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(8));
+    	addSequential(new DrivePID(16));
     	addSequential(new TimedIntake(0.5, 0.6));
     	
     }

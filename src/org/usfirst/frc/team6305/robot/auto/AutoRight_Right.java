@@ -31,13 +31,23 @@ public class AutoRight_Right extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new ResetGyro());
+//    	addSequential(new ResetGyro());
+//    	addParallel(new StartRelease());
+//    	addSequential(new DrivePID(170));
+//    	addSequential(new GyroTest(-92));
+//    	addSequential(new ResetGyro());
+//    	addSequential(new DrivePID(24));
+//    	addSequential(new TimedIntake(0.5, 0.6));
+//    	addSequential(new ResetGyro());
+//    	addSequential(new DrivePID(-12));
+//    	addSequential(new TimedElevator(0.6, -0.5));
     	addParallel(new StartRelease());
+    	addSequential(new ResetGyro());
     	addSequential(new DrivePID(170));
-    	addSequential(new GyroTest(-92));
+    	addSequential(new GyroTest(-90));
     	addSequential(new ResetGyro());
     	addSequential(new DrivePID(24));
-    	addSequential(new TimedIntake(0.5, 0.6));
+    	addSequential(new TimedIntake(0.5, 0.4));
     	addSequential(new ResetGyro());
     	addSequential(new DrivePID(-12));
     	addSequential(new TimedElevator(0.6, -0.5));
