@@ -8,14 +8,18 @@
 package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.XboxController;
-import org.usfirst.frc.team6305.robot.auto.AutoLeft_Left;
+import org.usfirst.frc.team6305.robot.auto.AutoLeft_Left_C1;
 import org.usfirst.frc.team6305.robot.auto.StartRelease;
+import org.usfirst.frc.team6305.robot.commands.PickUp;
+import org.usfirst.frc.team6305.robot.commands.PickUpOp;
 import org.usfirst.frc.team6305.robot.commands.ResetGyro;
 import org.usfirst.frc.team6305.robot.commands.arm.MoveArm;
 import org.usfirst.frc.team6305.robot.commands.claw.CloseClaw;
 import org.usfirst.frc.team6305.robot.commands.claw.OpenClaw;
 import org.usfirst.frc.team6305.robot.commands.elevator.MoveElevator;
+import org.usfirst.frc.team6305.robot.commands.elevator.TimedElevator;
 import org.usfirst.frc.team6305.robot.commands.intake.MoveIntake;
+import org.usfirst.frc.team6305.robot.commands.intake.TimedIntake;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -74,12 +78,15 @@ public class OI {
 	static {
 		
 		//Emergency base driver functions
-		OI.leftTrigger.whenPressed(new AutoLeft_Left());
-		
+//		OI.leftTrigger.whenPressed(new AutoLeft_Left());
+//		
 		OI.rightTrigger.whenPressed(new OpenClaw());
+//		
+//		OI.leftButton3.whileHeld(new MoveIntake(0.8));
+//		OI.rightButton3.whileHeld(new MoveIntake(-0.55));
 		
-		OI.leftButton3.whileHeld(new MoveIntake(0.8));
-		OI.rightButton3.whileHeld(new MoveIntake(-0.55));
+//		OI.rightTrigger.whenPressed(new PickUpOp(.5));
+//		;OI.
 		
 	    //All xbox controls for co-driving 
 		
@@ -87,11 +94,19 @@ public class OI {
 		OI.xbox.lt.whileHeld(new MoveElevator(-0.5));
 		OI.xbox.rb.whileHeld(new MoveArm(0.6));
 		OI.xbox.lb.whileHeld(new MoveArm(-0.35)); 
-		OI.xbox.x.whileHeld(new MoveIntake(0.55));
+		OI.xbox.x.whileHeld(new MoveIntake(0.65));
 		OI.xbox.a.whenPressed(new OpenClaw());
-		OI.xbox.y.whileHeld(new MoveIntake(-0.8));
-		OI.xbox.b.whenPressed(new CloseClaw());
-		OI.xbox.start.whenPressed(new ResetGyro());
-		OI.xbox.dPad.up.whenPressed(new StartRelease());
+		OI.xbox.y.whileHeld(new PickUpOp(.5));
+//		OI.xbox.b.whenPressed(new CloseClaw());
+		OI.xbox.b.whileHeld(new MoveIntake(0.8));
+//		OI.xbox.dPad.down.whileHeld(new PickUpOp(.5));
+		OI.xbox.dPad.right.whenPressed(new TimedIntake(0.5, 0.6));
+//		For testing
+		OI.xbox.dPad.up.whileHeld(new MoveIntake(.5));
+		OI.xbox.dPad.down.whenPressed(new StartRelease());
+	
+//		OI.xbox.dPad.left.whenPressed(new PickUp(.5, .65));
+//		OI.xbox.start.whenPressed(new ResetGyro());
+//		OI.xbox.dPad.up.whenPressed(new StartRelease());
 	}
 }

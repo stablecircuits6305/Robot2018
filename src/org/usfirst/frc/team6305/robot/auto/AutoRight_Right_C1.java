@@ -2,10 +2,11 @@ package org.usfirst.frc.team6305.robot.auto;
 
 
 import org.usfirst.frc.team6305.robot.commands.DrivePID;
-import org.usfirst.frc.team6305.robot.commands.FullDrive;
 import org.usfirst.frc.team6305.robot.commands.GyroTest;
 import org.usfirst.frc.team6305.robot.commands.PickUp;
 import org.usfirst.frc.team6305.robot.commands.ResetGyro;
+import org.usfirst.frc.team6305.robot.commands.Wait;
+import org.usfirst.frc.team6305.robot.commands.claw.OpenClaw;
 import org.usfirst.frc.team6305.robot.commands.elevator.TimedElevator;
 import org.usfirst.frc.team6305.robot.commands.intake.TimedIntake;
 
@@ -14,9 +15,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoLeft_Left extends CommandGroup {
+public class AutoRight_Right_C1 extends CommandGroup {
 
-    public AutoLeft_Left() {
+    public AutoRight_Right_C1() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -33,32 +34,29 @@ public class AutoLeft_Left extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+//    	addSequential(new ResetGyro());
+//    	addParallel(new StartRelease());
+//    	addSequential(new DrivePID(170));
+//    	addSequential(new GyroTest(-92));
+//    	addSequential(new ResetGyro());
+//    	addSequential(new DrivePID(24));
+//    	addSequential(new TimedIntake(0.5, 0.6));
+//    	addSequential(new ResetGyro());
+//    	addSequential(new DrivePID(-12));
+//    	addSequential(new TimedElevator(0.6, -0.5));
+//    	addSequential(new Wait(1));
     	addParallel(new StartRelease());
     	addSequential(new ResetGyro());
-    	//This adds a drivePID in a sequential way
-    	addSequential(new DrivePID(170));
-    	addSequential(new GyroTest(90));
+    	addSequential(new DrivePID(140));
     	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(18));
-    	addSequential(new TimedIntake(0.5, 0.4));
-    	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(-12));
-//    	addSequential(new TimedElevator(0.6, -0.5));
     	addSequential(new GyroTest(-90));
     	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(69));
-    	addSequential(new GyroTest(90));
-    	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(60));
-    	addSequential(new GyroTest(90));
-    	addSequential(new ResetGyro());
-    	addSequential(new DrivePID(15));
-    	addSequential(new TimedIntake(0.5, -0.4));
-//    	addSequential(new PickUp());
-//    	addSequential(new TimedElevator(0.6, 0.5));
-    	addSequential(new DrivePID(10));
-    	
-    	
-    	
+    	addSequential(new DrivePID(24));
+    	addSequential(new TimedIntake(0.5, 0.6));
+    	addSequential(new OpenClaw());
+//    	addSequential(new ResetGyro());
+    	addSequential(new GyroTest(0));
+    	addSequential(new DrivePID(-12));
+    	addSequential(new TimedElevator(0.6, -0.5));
     }
 }

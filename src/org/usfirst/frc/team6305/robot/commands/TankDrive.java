@@ -25,8 +25,8 @@ public class TankDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftSpeed = OI.leftJoystick.getY();
-    	double rightSpeed = OI.rightJoystick.getY();
+    	double leftSpeed = Math.pow(OI.leftJoystick.getY(), 3);
+    	double rightSpeed = Math.pow(OI.rightJoystick.getY(), 3);
     	
     	driveTrain.drive(leftSpeed, rightSpeed);
     }

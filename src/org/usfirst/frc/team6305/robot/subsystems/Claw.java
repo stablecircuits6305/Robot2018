@@ -12,14 +12,14 @@ public class Claw extends Subsystem {
     // here. Call these from Commands.
 
 	static Claw instance = new Claw();
-	//DoubleSolenoid claw = new DoubleSolenoid(0, 1);
+	DoubleSolenoid claw = new DoubleSolenoid(0, 1);
 	
 	public void open () {
-//		claw.set(DoubleSolenoid.Value.kForward);
+		claw.set(DoubleSolenoid.Value.kForward);
 	}
 	
 	public void close () {
-//		claw.set(DoubleSolenoid.Value.kReverse);
+		claw.set(DoubleSolenoid.Value.kReverse);
 	}
 	
 	public static Claw getInstance () {

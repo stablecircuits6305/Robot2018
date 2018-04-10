@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class PickUp extends CommandGroup {
 
-    public PickUp() {
+    public PickUp(double time, double speed) {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -27,8 +27,8 @@ public class PickUp extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new CloseClaw());
-    	addSequential(new TimedIntake(0.5, -0.4));
+    	addParallel(new CloseClaw());
+    	addSequential(new TimedIntake(time, -speed));
     	
     	
     }

@@ -9,13 +9,16 @@ package org.usfirst.frc.team6305.robot;
 
 import org.usfirst.frc.team6305.robot.auto.AutoBaseline;
 
-import org.usfirst.frc.team6305.robot.auto.AutoLeft_Left;
+
+import org.usfirst.frc.team6305.robot.auto.AutoLeft_Left_C1;
+import org.usfirst.frc.team6305.robot.auto.AutoLeft_Left_Full;
 import org.usfirst.frc.team6305.robot.auto.AutoLeft_Right;
 import org.usfirst.frc.team6305.robot.auto.AutoRight_Left;
-import org.usfirst.frc.team6305.robot.auto.AutoRight_Right;
+import org.usfirst.frc.team6305.robot.auto.AutoRight_Right_C1;
+import org.usfirst.frc.team6305.robot.auto.AutoRight_Right_Full;
 import org.usfirst.frc.team6305.robot.commands.CalibrateGyro;
 import org.usfirst.frc.team6305.robot.commands.TankDrive;
-import org.usfirst.frc.team6305.robot.commands.arm.returnLimit;
+//import org.usfirst.frc.team6305.robot.commands.arm.returnLimit;
 import org.usfirst.frc.team6305.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team6305.robot.subsystems.Elevator;
 
@@ -44,9 +47,10 @@ public class Robot extends TimedRobot {
 	CameraServer camera = CameraServer.getInstance();
 	Command autoCommand;
 	SendableChooser<Integer> chooser = new SendableChooser<Integer>();
+	SendableChooser<Boolean> collisionAvoiderChooser = new SendableChooser<Boolean>();
 	NetworkTable autoTable;
 	DriveTrain driveTrain;
-//	Compressor c;
+	Compressor c;
 	
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -60,16 +64,19 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 //		chooser.addDefault("Baseline", new AutoBaseline());
 		chooser.addDefault("Baseline", 0); // Baseline
-		
 		chooser.addObject("Left Side", 1); // Left Side
 		chooser.addObject("Right Side", 2); // Right Side
 	    SmartDashboard.putData("Auto mode", chooser);
+	    collisionAvoiderChooser.addDefault("Pass Switch", true);
+	    collisionAvoiderChooser.addObject("Don't Pass Switch", false);
+	    SmartDashboard.putData("Collision Avoider", collisionAvoiderChooser);
+	    
 		teleopDrive = new TankDrive();
 		autoCommand = null;
 		driveTrain = DriveTrain.getInstance();
 		NetworkTableInstance inst = NetworkTableInstance.getDefault();
 		autoTable = inst.getTable("autoTable");
-//		c = new Compressor(0);
+		c = new Compressor(0);
 	}
 
 	/**
@@ -79,7 +86,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-//		c.setClosedLoopControl(false);
+		c.setClosedLoopControl(false);
 	}
 
 	@Override
@@ -102,7 +109,7 @@ public class Robot extends TimedRobot {
 	public void autonomousInit() {
 		//Gyro.calibrate();
 		
-//		c.setClosedLoopControl(true);
+		c.setClosedLoopControl(true);
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
 		NetworkTableEntry switchPosition = autoTable.getEntry("switchPosition");
 		NetworkTableEntry scalePosition = autoTable.getEntry("scalePosition");
@@ -117,46 +124,69 @@ public class Robot extends TimedRobot {
 			scalePosition.setBoolean(true); // False is left, true is right
 		}
 		int auto = (int) chooser.getSelected();
+		Boolean goPast = collisionAvoiderChooser.getSelected();
+		/*
+		switch(auto) {
+		case 1:
+			if(switchPosition.getBoolean(false)) {
+				if(goPast)autoCommand = new AutoLeft_Right();
+				else autoCommand = new AutoBaseline();
+			}
+			else {
+				if(goPast) autoCommand = new AutoLeft_Left_Full();
+				else autoCommand = new AutoLeft_Left_C1();
+			}
+			break;
+		case 2:
+			if(switchPosition.getBoolean(false)) {
+				if(goPast) autoCommand = new AutoRight_Right_Full();
+				else autoCommand = new AutoRight_Right_C1();
+			}
+			else {
+				if(goPast) autoCommand = new AutoRight_Left();
+				else autoCommand = new AutoBaseline();
+			}
+			break;
+		default:
+			autoCommand = new AutoBaseline();
+		}
+		*/
+		
+		
 		if(auto == 0) {
 			autoCommand = new AutoBaseline();
 		}
 		else if(auto == 1) {
 			if (switchPosition.getBoolean(false)) {
-				autoCommand = new AutoLeft_Right();
+				if (goPast)
+					autoCommand = new AutoLeft_Right();
+				else
+					autoCommand = new AutoBaseline();
 			} else {
-				autoCommand = new AutoLeft_Left();
+				if (goPast)
+					autoCommand = new AutoLeft_Left_Full();
+				else
+					autoCommand = new AutoLeft_Left_C1();
 			}
 		}
 		else if(auto == 2) {
 			if (switchPosition.getBoolean(false)) {
-				autoCommand = new AutoRight_Right();
+				if (goPast)
+					autoCommand = new AutoRight_Right_Full();
+				else
+					autoCommand = new AutoRight_Right_C1();
 			} else {
-				autoCommand = new AutoRight_Left();
+				if (goPast)
+					autoCommand = new AutoRight_Left();
+				else
+					autoCommand = new AutoBaseline();
 			}	
 		}
 		else {
 			autoCommand = new AutoBaseline();
 		}
 		
-//		
-//		switch(auto){
-//		default:
-//			autoCommand = new AutoBaseline();
-//		case 1:
-//			if (switchPosition.getBoolean(false)) {
-//				autoCommand = new AutoLeft_Right();
-//			} else {
-//				autoCommand = new AutoLeft_Left();
-//			}
-//		case 2:
-//			if (switchPosition.getBoolean(false)) {
-//				autoCommand = new AutoRight_Right();
-//			} else {
-//				autoCommand = new AutoRight_Left();
-//			}	
-//		}
-	
-				
+			
 
 		// schedule the autonomous command (example)
 		if (autoCommand != null) {
@@ -180,7 +210,7 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-//		c.setClosedLoopControl(true);
+		c.setClosedLoopControl(true);
 		if (autoCommand != null) {
 			autoCommand.cancel();
 		}
@@ -203,31 +233,35 @@ public class Robot extends TimedRobot {
 	public void testPeriodic() {
 //		System.out.println("Gyro angle: " + Gyro.getAngle() + "  --  Gyro rate: " + Gyro.getRate());
 		int choice = (int) chooser.getSelected();
-		
+		/*
 		switch(choice) {
 		default:
 			System.out.println("Baseline");
+		    break;
 		case 1:
 			System.out.println("Left Side");
+		    break;
 		case 2:
 			System.out.println("Right Side");
+		    break;
 		}
-		
-		
-		if(choice == 0) {
-			System.out.println("Baseline");
-		}
-		else if(choice == 1) {
-			System.out.println("Left Side");
-		}
-		else if(choice == 2) {
-			System.out.println("Right Side");
-		}
-		Command armCheck = new returnLimit();
-		armCheck.start();
-		
-		SmartDashboard.putNumberArray("Drive Encoders", new Double[]{driveTrain.getLeftEncoderValue(), driveTrain.getRightEncoderValue()});
-		SmartDashboard.putNumber("Gyro rate", Gyro.getRate());
-		System.out.println(arm.getLimit());
+		*/
+//		
+//		
+//		if(choice == 0) {
+//			System.out.println("Baseline");
+//		}
+//		else if(choice == 1) {
+//			System.out.println("Left Side");
+//		}
+//		else if(choice == 2) {
+//			System.out.println("Right Side");
+//		}
+//		Command armCheck = new returnLimit();
+//		armCheck.start();
+//		
+//		SmartDashboard.putNumberArray("Drive Encoders", new Double[]{driveTrain.getLeftEncoderValue(), driveTrain.getRightEncoderValue()});
+//		SmartDashboard.putNumber("Gyro rate", Gyro.getRate());
+//		System.out.println(arm.getLimit());
 	}
 }
